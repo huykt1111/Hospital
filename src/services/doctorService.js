@@ -55,21 +55,37 @@ let getAllDoctors = () => {
 let saveDetailInfomationDoctor = (inputData) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!inputData.doctorId || !inputData.contentHtml || !inputData.contentMarkdown) {
+            if (!inputData.doctorId || !inputData.contentHtml || !inputData.contentMarkdown || !inputData.action) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Missing parameter!'
                 })
             }
             else {
-                await db.Markdown.create({
-                    contentHtml: inputData.contentHtml,
-                    contentMarkdown: inputData.contentMarkdown,
-                    description: inputData.description,
-                    doctorId: inputData.doctorId,
-                    // specialtyId: inputData.specialtyId,
-                    // clinicId: inputData.clinicId
-                })
+
+                if (inputData.action === 'CREATE') {
+                    await db.Markdown.create({
+                        contentHtml: inputData.contentHtml,
+                        contentMarkdown: inputData.contentMarkdown,
+                        description: inputData.description,
+                        doctorId: inputData.doctorId,
+                        // specialtyId: inputData.specialtyId,
+                        // clinicId: inputData.clinicId
+                    })
+                }
+                else if (inputData.action === 'EDIT') {
+                    let doctorMarkdown = await db.Markdown.findOne({
+                        where: { doctorId: inputData.doctorId },
+                        raw: false,
+                    })
+                    if (doctorMarkdown) {
+                        doctorMarkdown.contentHtml = inputData.contentHtml;
+                        doctorMarkdown.contentMarkdown = inputData.contentMarkdown;
+                        doctorMarkdown.description = inputData.description;
+
+                        await doctorMarkdown.save();
+                    }
+                }
 
                 resolve({
                     errCode: 0,
