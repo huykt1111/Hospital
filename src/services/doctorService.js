@@ -31,6 +31,59 @@ let getTopDoctorHome = (limit) => {
     })
 }
 
+let getAllDoctors = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let doctors = await db.User.findAll({
+                where: {
+                    roleId: "R2"
+                },
+                attributes: {
+                    exclude: ['password', 'image']
+                }
+            })
+            resolve({
+                errCode: 0,
+                data: doctors
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let saveDetailInfomationDoctor = (inputData) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!inputData.doctorId || !inputData.contentHtml || !inputData.contentMarkdown) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing parameter!'
+                })
+            }
+            else {
+                await db.Markdown.create({
+                    contentHtml: inputData.contentHtml,
+                    contentMarkdown: inputData.contentMarkdown,
+                    description: inputData.description,
+                    doctorId: inputData.doctorId,
+                    // specialtyId: inputData.specialtyId,
+                    // clinicId: inputData.clinicId
+                })
+
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Save infor doctor succeed!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 module.exports = {
-    getTopDoctorHome: getTopDoctorHome
+    getTopDoctorHome: getTopDoctorHome,
+    getAllDoctors: getAllDoctors,
+    saveDetailInfomationDoctor: saveDetailInfomationDoctor,
 }
