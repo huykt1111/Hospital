@@ -59,14 +59,21 @@ let getAllDoctors = () => {
 let saveDetailInfomationDoctor = (inputData) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!inputData.doctorId || !inputData.contentHtml || !inputData.contentMarkdown || !inputData.action) {
+
+            console.log(inputData.selectedPrice, inputData.selectedPayment, inputData.selectedProvince, inputData.nameClinic,
+                inputData.addressClinic, inputData.note, inputData.doctorId, inputData.contentHtml, inputData.contentMarkdown, inputData.action)
+            if (!inputData.doctorId || !inputData.contentHtml ||
+                !inputData.contentMarkdown || !inputData.action ||
+                !inputData.selectedPrice || !inputData.selectedPayment ||
+                !inputData.selectedProvince || !inputData.nameClinic ||
+                !inputData.addressClinic) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Missing parameter!'
                 })
             }
             else {
-
+                // upsert to Markdown
                 if (inputData.action === 'CREATE') {
                     await db.Markdown.create({
                         contentHtml: inputData.contentHtml,
@@ -89,6 +96,34 @@ let saveDetailInfomationDoctor = (inputData) => {
 
                         await doctorMarkdown.save();
                     }
+                }
+
+                // upsert to Doctor_info
+                let doctor_infor = await db.Doctor_Infor.findOne({
+                    where: { doctorId: inputData.doctorId },
+                    raw: false,
+                })
+                if (doctor_infor) {
+                    // update
+                    doctor_infor.doctorId = inputData.doctorId;
+                    doctor_infor.priceId = inputData.selectedPrice;
+                    doctor_infor.provinceId = inputData.selectedProvince;
+                    doctor_infor.paymentId = inputData.selectedPayment;
+                    doctor_infor.addressClinic = inputData.addressClinic;
+                    doctor_infor.nameClinic = inputData.nameClinic;
+                    doctor_infor.note = inputData.note;
+                    await doctor_infor.save();
+                } else {
+                    // create
+                    await db.Doctor_Infor.create({
+                        doctorId: inputData.doctorId,
+                        priceId: inputData.selectedPrice,
+                        provinceId: inputData.selectedProvince,
+                        paymentId: inputData.selectedPayment,
+                        addressClinic: inputData.addressClinic,
+                        nameClinic: inputData.nameClinic,
+                        note: inputData.note
+                    })
                 }
 
                 resolve({
@@ -174,14 +209,9 @@ let bulkCreateSchedule = (data) => {
                     attributes: ['timeType', 'date', 'doctorId', 'maxNumber'],
                     raw: true
                 })
-                if (existing && existing.length > 0) {
-                    existing = existing.map(item => {
-                        item.date = new Date(item.date).getTime();
-                        return item;
-                    })
-                }
+
                 let toCreate = _.differenceWith(schedule, existing, (a, b) => {
-                    return a.timeType === b.timeType && a.date === b.date;
+                    return a.timeType === b.timeType && +a.date === +b.date;
                 });
                 if (toCreate && toCreate.length > 0) {
                     await db.Schedule.bulkCreate(toCreate);
@@ -211,7 +241,14 @@ let getScheduleByDate = (doctorId, date) => {
                     where: {
                         doctorId: doctorId,
                         date: date
-                    }
+                    },
+                    include: [
+                        {
+                            model: db.Allcode, as: 'timeTypeData', attributes: ['valueEn', 'valueVi']
+                        }
+                    ],
+                    raw: false,
+                    nest: true
                 })
 
                 if (!dataSchedule) dataSchedule = [];
