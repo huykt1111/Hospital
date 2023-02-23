@@ -7,17 +7,20 @@ let postBookAppointment = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             console.log(data.email, data.doctorId, data.timeType, data.date)
-            if (!data.email || !data.doctorId || !data.timeType || !data.date) {
+            if (!data.email || !data.doctorId || !data.timeType || !data.date
+                || !data.fullName) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Missing parameter!'
                 })
             } else {
+
                 await emailService.sendSimpleEmail({
                     receiverEmail: data.email,
-                    patientName: "Quang Huy",
-                    time: '8:00 - 9:00 Chủ nhật 8/2/2023',
-                    doctorName: 'Bác sĩ A',
+                    patientName: data.fullName,
+                    time: data.timeString,
+                    doctorName: data.doctorName,
+                    language: data.language,
                     redirectLink: 'http://localhost:3000/home'
                 })
                 // upsert patient
@@ -31,7 +34,6 @@ let postBookAppointment = (data) => {
                     },
                 });
 
-                console.log(data.doctorId)
                 if (user && user[0]) {
                     await db.Booking.findOrCreate({
                         where: {
