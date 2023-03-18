@@ -64,7 +64,7 @@ let saveDetailInfomationDoctor = (inputData) => {
                 !inputData.contentMarkdown || !inputData.action ||
                 !inputData.selectedPrice || !inputData.selectedPayment ||
                 !inputData.selectedProvince || !inputData.nameClinic ||
-                !inputData.addressClinic) {
+                !inputData.addressClinic || !inputData.specialtyId) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Missing parameter!'
@@ -110,6 +110,10 @@ let saveDetailInfomationDoctor = (inputData) => {
                     doctor_infor.addressClinic = inputData.addressClinic;
                     doctor_infor.nameClinic = inputData.nameClinic;
                     doctor_infor.note = inputData.note;
+                    doctor_infor.specialtyId = inputData.specialtyId;
+                    doctor_infor.clinicId = inputData.clinicId;
+                    doctor_infor.specialtyId = inputData.specialtyId;
+                    doctor_infor.clinicId = inputData.clinicId;
                     await doctor_infor.save();
                 } else {
                     // create
@@ -120,7 +124,9 @@ let saveDetailInfomationDoctor = (inputData) => {
                         paymentId: inputData.selectedPayment,
                         addressClinic: inputData.addressClinic,
                         nameClinic: inputData.nameClinic,
-                        note: inputData.note
+                        note: inputData.note,
+                        specialtyId: inputData.specialtyId,
+                        clinicId: inputData.clinicId,
                     })
                 }
 
