@@ -30,12 +30,13 @@ class DetailClinic extends Component {
 
             if (res && res.errCode == 0) {
                 let data = res.data;
+                console.log("res", data);
                 let arrDoctorId = [];
                 if (data && !_.isEmpty(res.data)) {
                     let arr = data.doctorClinic;
                     if (arr && arr.length > 0) {
                         arr.map(item => {
-                            arrDoctorId.push(item.doctorId);
+                            arrDoctorId.push(item.maTk);
                         })
                     }
                 }
@@ -58,6 +59,7 @@ class DetailClinic extends Component {
 
     render() {
         let { arrDoctorId, dataDetailClinic } = this.state;
+        console.log("đasadsadsa clinicccccccccccccc", arrDoctorId)
         let { language } = this.props;
         return (
             <div className="detail-specialty-container">
@@ -67,10 +69,10 @@ class DetailClinic extends Component {
                         {dataDetailClinic && !_.isEmpty(dataDetailClinic) &&
                             <div>
                                 <div className='title-specialty'>
-                                    {dataDetailClinic.name}
+                                    {dataDetailClinic.tenPhongKham}
                                 </div>
 
-                                <div dangerouslySetInnerHTML={{ __html: dataDetailClinic.descriptionHtml }}>
+                                <div dangerouslySetInnerHTML={{ __html: dataDetailClinic.mieuTaHtml }}>
 
                                 </div>
 
@@ -88,7 +90,7 @@ class DetailClinic extends Component {
                                                 doctorId={item}
                                                 isShowDescriptionDoctor={true}
                                                 isShowLinkDetails={true}
-                                                isShowPrice={false}
+                                                isShowPrice={true}
 
                                             // dataTime={dataTime}
                                             />

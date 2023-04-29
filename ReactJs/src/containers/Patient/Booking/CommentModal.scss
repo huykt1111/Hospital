@@ -1,0 +1,24 @@
+.modal-comment-container {
+    .content-left {
+        .content-left-image {
+            width: 150px;
+            height: 150px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: #eee;
+        }
+    }
+}
+
+.star-rating {
+    .star {
+        color: gray;
+        cursor: pointer;
+        font-size: 30px;
+    }
+
+    .filled {
+        color: orange;
+    }
+}

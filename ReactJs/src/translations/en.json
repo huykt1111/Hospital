@@ -7,6 +7,8 @@
         "doctor": "Doctor",
         "choose-doctor": "Choose a good doctor",
         "fee": "Checkup package",
+        "registration-doctor": "Doctor registration",
+        "registration-doctor-title": "Register to become a doctor",
         "check-health": "General health check",
         "support": "Support",
         "welcome": "Welcome, ",
@@ -14,7 +16,8 @@
         "family": "Family Profile",
         "login": "Login",
         "logout": "Log out",
-        "register": "Register"
+        "register": "Register",
+        "booking": "Booking schedule"
     },
     "banner": {
         "title-1": "Medical platform",
@@ -99,11 +102,29 @@
             "exit": "Cancel",
             "free-booking": "Free booking",
             "price": "Price: "
+        },
+        "family": {
+            "add": "Add a new member",
+            "email": "Email",
+            "firstname": "First name",
+            "lastname": "Last name",
+            "birthday": "Date of birth",
+            "phonenumber": "Phone Number",
+            "address": "Address",
+            "gender": "Gender",
+            "position": "Position",
+            "save": "Save member",
+            "choose": "Choose",
+            "image": "Avatar",
+            "edit": "Edit member",
+            "create": "Create Member"
         }
     },
     "admin": {
         "manage-doctor": {
             "title": "Create more doctor information",
+            "name": "Doctor's name",
+            "register-doctor": "Doctor profile information",
             "select-doctor": "Select doctor",
             "intro": "Introduction information",
             "save-infor": "Save information",
@@ -116,6 +137,10 @@
             "note": "Note",
             "specialty": "Choose a specialty",
             "clinic": "Choose a clinic"
+        },
+        "manage-clinic": {
+            "create": "Create",
+            "edit": "Save"
         }
     }
 }

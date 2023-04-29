@@ -44,9 +44,9 @@ class DetailDoctor extends Component {
         let { detailDoctor } = this.state;
         let { language } = this.props;
         let nameVi = '', nameEn = '';
-        if (detailDoctor && detailDoctor.positionData) {
-            nameVi = `${detailDoctor.positionData.valueVi}, ${detailDoctor.lastName} ${detailDoctor.firstName}`;
-            nameEn = `${detailDoctor.positionData.valueEn}, ${detailDoctor.firstName} ${detailDoctor.lastName}`;
+        if (detailDoctor && detailDoctor.positionData && detailDoctor.TaiKhoan) {
+            nameVi = `${detailDoctor.positionData.valueVi}, ${detailDoctor.TaiKhoan.ho} ${detailDoctor.TaiKhoan.ten}`;
+            nameEn = `${detailDoctor.positionData.valueEn}, ${detailDoctor.TaiKhoan.ten} ${detailDoctor.TaiKhoan.ho}`;
         }
 
         let currentURL = +process.env.REACT_APP_IS_LOCALHOST === 1 ?
@@ -60,7 +60,7 @@ class DetailDoctor extends Component {
                     <div className="intro-doctor">
                         <div className='content-left'>
                             <div className='content-left-image'
-                                style={{ backgroundImage: `url(${detailDoctor && detailDoctor.image ? detailDoctor.image : ''})` }}
+                                style={{ backgroundImage: `url(${detailDoctor && detailDoctor.TaiKhoan && detailDoctor.TaiKhoan.hinhAnh ? detailDoctor.TaiKhoan.hinhAnh : ''})` }}
                             />
                         </div>
                         <div className="content-right">
@@ -68,9 +68,9 @@ class DetailDoctor extends Component {
                                 {language === LANGUAGES.VI ? nameVi : nameEn}
                             </div>
                             <div className="down">
-                                {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.description &&
+                                {detailDoctor && detailDoctor.mieuTa &&
 
-                                    <span>{detailDoctor.Markdown.description}</span>
+                                    <span>{detailDoctor.mieuTa}</span>
 
                                 }
                                 <div className="like-share-plugin">
@@ -91,8 +91,8 @@ class DetailDoctor extends Component {
                         </div>
                     </div>
                     <div className="detail-doctor">
-                        {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.contentHtml &&
-                            <div dangerouslySetInnerHTML={{ __html: detailDoctor.Markdown.contentHtml }}>
+                        {detailDoctor && detailDoctor.noiDungHTML &&
+                            <div dangerouslySetInnerHTML={{ __html: detailDoctor.noiDungHTML }}>
 
                             </div>
                         }

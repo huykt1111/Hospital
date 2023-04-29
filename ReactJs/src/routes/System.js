@@ -4,11 +4,10 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Home from '../routes/Home';
 import { path, USER_ROLE } from '../utils'
 import UserManage from '../containers/System/UserManage';
-import UserRedux from '../containers/System/Admin/UserRedux';
-import ManageDoctor from '../containers/System/Admin/ManageDoctor';
 import Header from '../containers/Header/Header';
 import ManageSpecialty from '../containers/System/Specialty/ManageSpecialty';
 import ManageClinic from '../containers/System/Clinic/ManageClinic';
+import ManageDoctor from '../containers/System/Admin/Doctor/ManageDoctor';
 import _ from 'lodash';
 
 class System extends Component {
@@ -20,7 +19,7 @@ class System extends Component {
         return (
 
             <React.Fragment>
-                {isLoggedIn && userInfo.user.roleId === USER_ROLE.PATIENT ?
+                {isLoggedIn && userInfo.user.vaiTro === USER_ROLE.PATIENT ?
                     <div className="system-container" >
                         <div className="system-list">
                             <Switch>
@@ -35,7 +34,6 @@ class System extends Component {
                             <div className="system-list">
                                 <Switch>
                                     <Route path="/system/user-manage" component={UserManage} />
-                                    <Route path="/system/user-redux" component={UserRedux} />
                                     <Route path="/system/manage-doctor" component={ManageDoctor} />
                                     <Route path="/system/manage-specialty" component={ManageSpecialty} />
                                     <Route path="/system/manage-clinic" component={ManageClinic} />

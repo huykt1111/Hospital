@@ -1,7 +1,18 @@
 .login-background {
     height: 100vh;
+    width: 100%;
+    display: flex;
     // background: rgb(34, 193, 195);
     background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+
+    .login-background-container {
+        height: 100%;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     .login-container {
         width: 400px;
@@ -9,12 +20,7 @@
         margin: 0 auto;
         border-radius: 10px;
         background-color: white;
-        position: absolute;
-        margin: auto;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+
 
         .login-content {
             padding: 15px;
@@ -51,6 +57,21 @@
                 background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
                 color: white;
                 font-size: 16px;
+            }
+
+            .register {
+                font-size: 12px;
+                display: flex;
+                justify-content: flex-end;
+
+                .register-title-button {
+                    color: blue;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #5318de;
+                    }
+                }
             }
 
             .forgot-password {

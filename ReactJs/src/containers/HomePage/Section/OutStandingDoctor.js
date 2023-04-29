@@ -37,7 +37,7 @@ class OutStandingDoctor extends Component {
 
         let arrDoctors = this.state.arrDoctors;
         let { language } = this.props;
-        arrDoctors = arrDoctors.concat(arrDoctors).concat(arrDoctors);
+        console.log("dsadsa", arrDoctors);
         return (
             <div className='section-share section-outstanding-doctor'>
                 <div className='section-container'>
@@ -57,21 +57,22 @@ class OutStandingDoctor extends Component {
                                 if (item.image) {
                                     imageBase64 = new Buffer(item.image, 'base64').toString('binary');
                                 }
-                                let nameVi = `${item.positionData.valueVi}, ${item.lastName} ${item.firstName}`;
-                                let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
+                                let nameVi = `${item.positionData.valueVi}, ${item.TaiKhoan.ho} ${item.TaiKhoan.ten}`;
+                                let nameEn = `${item.positionData.valueEn}, ${item.TaiKhoan.ten} ${item.TaiKhoan.ho}`;
                                 return (
                                     <div className='section-customize'
+                                        key={index}
                                         onClick={() => this.handleViewDetailDoctor(item)}
                                     >
                                         <div className='customize-border'>
                                             <div className='outer-bg'>
                                                 <div className='bg-image section-outstanding-doctor'
-                                                    style={{ backgroundImage: `url(${imageBase64})` }}
+                                                    style={{ backgroundImage: `url(${item.TaiKhoan.hinhAnh})` }}
                                                 />
                                             </div>
                                             <div className='position text-center'>
                                                 <div>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
-                                                <div>Sức khỏe tâm thần</div>
+                                                <div>{item.tenPhongKham}</div>
                                             </div>
                                         </div>
                                     </div>

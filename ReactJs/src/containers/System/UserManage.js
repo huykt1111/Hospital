@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import './UserManage.scss';
 import { getAllUsers, createNewUserService, deleteUserService, editUserService } from '../../services/userService';
 import ModalUser from './ModalUser';
-import axios from 'axios';
 import ModalEditUser from './ModalEditUser';
 import { emitter } from '../../utils/emitter';
 
@@ -60,7 +59,17 @@ class UserManage extends Component {
 
     createNewUser = async (data) => {
         try {
-            let response = await createNewUserService(data);
+            let formattedDate = new Date(data.birthday).getTime();
+            let response = await createNewUserService({
+                email: data.email,
+                password: data.password,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                gender: data.gender,
+                birthday: formattedDate,
+                address: data.address,
+                phoneNumber: data.phoneNumber,
+            });
             if (response && response.errCode !== 0) {
                 alert(response.errMessage)
             }
@@ -90,9 +99,20 @@ class UserManage extends Component {
         }
     }
 
-    doEditUser = async (user) => {
+    doEditUser = async (data) => {
         try {
-            let res = await editUserService(user);
+            let formattedDate = new Date(data.birthday).getTime();
+            let res = await editUserService({
+                id: data.id,
+                email: data.email,
+                password: data.password,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                gender: data.gender,
+                birthday: formattedDate,
+                address: data.address,
+                phoneNumber: data.phoneNumber,
+            });
             if (res && res.errCode === 0) {
                 this.setState({
                     isOpenModalEditUser: false
@@ -110,6 +130,7 @@ class UserManage extends Component {
 
     render() {
         let arrUsers = this.state.arrUsers;
+        console.log(arrUsers);
         return (
             <div className="user-container">
                 <ModalUser
@@ -147,11 +168,11 @@ class UserManage extends Component {
                             {
                                 arrUsers && arrUsers.map((item, index) => {
                                     return (
-                                        <tr>
+                                        <tr key={index}>
                                             <td>{item.email}</td>
-                                            <td>{item.firstName}</td>
-                                            <td>{item.lastName}</td>
-                                            <td>{item.address}</td>
+                                            <td>{item.ten}</td>
+                                            <td>{item.ho}</td>
+                                            <td>{item.diaChi}</td>
                                             <td>
                                                 <button className="btn-edit"
                                                     onClick={() => this.handleEditUser(item)}

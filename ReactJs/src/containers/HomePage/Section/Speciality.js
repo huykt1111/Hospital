@@ -48,9 +48,9 @@ class Speciality extends Component {
                                         onClick={() => this.handleViewDetailSpecialty(item)}
                                     >
                                         <div className='bg-image section-speciality'
-                                            style={{ backgroundImage: `url(${item.image})` }}
+                                            style={{ backgroundImage: `url(${item.hinhAnh})` }}
                                         />
-                                        <div className='specialty-name'>{item.name}</div>
+                                        <div className='specialty-name'>{item.tenChuyenKhoa}</div>
                                     </div>
                                 )
                             })}

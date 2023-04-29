@@ -12,7 +12,6 @@ class HomeHeader extends Component {
 
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language);
-        // fire redux event : actions
     }
 
     returnToHome = () => {
@@ -29,6 +28,30 @@ class HomeHeader extends Component {
     handleViewLogin = () => {
         if (this.props.history) {
             this.props.history.push(`/login`);
+        }
+    }
+
+    handleViewRegisterDoctor = (userInfo) => {
+        if (this.props.history) {
+            this.props.history.push(`/register-doctor/${userInfo.user.id}`);
+        }
+    }
+
+    handleFamily = (userInfo) => {
+        if (this.props.history) {
+            this.props.history.push(`/family-profile/${userInfo.user.id}`);
+        }
+    }
+
+    handleDetailBooking = (userInfo) => {
+        if (this.props.history) {
+            this.props.history.push(`/booking/${userInfo.user.id}`);
+        }
+    }
+
+    handleViewRegister = () => {
+        if (this.props.history) {
+            this.props.history.push(`/register`);
         }
     }
 
@@ -56,34 +79,37 @@ class HomeHeader extends Component {
                                 <div><b><FormattedMessage id="homeheader.doctor" /></b></div>
                                 <div className='subs-title'><FormattedMessage id="homeheader.choose-doctor" /></div>
                             </div>
-                            {/* <div className='child-center-content'>
-                                <div><b><FormattedMessage id="homeheader.fee" /></b></div>
-                                <div className='subs-title'><FormattedMessage id="homeheader.check-health" /></div>
-                            </div> */}
+                            {userInfo && userInfo.user &&
+                                <div className='child-center-content' onClick={() => this.handleViewRegisterDoctor(userInfo)}>
+                                    <div><b><FormattedMessage id="homeheader.registration-doctor" /></b></div>
+                                    <div className='subs-title'><FormattedMessage id="homeheader.registration-doctor-title" /></div>
+                                </div>
+                            }
                         </div>
                         <div className='right-content'>
                             {isLoggedIn ?
-                                <div class="dropdown account">
-                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div className="dropdown account">
+                                    <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         {userInfo && userInfo.user && language === LANGUAGES.VI ?
-                                            <span>{userInfo.user.lastName} {userInfo.user.firstName}</span> :
-                                            <span>{userInfo.user.firstName} {userInfo.user.lastName}</span>
+                                            <span>{userInfo.user.ho} {userInfo.user.ten}</span> :
+                                            <span>{userInfo.user.ten + " "} {userInfo.user.ho}</span>
                                         }
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#"><FormattedMessage id="homeheader.profile" /></a>
-                                        <a class="dropdown-item" href="#"><FormattedMessage id="homeheader.family" /></a>
-                                        <a class="dropdown-item" onClick={() => this.handleLogout(processLogout)}><FormattedMessage id="homeheader.logout" /></a>
+                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a className="dropdown-item" href="#"><FormattedMessage id="homeheader.profile" /></a>
+                                        <a className="dropdown-item" onClick={() => this.handleFamily(userInfo)}><FormattedMessage id="homeheader.family" /></a>
+                                        <a className="dropdown-item" onClick={() => this.handleDetailBooking(userInfo)}><FormattedMessage id="homeheader.booking" /></a>
+                                        <a className="dropdown-item" onClick={() => this.handleLogout(processLogout)}><FormattedMessage id="homeheader.logout" /></a>
                                     </div>
                                 </div>
                                 :
-                                <div class="dropdown account">
-                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div className="dropdown account">
+                                    <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <FormattedMessage id="homeheader.login" />
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" onClick={() => this.handleViewLogin()}><FormattedMessage id="homeheader.login" /></a>
-                                        <a class="dropdown-item"><FormattedMessage id="homeheader.register" /></a>
+                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a className="dropdown-item" onClick={() => this.handleViewLogin()}><FormattedMessage id="homeheader.login" /></a>
+                                        <a className="dropdown-item" onClick={() => this.handleViewRegister()}><FormattedMessage id="homeheader.register" /></a>
                                     </div>
                                 </div>
                             }

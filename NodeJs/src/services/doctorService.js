@@ -5,30 +5,213 @@ import emailService from "./emailService";
 
 const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
 
-let getTopDoctorHome = (limit) => {
+let saveDetailInfomationDoctor = (inputData) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let users = await db.User.findAll({
-                limit: limit,
-                where: { roleId: 'R2' },
-                order: [["createdAt", "DESC"]],
-                attributes: {
-                    exclude: ['password']
+            if (inputData && inputData.id !== null) {
+                if (inputData.avatar !== null) {
+                    let user = await db.TaiKhoan.findOne({
+                        where: { id: inputData.id },
+                        raw: false
+                    });
+                    if (user) {
+                        user.hinhAnh = inputData.avatar;
+                        await user.save();
+                    }
+                }
+
+                await db.ThongTinBacSi.create({
+                    maTk: inputData.id,
+                    chuyenKhoa: inputData.selectedSpecialty,
+                    phongKham: inputData.selectedClinic,
+                    chucDanh: inputData.position,
+                    giaKham: inputData.selectedPrice,
+                    khuVucLamViec: inputData.selectedProvince,
+                    phuongThucThanhToan: inputData.selectedPayment,
+                    diaChiPhongKham: inputData.addressClinic,
+                    tenPhongKham: inputData.nameClinic,
+                    ghiChu: inputData.note,
+                    mieuTa: inputData.description,
+                    noiDungHTML: inputData.contentHtml,
+                    noiDungMarkdown: inputData.contentMarkdown,
+                    trangThai: 1,
+                })
+
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Register infor doctor succeed!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getAllRegisterDoctors = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            let doctor = await db.ThongTinBacSi.findAll({
+                where: {
+                    trangThai: 1
                 },
                 include: [
                     {
-                        model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi']
+                        model: db.TaiKhoan,
+                        // where: {
+                        //     vaiTro: "R3",
+                        //     trangThai: 1
+                        // }
                     },
                     {
-                        model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi']
-                    }
+                        model: db.PhongKham, as: 'userClinicData', attributes: ['id', 'tenPhongKham', 'diaChi']
+                    },
+                    {
+                        model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi']
+                    },
+                    { model: db.Allcode, as: 'priceIdData', attributes: ['valueEn', 'valueVi'] },
+                    { model: db.Allcode, as: 'provinceIdData', attributes: ['valueEn', 'valueVi'] },
+                    { model: db.Allcode, as: 'paymentIdData', attributes: ['valueEn', 'valueVi'] },
                 ],
-                raw: true,
+                raw: false,
                 nest: true
-            });
+            })
+
+            if (doctor && doctor.length > 0) {
+                doctor.map(item => {
+                    item.TaiKhoan.hinhAnh = new Buffer(item.TaiKhoan.hinhAnh, 'base64').toString('binary');
+                    return item;
+                })
+            }
+
+            if (!doctor) doctor = {};
+
             resolve({
                 errCode: 0,
-                data: users
+                data: doctor
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let ratifyDoctor = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (data && data.maTk !== null) {
+                let user = await db.ThongTinBacSi.findOne({
+                    where: { maTk: data.maTk },
+                    raw: false
+                });
+                if (user) {
+                    user.trangThai = 2;
+                    await user.save();
+                }
+
+                let taikhoan = await db.TaiKhoan.findOne({
+                    where: { id: data.maTk },
+                    raw: false
+                });
+
+                if (taikhoan) {
+                    taikhoan.vaiTro = 'R2';
+                    await taikhoan.save();
+                }
+
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Ratify register doctor succeed!'
+                })
+            }
+            else {
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Ratify register doctor faided!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let refuseDoctor = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (data && data.maTk !== null) {
+                let user = await db.ThongTinBacSi.findOne({
+                    where: { maTk: data.maTk },
+                    raw: false
+                });
+                if (user) {
+                    user.trangThai = 0;
+                    await user.save();
+                }
+
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Refuse register doctor succeed!'
+                })
+            }
+            else {
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Refuse register doctor faided!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getTopDoctorHome = (limit) => {
+
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            let doctor = await db.ThongTinBacSi.findAll({
+                limit: limit,
+                where: {
+                    trangThai: 2
+                },
+                order: [["createdAt", "DESC"]],
+                include: [
+                    {
+                        model: db.TaiKhoan,
+                        where: {
+                            vaiTro: "R2",
+                            trangThai: 1
+                        }
+                    },
+                    {
+                        model: db.PhongKham, as: 'userClinicData', attributes: ['tenPhongKham', 'diaChi', 'mieuTaHtml', 'mieuTaMarkDown']
+                    },
+                    {
+                        model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi']
+                    },
+                    { model: db.Allcode, as: 'priceIdData', attributes: ['valueEn', 'valueVi'] },
+                    { model: db.Allcode, as: 'provinceIdData', attributes: ['valueEn', 'valueVi'] },
+                    { model: db.Allcode, as: 'paymentIdData', attributes: ['valueEn', 'valueVi'] },
+                ],
+                raw: false,
+                nest: true
+            })
+
+            if (doctor && doctor.length > 0) {
+                doctor.map(item => {
+                    item.TaiKhoan.hinhAnh = new Buffer(item.TaiKhoan.hinhAnh, 'base64').toString('binary');
+                    return item;
+                })
+            }
+
+            if (!doctor) doctor = {};
+
+            resolve({
+                errCode: 0,
+                data: doctor
             })
         } catch (e) {
             reject(e);
@@ -57,91 +240,6 @@ let getAllDoctors = () => {
     })
 }
 
-let saveDetailInfomationDoctor = (inputData) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            console.log(inputData.contentHTMl)
-            if (!inputData.doctorId || !inputData.contentHtml ||
-                !inputData.contentMarkdown || !inputData.action ||
-                !inputData.selectedPrice || !inputData.selectedPayment ||
-                !inputData.selectedProvince || !inputData.nameClinic ||
-                !inputData.addressClinic || !inputData.specialtyId) {
-                resolve({
-                    errCode: 1,
-                    errMessage: 'Missing parameter!'
-                })
-            }
-            else {
-                // upsert to Markdown
-                if (inputData.action === 'CREATE') {
-                    await db.Markdown.create({
-                        contentHtml: inputData.contentHtml,
-                        contentMarkdown: inputData.contentMarkdown,
-                        description: inputData.description,
-                        doctorId: inputData.doctorId,
-                        // specialtyId: inputData.specialtyId,
-                        // clinicId: inputData.clinicId
-                    })
-                }
-                else if (inputData.action === 'EDIT') {
-                    let doctorMarkdown = await db.Markdown.findOne({
-                        where: { doctorId: inputData.doctorId },
-                        raw: false,
-                    })
-                    if (doctorMarkdown) {
-                        doctorMarkdown.contentHtml = inputData.contentHtml;
-                        doctorMarkdown.contentMarkdown = inputData.contentMarkdown;
-                        doctorMarkdown.description = inputData.description;
-
-                        await doctorMarkdown.save();
-                    }
-                }
-
-                // upsert to Doctor_info
-                let doctor_infor = await db.Doctor_Infor.findOne({
-                    where: { doctorId: inputData.doctorId },
-                    raw: false,
-                })
-                if (doctor_infor) {
-                    // update
-                    doctor_infor.doctorId = inputData.doctorId;
-                    doctor_infor.priceId = inputData.selectedPrice;
-                    doctor_infor.provinceId = inputData.selectedProvince;
-                    doctor_infor.paymentId = inputData.selectedPayment;
-                    doctor_infor.addressClinic = inputData.addressClinic;
-                    doctor_infor.nameClinic = inputData.nameClinic;
-                    doctor_infor.note = inputData.note;
-                    doctor_infor.specialtyId = inputData.specialtyId;
-                    doctor_infor.clinicId = inputData.clinicId;
-                    doctor_infor.specialtyId = inputData.specialtyId;
-                    doctor_infor.clinicId = inputData.clinicId;
-                    await doctor_infor.save();
-                } else {
-                    // create
-                    await db.Doctor_Infor.create({
-                        doctorId: inputData.doctorId,
-                        priceId: inputData.selectedPrice,
-                        provinceId: inputData.selectedProvince,
-                        paymentId: inputData.selectedPayment,
-                        addressClinic: inputData.addressClinic,
-                        nameClinic: inputData.nameClinic,
-                        note: inputData.note,
-                        specialtyId: inputData.specialtyId,
-                        clinicId: inputData.clinicId,
-                    })
-                }
-
-                resolve({
-                    errCode: 0,
-                    errorMessage: 'Save infor doctor succeed!'
-                })
-            }
-        } catch (e) {
-            reject(e);
-        }
-    })
-}
-
 let getDetailDoctor = (inputId) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -151,39 +249,31 @@ let getDetailDoctor = (inputId) => {
                     errMessage: 'Missing required parameter!'
                 })
             } else {
-                let data = await db.User.findOne({
+                let data = await db.ThongTinBacSi.findOne({
                     where: {
-                        id: inputId
-                    },
-                    attributes: {
-                        exclude: ['password']
+                        maTk: inputId,
+                        trangThai: 2
                     },
                     include: [
                         {
-                            model: db.Markdown,
-                            attributes: ['description', 'contentHtml', 'contentMarkdown']
+                            model: db.TaiKhoan,
+                        },
+                        {
+                            model: db.PhongKham, as: 'userClinicData', attributes: ['tenPhongKham', 'diaChi', 'mieuTaHtml', 'mieuTaMarkDown']
                         },
                         {
                             model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi']
                         },
-                        {
-                            model: db.Doctor_Infor,
-                            attributes: {
-                                exclude: ['id', 'doctorId']
-                            },
-                            include: [
-                                { model: db.Allcode, as: 'priceIdData', attributes: ['valueEn', 'valueVi'] },
-                                { model: db.Allcode, as: 'provinceIdData', attributes: ['valueEn', 'valueVi'] },
-                                { model: db.Allcode, as: 'paymentIdData', attributes: ['valueEn', 'valueVi'] },
-                            ]
-                        },
+                        { model: db.Allcode, as: 'priceIdData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'provinceIdData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'paymentIdData', attributes: ['valueEn', 'valueVi'] },
                     ],
                     raw: false,
                     nest: true
                 })
 
-                if (data && data.image) {
-                    data.image = new Buffer(data.image, 'base64').toString('binary');
+                if (data && data.TaiKhoan.hinhAnh) {
+                    data.TaiKhoan.hinhAnh = new Buffer(data.TaiKhoan.hinhAnh, 'base64').toString('binary');
                 }
 
                 if (!data) data = {};
@@ -202,7 +292,7 @@ let getDetailDoctor = (inputId) => {
 let bulkCreateSchedule = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.arrSchedule || !data.doctorId || !data.formattedDate) {
+            if (!data.arrSchedule || !data.maTk || !data.formattedDate) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Missing required parameter!'
@@ -210,27 +300,23 @@ let bulkCreateSchedule = (data) => {
             }
             else {
                 let schedule = data.arrSchedule;
-                if (schedule && schedule.length > 0) {
-                    schedule = schedule.map(item => {
-                        item.maxNumber = MAX_NUMBER_SCHEDULE;
-                        return item;
-                    })
-                }
-                let existing = await db.Schedule.findAll({
+                let existing = await db.LichKham.findAll({
                     where: {
-                        doctorId: data.doctorId,
-                        date: data.formattedDate
+                        maTk: data.maTk,
+                        ngayKham: data.formattedDate
                     },
-
-                    attributes: ['timeType', 'date', 'doctorId', 'maxNumber'],
+                    attributes: ['thoiGianKham', 'ngayKham', 'maTk', 'soLuongDangDat'],
                     raw: true
                 })
 
+                console.log(schedule)
+
                 let toCreate = _.differenceWith(schedule, existing, (a, b) => {
-                    return a.timeType === b.timeType && +a.date === +b.date;
+                    return a.thoiGianKham === b.thoiGianKham && +a.ngayKham === +b.ngayKham;
                 });
+                console.log(toCreate)
                 if (toCreate && toCreate.length > 0) {
-                    await db.Schedule.bulkCreate(toCreate);
+                    await db.LichKham.bulkCreate(toCreate);
                 }
                 resolve({
                     errCode: 0,
@@ -253,22 +339,24 @@ let getScheduleByDate = (doctorId, date) => {
                 })
             }
             else {
-                let dataSchedule = await db.Schedule.findAll({
+                let dataSchedule = await db.LichKham.findAll({
                     where: {
-                        doctorId: doctorId,
-                        date: date
+                        maTk: doctorId,
+                        ngayKham: date
                     },
                     include: [
                         {
                             model: db.Allcode, as: 'timeTypeData', attributes: ['valueEn', 'valueVi']
                         },
                         {
-                            model: db.User, as: 'doctorData', attributes: ['firstName', 'lastName']
+                            model: db.TaiKhoan, as: 'doctorData', attributes: ['ho', 'ten']
                         }
                     ],
                     raw: false,
                     nest: true
                 })
+
+                console.log(dataSchedule)
 
                 if (!dataSchedule) dataSchedule = [];
 
@@ -293,14 +381,21 @@ let getExtraInforDoctorById = (doctorId) => {
                 })
             }
             else {
-                let data = await db.Doctor_Infor.findOne({
+                let data = await db.ThongTinBacSi.findOne({
                     where: {
-                        doctorId: doctorId
-                    },
-                    attributes: {
-                        exclude: ['']
+                        maTk: doctorId,
+                        trangThai: 2
                     },
                     include: [
+                        {
+                            model: db.TaiKhoan,
+                        },
+                        {
+                            model: db.PhongKham, as: 'userClinicData', attributes: ['tenPhongKham', 'diaChi', 'mieuTaHtml', 'mieuTaMarkDown']
+                        },
+                        {
+                            model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi']
+                        },
                         { model: db.Allcode, as: 'priceIdData', attributes: ['valueEn', 'valueVi'] },
                         { model: db.Allcode, as: 'provinceIdData', attributes: ['valueEn', 'valueVi'] },
                         { model: db.Allcode, as: 'paymentIdData', attributes: ['valueEn', 'valueVi'] },
@@ -308,6 +403,10 @@ let getExtraInforDoctorById = (doctorId) => {
                     raw: false,
                     nest: true
                 })
+
+                if (data && data.TaiKhoan.hinhAnh) {
+                    data.TaiKhoan.hinhAnh = new Buffer(data.TaiKhoan.hinhAnh, 'base64').toString('binary');
+                }
 
                 if (!data) data = {};
 
@@ -331,39 +430,35 @@ let getProfileDoctorById = (inputId) => {
                     errMessage: "Missing required parameters!"
                 })
             } else {
-                let data = await db.User.findOne({
+                let data = await db.ThongTinBacSi.findOne({
                     where: {
-                        id: inputId
-                    },
-                    attributes: {
-                        exclude: ['password']
+                        maTk: inputId,
+                        trangThai: 2
                     },
                     include: [
                         {
-                            model: db.Markdown,
-                            attributes: ['description', 'contentHtml', 'contentMarkdown']
+                            model: db.TaiKhoan,
+                            // where: {
+                            //     vaiTro: "R2",
+                            //     trangThai: 1
+                            // }
+                        },
+                        {
+                            model: db.PhongKham, as: 'userClinicData', attributes: ['tenPhongKham', 'diaChi', 'mieuTaHtml', 'mieuTaMarkDown']
                         },
                         {
                             model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi']
                         },
-                        {
-                            model: db.Doctor_Infor,
-                            attributes: {
-                                exclude: ['id', 'doctorId']
-                            },
-                            include: [
-                                { model: db.Allcode, as: 'priceIdData', attributes: ['valueEn', 'valueVi'] },
-                                { model: db.Allcode, as: 'provinceIdData', attributes: ['valueEn', 'valueVi'] },
-                                { model: db.Allcode, as: 'paymentIdData', attributes: ['valueEn', 'valueVi'] },
-                            ]
-                        },
+                        { model: db.Allcode, as: 'priceIdData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'provinceIdData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'paymentIdData', attributes: ['valueEn', 'valueVi'] },
                     ],
                     raw: false,
                     nest: true
                 })
 
-                if (data && data.image) {
-                    data.image = new Buffer(data.image, 'base64').toString('binary');
+                if (data && data.TaiKhoan.hinhAnh) {
+                    data.TaiKhoan.hinhAnh = new Buffer(data.TaiKhoan.hinhAnh, 'base64').toString('binary');
                 }
 
                 if (!data) data = {};
@@ -388,23 +483,26 @@ let getListPatientForDoctor = (doctorId, date) => {
                     errMessage: "Missing required parameters!"
                 })
             } else {
-                let data = await db.Booking.findAll({
+                let data = await db.DatLichKham.findAll({
                     where: {
-                        statusId: 'S2',
-                        doctorId: doctorId,
-                        date: date
+                        trangThai: 'S2',
+                        maBS: doctorId,
                     },
                     include: [
                         {
-                            model: db.User, as: 'patientData',
-                            attributes: ['email', 'firstName', 'address', 'gender'],
+                            model: db.LichKham, as: 'schedulePatientData',
+                            where: {
+                                ngayKham: date
+                            },
                             include: [
-                                { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] }
+                                {
+                                    model: db.Allcode, as: 'timeTypeData', attributes: ['valueEn', 'valueVi']
+                                }
                             ]
                         },
                         {
-                            model: db.Allcode, as: 'timeTypeDataPatient', attributes: ['valueEn', 'valueVi']
-                        },
+                            model: db.Allcode, as: 'genderDataDLK', attributes: ['valueEn', 'valueVi']
+                        }
                     ],
                     raw: false,
                     nest: true
@@ -432,17 +530,29 @@ let sendRemedy = (data) => {
                     errMessage: "Missing required parameters!"
                 })
             } else {
-                let appointment = await db.Booking.findOne({
+                console.log(data)
+                let appointment = await db.DatLichKham.findOne({
                     where: {
-                        doctorId: data.doctorId,
-                        patientId: data.patientId,
-                        timeType: data.timeType,
-                        statusId: 'S2'
+                        maBS: data.doctorId,
+                        maND: data.patientId,
+                        trangThai: 'S2'
                     },
+                    include: [
+                        {
+                            model: db.LichKham, as: 'schedulePatientData',
+                            where: {
+                                ngayKham: data.date,
+                                thoiGianKham: data.timeType
+                            },
+                        }
+                    ],
                     raw: false
                 })
                 if (appointment) {
-                    appointment.statusId = 'S3';
+                    appointment.ngayTaiKham = data.ngayTaiKham;
+                    appointment.fileDinhKem = data.imgBase64;
+                    appointment.keDonThuoc = data.donThuoc;
+                    appointment.trangThai = 'S3';
                     await appointment.save();
                 }
 
@@ -469,5 +579,8 @@ module.exports = {
     getExtraInforDoctorById: getExtraInforDoctorById,
     getProfileDoctorById: getProfileDoctorById,
     getListPatientForDoctor: getListPatientForDoctor,
-    sendRemedy: sendRemedy
+    sendRemedy: sendRemedy,
+    getAllRegisterDoctors,
+    ratifyDoctor,
+    refuseDoctor
 }

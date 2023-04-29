@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import moment from "moment";
 import { Toast } from 'react-toastify';
 import { CommonUtils } from '../../../utils';
+import DatePicker from '../../../components/Input/DatePicker';
 
 class RemedyModal extends Component {
 
@@ -13,7 +14,9 @@ class RemedyModal extends Component {
         super(props);
         this.state = {
             email: '',
-            imgBase64: ''
+            imgBase64: '',
+            donThuoc: '',
+            ngayTaiKham: '',
         }
     }
 
@@ -33,6 +36,12 @@ class RemedyModal extends Component {
         }
     }
 
+    handleOnChangeDatePicker = (date) => {
+        this.setState({
+            ngayTaiKham: date[0]
+        })
+    }
+
     handleOnChangeEmail = (event) => {
         this.setState({
             email: event.target.value
@@ -50,6 +59,14 @@ class RemedyModal extends Component {
         }
     }
 
+    onChangeInput = (event, id) => {
+        let copyState = { ...this.state };
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState
+        });
+    }
+
     handleSendRemedy = () => {
         this.props.sendRemedy(this.state);
     }
@@ -58,7 +75,7 @@ class RemedyModal extends Component {
 
 
         let { isOpenModal, closeRemedyModal, dataModal, sendRemedy } = this.props;
-
+        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
         return (
             <Modal
                 isOpen={isOpenModal}
@@ -80,6 +97,23 @@ class RemedyModal extends Component {
                                 onChange={(event) => this.handleOnChangeEmail(event)}
                                 value={this.state.email} />
 
+                        </div>
+                        <div className="col-6 form-group">
+                            <label>Đơn thuốc</label>
+                            <input className='form-control'
+                                type="email"
+                                onChange={(event) => { this.onChangeInput(event, 'donThuoc') }}
+                                value={this.state.donThuoc} />
+
+                        </div>
+                        <div className="col-6 form-group">
+                            <label>Ngày tái khám</label>
+                            <DatePicker
+                                onChange={this.handleOnChangeDatePicker}
+                                className="form-control"
+                                value={this.state.ngayTaiKham}
+                                minDate={yesterday}
+                            />
                         </div>
                         <div className="col-6 form-group">
                             <label>Chọn file đơn thuốc</label>

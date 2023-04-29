@@ -14,7 +14,10 @@
         "family": "Hồ sơ gia đình",
         "login": "Đăng nhập",
         "logout": "Đăng xuất",
-        "register": "Đăng kí"
+        "register": "Đăng kí",
+        "registration-doctor": "Đăng ký bác sĩ",
+        "registration-doctor-title": "Đăng ký để trở thành bác sĩ",
+        "booking": "Lịch đặt"
     },
     "banner": {
         "title-1": "Nền tảng y tế",
@@ -99,11 +102,30 @@
             "exit": "Hủy",
             "free-booking": "Miễn phí đặt lịch",
             "price": "Giá khám: "
+        },
+        "family": {
+            "add": "Thêm mới thành viên mới",
+            "email": "Email",
+            "password": "Mật khẩu",
+            "firstname": "Tên",
+            "lastname": "Họ",
+            "birthday": "Ngày sinh",
+            "phonenumber": "Số điện thoại",
+            "address": "Địa chỉ",
+            "gender": "Giới tính",
+            "position": "Chức danh",
+            "save": "Lưu thành viên",
+            "choose": "Chọn",
+            "image": "Ảnh đại diện",
+            "edit": "Cập nhật thành viên",
+            "create": "Thêm thành viên"
         }
     },
     "admin": {
         "manage-doctor": {
             "title": "Tạo thêm thông tin bác sĩ",
+            "name": "Tên bác sĩ",
+            "register-doctor": "Thông tin hồ sơ bác sĩ",
             "select-doctor": "Chọn bác sĩ",
             "intro": "Thông tin giới thiệu",
             "save-infor": "Lưu thông tin",
@@ -116,6 +138,10 @@
             "note": "Ghi chú",
             "specialty": "Chọn chuyên khoa",
             "clinic": "Chọn phòng khám"
+        },
+        "manage-clinic": {
+            "create": "Thêm",
+            "edit": "Lưu"
         }
     }
 }

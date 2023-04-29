@@ -11,9 +11,12 @@ class Home extends Component {
         let linkToRedirect = '';
         if (isLoggedIn) {
             if (userInfo.user && !_.isEmpty(userInfo.user)) {
-                let role = userInfo.user.roleId;
-                if (role === USER_ROLE.ADMIN || role === USER_ROLE.DOCTOR) {
+                let role = userInfo.user.vaiTro;
+                if (role === USER_ROLE.ADMIN) {
                     linkToRedirect = '/system/user-manage';
+                }
+                else if (role === USER_ROLE.DOCTOR) {
+                    linkToRedirect = '/doctor/manage-schedule';
                 }
                 else if (role === USER_ROLE.PATIENT) {
                     linkToRedirect = '/home';

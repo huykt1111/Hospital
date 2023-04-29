@@ -34,7 +34,7 @@ class MedicalFacility extends Component {
             <div className='section-share section-medical-facility'>
                 <div className='section-container'>
                     <div className='section-header'>
-                        <span className='title-section'>Cơ sở y tế nổi bật</span>
+                        <span className='title-section'>Phòng khám nổi bậc</span>
                         <button className='btn-section'>xem thêm</button>
                     </div>
                     <div className='section-body'>
@@ -48,9 +48,9 @@ class MedicalFacility extends Component {
 
                                         >
                                             <div className='bg-image section-medical-facility'
-                                                style={{ backgroundImage: `url(${item.image})` }}
+                                                style={{ backgroundImage: `url(${item.hinhAnh})` }}
                                             />
-                                            <div className='clinic-name'>{item.name}</div>
+                                            <div className='clinic-name'>{item.tenPhongKham}</div>
                                         </div>
                                     )
                                 })

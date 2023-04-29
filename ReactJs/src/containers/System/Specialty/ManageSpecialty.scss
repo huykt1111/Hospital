@@ -1,5 +1,17 @@
 .manage-specialty-container {
-    padding: 0 15px;
+    padding: 0 100px;
+
+    .form-control-file {
+        color: transparent;
+    }
+
+    .content-one-image {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100px;
+        width: 200px;
+    }
 
     .ms-title {
         text-align: center;
@@ -13,11 +25,23 @@
 
         .btn-save-new-specialty {
             border: none;
-            background: orange;
+            background: #0071ba;
+            color: white;
             padding: 8px 5px;
             min-width: 75px;
             border-radius: 3px;
             margin: 15px 0;
+        }
+    }
+
+    .manager-specialty {
+
+        .content-one-image {
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100px;
+            width: 200px;
         }
     }
 }

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { emitter } from '../../utils/emitter';
+import { LANGUAGES } from '../../utils';
+import * as actions from "../../store/actions";
+import DatePicker from '../../components/Input/DatePicker';
 
 class ModalUser extends Component {
 
@@ -13,7 +16,12 @@ class ModalUser extends Component {
             password: '',
             firstName: '',
             lastName: '',
-            address: ''
+            address: '',
+            phoneNumber: '',
+            genderArr: [],
+            gender: '',
+            birthday: '',
+            currentDate: ''
         }
 
         this.listenToEmitter();
@@ -26,13 +34,33 @@ class ModalUser extends Component {
                 password: '',
                 firstName: '',
                 lastName: '',
-                address: ''
+                address: '',
+                phoneNumber: '',
+                gender: '',
+                birthday: '',
+                currentDate: ''
             })
         })
     }
 
     componentDidMount() {
+        this.props.getGenderStart();
+    }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.genderRedux !== this.props.genderRedux) {
+            let arrGenders = this.props.genderRedux;
+            this.setState({
+                genderArr: arrGenders,
+                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : ''
+            })
+        }
+    }
+
+    handleOnChangeDatePicker = (date) => {
+        this.setState({
+            birthday: date[0]
+        })
     }
 
     toggle = () => {
@@ -50,7 +78,7 @@ class ModalUser extends Component {
 
     checkValidateInput = () => {
         let isValid = true;
-        let arrInput = ['email', 'password', 'firstName', 'lastName', 'address'];
+        let arrInput = ['email', 'password', 'firstName', 'lastName', 'address', 'phoneNumber', 'birthday'];
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
@@ -71,6 +99,9 @@ class ModalUser extends Component {
 
 
     render() {
+        let genders = this.state.genderArr;
+        let language = this.props.language;
+        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
         return (
             <Modal isOpen={this.props.isOpen}
                 toggle={() => { this.toggle() }}
@@ -108,6 +139,41 @@ class ModalUser extends Component {
                                 value={this.state.lastName}
                             />
                         </div>
+                        <div className='input-container'>
+                            <label>Gender:</label>
+                            <select id="inputState"
+                                onChange={(event) => { this.handleOnChangeInput(event, 'gender') }}
+                                className="form-control"
+                                value={this.state.gender}
+                            >
+                                {genders && genders.length > 0 &&
+                                    genders.map((item, index) => {
+                                        return (
+                                            <option key={index} value={item.keyMap}>
+                                                {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                            </option>
+                                        )
+                                    })
+                                }
+                            </select>
+                        </div>
+                        <div className='input-container'>
+                            <label>Date of Birth:</label>
+                            <DatePicker
+                                onChange={this.handleOnChangeDatePicker}
+                                placeholder='Date of birth'
+                                className="form-control"
+                                value={this.state.birthday}
+                                maxDate={yesterday}
+                            />
+                        </div>
+                        <div className='input-container'>
+                            <label>Phone number</label>
+                            <input type='text'
+                                onChange={(event) => { this.handleOnChangeInput(event, "phoneNumber") }}
+                                value={this.state.phoneNumber}
+                            />
+                        </div>
                         <div className='input-container max-width-input'>
                             <label>Address</label>
                             <input type='text'
@@ -134,11 +200,14 @@ class ModalUser extends Component {
 
 const mapStateToProps = state => {
     return {
+        language: state.app.language,
+        genderRedux: state.admin.genders,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        getGenderStart: () => dispatch(actions.fetchGenderStart())
     };
 };
 

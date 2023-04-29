@@ -11,14 +11,47 @@ let createClinic = (data) => {
                     errMessage: 'Missing parameter!'
                 })
             } else {
-                await db.Clinic.create({
-                    name: data.name,
-                    image: data.imageBase64,
-                    address: data.address,
-                    descriptionHtml: data.descriptionHtml,
-                    descriptionMarkdown: data.descriptionMarkdown
+                await db.PhongKham.create({
+                    tenPhongKham: data.name,
+                    hinhAnh: data.imageBase64,
+                    diaChi: data.address,
+                    mieuTaHtml: data.descriptionHtml,
+                    mieuTaMarkDown: data.descriptionMarkdown,
+                    trangThai: 1
                 })
 
+                resolve({
+                    errCode: 0,
+                    errMessage: 'Succeed!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let updateClinic = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.name || !data.address || !data.imageBase64 || !data.descriptionHtml || !data.descriptionMarkdown) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing parameter!'
+                })
+            } else {
+                let clinic = await db.PhongKham.findOne({
+                    where: { id: data.idClinic },
+                    raw: false
+                });
+                if (clinic) {
+                    clinic.tenPhongKham = data.name;
+                    clinic.hinhAnh = data.imageBase64;
+                    clinic.diaChi = data.address;
+                    clinic.mieuTaHtml = data.descriptionHtml;
+                    clinic.mieuTaMarkDown = data.descriptionMarkdown;
+                    await clinic.save();
+                }
                 resolve({
                     errCode: 0,
                     errMessage: 'Succeed!'
@@ -33,12 +66,14 @@ let createClinic = (data) => {
 let getAllClinic = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let data = await db.Clinic.findAll({
-
+            let data = await db.PhongKham.findAll({
+                where: {
+                    trangThai: 1
+                }
             });
             if (data && data.length > 0) {
                 data.map(item => {
-                    item.image = new Buffer(item.image, 'base64').toString('binary');
+                    item.hinhAnh = new Buffer(item.hinhAnh, 'base64').toString('binary');
                     return item;
                 })
             }
@@ -47,6 +82,36 @@ let getAllClinic = () => {
                 errCode: 0,
                 data: data
             })
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let deleteClinic = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (data && data.id !== null) {
+                let clinic = await db.PhongKham.findOne({
+                    where: { id: data.id },
+                    raw: false
+                });
+                if (clinic) {
+                    clinic.trangThai = 0;
+                    await clinic.save();
+                }
+
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Delete succeed!'
+                })
+            }
+            else {
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Delete faided!'
+                })
+            }
         } catch (e) {
             reject(e);
         }
@@ -63,18 +128,33 @@ let getDetailClinicById = (inputId) => {
                 })
             } else {
 
-                let data = await db.Clinic.findOne({
+                let data = await db.PhongKham.findOne({
                     where: {
                         id: inputId,
+                        trangThai: 1
                     },
-                    attributes: ['name', 'address', 'descriptionHtml', 'descriptionMarkdown']
+                    attributes: ['tenPhongKham', 'diaChi', 'mieuTaHtml', 'mieuTaMarkDown']
                 })
                 if (data) {
                     let doctorClinic = [];
-                    doctorClinic = await db.Doctor_Infor.findAll({
-                        where: { clinicId: inputId },
-                        attributes: ['doctorId', 'provinceId']
-                    })
+                    console.log("dasssssssssssssssssss")
+                    doctorClinic = await db.ThongTinBacSi.findAll({
+                        where: { phongKham: inputId, trangThai: 2 },
+                        include: [
+                            {
+                                model: db.TaiKhoan
+                            },
+                        ],
+                        raw: false,
+                        nest: true
+                    });
+
+                    if (doctorClinic && doctorClinic.length > 0) {
+                        doctorClinic.map(item => {
+                            item.TaiKhoan.hinhAnh = new Buffer(item.TaiKhoan.hinhAnh, 'base64').toString('binary');
+                            return item;
+                        })
+                    }
 
                     data.doctorClinic = doctorClinic;
 
@@ -99,4 +179,6 @@ module.exports = {
     createClinic: createClinic,
     getAllClinic: getAllClinic,
     getDetailClinicById: getDetailClinicById,
+    deleteClinic,
+    updateClinic
 }

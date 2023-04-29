@@ -4,6 +4,22 @@ const handleLoginApi = (userEmail, userPassword) => {
     return axios.post('/api/login', { email: userEmail, password: userPassword });
 }
 
+const createNewMember = (data) => {
+    return axios.post('/api/create-new-member-family', data);
+}
+
+const getAllMember = (data) => {
+    return axios.get(`/api/get-all-member?id_user=${data.id}`);
+}
+
+const getMemberByUser = (data) => {
+    return axios.get(`/api/get-member?id_user=${data.id}`);
+}
+
+const updateMemberData = (data) => {
+    return axios.post(`/api/update-member-family`, data);
+}
+
 const getAllUsers = (inputId) => {
     return axios.get(`/api/get-all-users?id=${inputId}`);
 }
@@ -13,7 +29,7 @@ const createNewUserService = (data) => {
 }
 
 const deleteUserService = (userId) => {
-    return axios.delete('/api/delete-user', {
+    return axios.post('/api/delete-user', {
         data: {
             id: userId
         }
@@ -34,6 +50,18 @@ const getTopDoctorHomeService = (limit) => {
 
 const getAllDoctorsService = () => {
     return axios.get(`/api/get-all-doctors`);
+}
+
+const refuseDoctor = (data) => {
+    return axios.post(`/api/refuse-register-doctors`, data);
+}
+
+const ratifyDoctor = (data) => {
+    return axios.post(`/api/ratify-register-doctors`, data);
+}
+
+const getAllRegisterDoctors = () => {
+    return axios.get(`/api/get-register-doctors`);
 }
 
 const saveDetailDoctorsService = (data) => {
@@ -72,6 +100,14 @@ const createNewSpecialty = (data) => {
     return axios.post(`/api/create-new-specialty`, data);
 }
 
+const updateSpecialty = (data) => {
+    return axios.post(`/api/update-specialty`, data);
+}
+
+const deleteSpecialty = (data) => {
+    return axios.post(`/api/delete-specialty`, data);
+}
+
 const getAllSpecialty = () => {
     return axios.get(`/api/get-all-specialty`);
 }
@@ -82,6 +118,14 @@ const getAllDetailSpecialtyById = (data) => {
 
 const createNewClinic = (data) => {
     return axios.post(`/api/create-new-clinic`, data);
+}
+
+const updateClinic = (data) => {
+    return axios.post(`/api/update-clinic`, data);
+}
+
+const deleteClinic = (data) => {
+    return axios.post(`/api/delete-clinic`, data);
 }
 
 const getAllClinic = () => {
@@ -95,14 +139,34 @@ const getAllDetailClinicById = (data) => {
 const getAllPatientForDoctor = (data) => {
     return axios.get(`/api/get-list-patient-for-doctor?doctorId=${data.doctorId}&date=${data.date}`)
 }
+
 const postSendRemedy = (data) => {
     return axios.post(`/api/send-remedy`, data);
 }
 
+const cancelBook = (data) => {
+    return axios.post(`/api/cancel-book-appointment`, data);
+}
+
+const racingBook = (data) => {
+    return axios.post(`/api/racing-book-appointment`, data);
+}
+
+const getAllBookedByUser = (data) => {
+    return axios.get(`/api/get-all-book-appointment?id_user=${data.id}`);
+}
+
+const getAllBookByUser = (data) => {
+    return axios.get(`/api/get-all-booked-appointment?id_user=${data.id}`);
+}
 
 export {
     handleLoginApi,
+    createNewMember,
+    getAllMember,
+    updateMemberData,
     getAllUsers,
+    getMemberByUser,
     createNewUserService,
     deleteUserService,
     editUserService,
@@ -124,5 +188,16 @@ export {
     getAllClinic,
     getAllDetailClinicById,
     getAllPatientForDoctor,
-    postSendRemedy
+    postSendRemedy,
+    getAllRegisterDoctors,
+    ratifyDoctor,
+    refuseDoctor,
+    deleteClinic,
+    updateClinic,
+    deleteSpecialty,
+    updateSpecialty,
+    getAllBookedByUser,
+    getAllBookByUser,
+    cancelBook,
+    racingBook
 }

@@ -26,7 +26,7 @@ class Header extends Component {
         let { userInfo } = this.props;
         let menu = [];
         if (userInfo && !_.isEmpty(userInfo)) {
-            let role = userInfo.roleId;
+            let role = userInfo.vaiTro;
             if (role === USER_ROLE.ADMIN) {
                 menu = adminMenu;
             }
@@ -53,7 +53,7 @@ class Header extends Component {
                 </div>
                 <div className="languages">
                     <span className='welcome'><FormattedMessage id="homeheader.welcome" />
-                        {userInfo && userInfo.firstName ? userInfo.firstName : ''} !
+                        {userInfo && userInfo.ten ? userInfo.ten : ''} !
                     </span>
                     <span className={language === LANGUAGES.VI ? "language-vi active" : "language-vi"}
                         onClick={() => this.handleChangeLanguage(LANGUAGES.VI)}

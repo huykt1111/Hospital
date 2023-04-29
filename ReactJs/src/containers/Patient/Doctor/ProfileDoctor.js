@@ -16,7 +16,7 @@ class ProfileDoctor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataProfile: {}
+            dataProfile: []
         }
     }
 
@@ -51,16 +51,15 @@ class ProfileDoctor extends Component {
 
     renderTimeBooking = (dataTime) => {
         let { language } = this.props;
-        console.log(language)
         if (dataTime && !_.isEmpty(dataTime)) {
             let time = language === LANGUAGES.VI ? dataTime.timeTypeData.valueVi : dataTime.timeTypeData.valueEn;
 
             let date = language === LANGUAGES.VI ?
-                moment.unix(+dataTime.date / 1000).locale("vi", vi).format('dddd - DD/MM/YYYY')
+                moment.unix(+dataTime.ngayKham / 1000).locale("vi", vi).format('dddd - DD/MM/YYYY')
                 :
-                moment.unix(+dataTime.date / 1000).locale("en").format('ddd - MM/DD/YYYY')
+                moment.unix(+dataTime.ngayKham / 1000).locale("en").format('ddd - MM/DD/YYYY')
 
-            console.log(moment.unix(+dataTime.date / 1000).format('dddd - DD/MM/YYYY'))
+            console.log(moment.unix(+dataTime.ngayKham / 1000).format('dddd - DD/MM/YYYY'))
             return (
                 <>
                     <div>{time} - {date}</div>
@@ -80,16 +79,15 @@ class ProfileDoctor extends Component {
 
         let nameVi = '', nameEn = '';
         if (dataProfile && dataProfile.positionData) {
-            nameVi = `${dataProfile.positionData.valueVi}, ${dataProfile.lastName} ${dataProfile.firstName}`;
-            nameEn = `${dataProfile.positionData.valueEn}, ${dataProfile.firstName} ${dataProfile.lastName}`;
+            nameVi = `${dataProfile.positionData.valueVi}, ${dataProfile.TaiKhoan.ho} ${dataProfile.TaiKhoan.ten}`;
+            nameEn = `${dataProfile.positionData.valueEn}, ${dataProfile.TaiKhoan.ten} ${dataProfile.TaiKhoan.ho}`;
         }
-        console.log("Check props", dataTime)
         return (
             <div className="profile-doctor-container">
                 <div className="intro-doctor">
                     <div className='content-left'>
                         <div className='content-left-image'
-                            style={{ backgroundImage: `url(${dataProfile && dataProfile.image ? dataProfile.image : ''})` }}
+                            style={{ backgroundImage: `url(${dataProfile && dataProfile.TaiKhoan && dataProfile.TaiKhoan.hinhAnh ? dataProfile.TaiKhoan.hinhAnh : ''})` }}
                         />
                     </div>
                     <div className="content-right">
@@ -99,8 +97,8 @@ class ProfileDoctor extends Component {
                         <div className="down">
                             {isShowDescriptionDoctor === true ?
                                 <>
-                                    {dataProfile && dataProfile.Markdown && dataProfile.Markdown.description &&
-                                        <span>{dataProfile.Markdown.description}</span>
+                                    {dataProfile && dataProfile.mieuTa &&
+                                        <span>{dataProfile.mieuTa}</span>
                                     }
                                 </>
                                 :
@@ -120,20 +118,20 @@ class ProfileDoctor extends Component {
                 {isShowPrice === true &&
                     <div className="price">
                         <FormattedMessage id="patient.booking-modal.price" />
-                        {dataProfile && dataProfile.Doctor_Infor && language === LANGUAGES.VI ?
+                        {dataProfile && dataProfile.priceIdData && language === LANGUAGES.VI ?
                             <NumericFormat
                                 className='currency'
-                                value={dataProfile.Doctor_Infor.priceIdData.valueVi}
+                                value={dataProfile.priceIdData.valueVi}
                                 displayType="text"
                                 thousandSeparator={true}
                                 suffix={'VND'}
                             />
                             : ''
                         }
-                        {dataProfile && dataProfile.Doctor_Infor && language === LANGUAGES.EN ?
+                        {dataProfile && dataProfile.priceIdData && language === LANGUAGES.EN ?
                             <NumericFormat
                                 className='currency'
-                                value={dataProfile.Doctor_Infor.priceIdData.valueEn}
+                                value={dataProfile.priceIdData.valueEn}
                                 displayType="text"
                                 thousandSeparator={true}
                                 suffix={'$'}

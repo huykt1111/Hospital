@@ -34,12 +34,13 @@ class DetailSpecialty extends Component {
 
             if (res && res.errCode == 0 && resProvince && resProvince.errCode === 0) {
                 let data = res.data;
+                console.log("res", data)
                 let arrDoctorId = [];
                 if (data && !_.isEmpty(res.data)) {
                     let arr = data.doctorSpecialty;
                     if (arr && arr.length > 0) {
                         arr.map(item => {
-                            arrDoctorId.push(item.doctorId);
+                            arrDoctorId.push(item.maTk);
                         })
                     }
                 }
@@ -50,8 +51,8 @@ class DetailSpecialty extends Component {
                         createdAt: null,
                         keyMap: "ALL",
                         type: "PROVINCE",
-                        valueEn: "All Over Danang",
-                        valueVi: "Khắp Đà Nẵng",
+                        valueEn: "All",
+                        valueVi: "Tất cả",
                     })
                 }
 
@@ -104,8 +105,8 @@ class DetailSpecialty extends Component {
 
     render() {
         let { arrDoctorId, dataDetailSpecialty, listProvince } = this.state;
-        console.log("Test", this.state);
         let { language } = this.props;
+        console.log("This.s", arrDoctorId)
         return (
             <div className="detail-specialty-container">
                 <HomeHeader />
@@ -114,10 +115,10 @@ class DetailSpecialty extends Component {
                         {dataDetailSpecialty && !_.isEmpty(dataDetailSpecialty) &&
                             <div>
                                 <div className='title-specialty'>
-                                    {dataDetailSpecialty.name}
+                                    {dataDetailSpecialty.tenChuyenKhoa}
                                 </div>
 
-                                <div dangerouslySetInnerHTML={{ __html: dataDetailSpecialty.descriptionHtml }}>
+                                <div dangerouslySetInnerHTML={{ __html: dataDetailSpecialty.mieuTaHtml }}>
 
                                 </div>
 
@@ -148,7 +149,7 @@ class DetailSpecialty extends Component {
                                                 doctorId={item}
                                                 isShowDescriptionDoctor={true}
                                                 isShowLinkDetails={true}
-                                                isShowPrice={false}
+                                                isShowPrice={true}
 
                                             // dataTime={dataTime}
                                             />

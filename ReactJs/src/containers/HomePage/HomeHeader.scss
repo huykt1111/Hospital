@@ -40,10 +40,15 @@
             align-items: center;
 
             .child-center-content {
+                cursor: pointer;
 
                 .subs-title {
                     font-weight: 400;
                     font-size: 12px;
+                }
+
+                &:hover {
+                    color: #4cc5d4;
                 }
 
             }

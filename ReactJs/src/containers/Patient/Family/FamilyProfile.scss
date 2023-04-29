@@ -1,0 +1,32 @@
+.family-profile-container {
+    .family-profile-body {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .button-member {
+        width: 80%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: end;
+        margin-top: 50px;
+        margin-bottom: 40px;
+
+        .button-member-add {
+            padding: 10px;
+            border: 1px solid #fff04b;
+            border-radius: 10px;
+            background-color: #fff04b;
+            color: black;
+
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f3e22c;
+            }
+        }
+    }
+}

@@ -20,17 +20,17 @@ let handleUserLogin = (email, password) => {
             let userData = {}
             let isExist = await checkUserEmail(email);
             if (isExist) {
-                let user = await db.User.findOne({
-                    where: { email: email },
-                    attributes: ['id', 'email', 'roleId', 'password', 'firstName', 'lastName'],
+                let user = await db.TaiKhoan.findOne({
+                    where: { email: email, trangThai: 1 },
+                    attributes: ['id', 'email', 'vaiTro', 'matKhau', 'ho', 'ten'],
                     raw: true
                 });
                 if (user) {
-                    let check = await bcrypt.compareSync(password, user.password);
+                    let check = await bcrypt.compareSync(password, user.matKhau);
                     if (check) {
                         userData.errCode = 0;
                         userData.errMessage = 'Ok';
-                        delete user.password;
+                        delete user.matKhau;
                         userData.user = user;
                     }
                     else {
@@ -39,7 +39,7 @@ let handleUserLogin = (email, password) => {
                     }
                 } else {
                     userData.errCode = 2;
-                    userData.errMessage = `User's not found!`
+                    userData.errMessage = `User does not exist or is locked!`
                 }
             } else {
                 userData.errCode = 1;
@@ -55,7 +55,7 @@ let handleUserLogin = (email, password) => {
 let checkUserEmail = (userEmail) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let user = await db.User.findOne({
+            let user = await db.TaiKhoan.findOne({
                 where: { email: userEmail }
             })
             if (user) {
@@ -75,20 +75,44 @@ let getAllUsers = (userId) => {
         try {
             let users = '';
             if (userId === 'ALL') {
-                users = await db.User.findAll({
+                users = await db.TaiKhoan.findAll({
+                    where: {
+                        trangThai: 1,
+                        vaiTro: ['R3', 'R2']
+                    },
                     attributes: {
                         exclude: ['password']
-                    }
+                    },
+                    include: [
+                        {
+                            model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi']
+                        },
+                    ],
+                    raw: false,
+                    nest: true
                 });
+                if (users && users.length > 0) {
+                    users.map(item => {
+                        if (item.hinhAnh !== null) {
+                            item.hinhAnh = new Buffer(item.hinhAnh, 'base64').toString('binary');
+                        }
+                        return item;
+                    })
+                }
             }
 
             if (userId && userId !== 'ALL') {
-                users = await db.User.findOne({
+                users = await db.TaiKhoan.findOne({
                     where: { id: userId },
                     attributes: {
                         exclude: ['password']
                     }
                 });
+                if (users && JSON.stringify(users).length > 0) {
+                    if (users.hinhAnh !== null) {
+                        users.hinhAnh = new Buffer(users.hinhAnh, 'base64').toString('binary');
+                    }
+                }
             }
             resolve(users);
         } catch (e) {
@@ -96,7 +120,6 @@ let getAllUsers = (userId) => {
         }
     })
 }
-
 
 let createNewUser = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -110,17 +133,17 @@ let createNewUser = (data) => {
                 });
             } else {
                 let hashPasswordFromBcrypt = await hashUserPassword(data.password);
-                await db.User.create({
+                await db.TaiKhoan.create({
                     email: data.email,
-                    password: hashPasswordFromBcrypt,
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    address: data.address,
-                    phonenumber: data.phonenumber,
-                    gender: data.gender,
-                    roleId: data.roleId,
-                    positionId: data.positionId,
-                    image: data.avatar
+                    matKhau: hashPasswordFromBcrypt,
+                    ho: data.lastName,
+                    ten: data.firstName,
+                    gioiTinh: data.gender,
+                    ngaySinh: data.birthday,
+                    diaChi: data.address,
+                    soDienThoai: data.phoneNumber,
+                    vaiTro: 'R3',
+                    trangThai: '1'
                 });
                 resolve({
                     errCode: 0,
@@ -137,8 +160,9 @@ let createNewUser = (data) => {
 let deleteUser = (userId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let user = await db.User.findOne({
-                where: { id: userId }
+            let user = await db.TaiKhoan.findOne({
+                where: { id: userId },
+                raw: false
             })
             if (!user) {
                 resolve({
@@ -147,9 +171,8 @@ let deleteUser = (userId) => {
                 });
             }
             // await user.destroy();
-            await db.User.destroy({
-                where: { id: userId }
-            });
+            user.trangThai = 0;
+            await user.save();
             resolve({
                 errCode: 0,
                 message: `The user is deleted`
@@ -163,28 +186,28 @@ let deleteUser = (userId) => {
 let updateUserData = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.id || !data.roleId || !data.positionId || !data.gender) {
+            if (!data.id) {
                 resolve({
                     errCode: 2,
                     errMessage: 'Missing required parameters'
                 })
             }
 
-            let user = await db.User.findOne({
+            let user = await db.TaiKhoan.findOne({
                 where: { id: data.id },
                 raw: false
             });
 
             if (user) {
-                user.firstName = data.firstName;
-                user.lastName = data.lastName;
-                user.address = data.address;
-                user.phonenumber = data.phonenumber;
-                user.gender = data.gender;
-                user.positionId = data.positionId;
-                user.roleId = data.roleId;
+                user.ho = data.lastName;
+                user.ten = data.firstName;
+                user.gioiTinh = data.gender;
+                user.ngaySinh = data.birthday;
+                user.diaChi = data.address;
+                user.soDienThoai = data.phoneNumber;
+
                 if (data.avatar) {
-                    user.image = data.avatar;
+                    user.hinhAnh = data.avatar;
                 }
 
                 await user.save();

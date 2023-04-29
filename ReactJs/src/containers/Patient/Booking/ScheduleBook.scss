@@ -1,0 +1,90 @@
+.booked-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    // width: 90%;
+
+    .content-one {
+        flex: 0 0 80px;
+        margin-right: 10px;
+    }
+
+    .content-one-image {
+        width: 80px;
+        height: 80px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .content-two {
+        margin-left: 10px;
+        width: 150px;
+    }
+
+    .content-three {
+        margin-left: 10px;
+        margin-top: 5px;
+        font-weight: 600;
+        width: 200px;
+    }
+
+    .content-five {
+        margin-left: 10px;
+        margin-top: 5px;
+        font-weight: 600;
+        width: 300px;
+    }
+
+    .content-four {
+        margin-left: 10px;
+        width: 150px;
+    }
+
+    .button-detail-book {
+        margin-left: 10px;
+        width: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .button-detail-book div {
+        cursor: pointer;
+        color: blue;
+        margin-left: 10px;
+    }
+
+    .button-detail-book div:hover {
+        text-decoration: underline;
+    }
+
+    div span {
+        font-weight: bold;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .booked-container {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .content-one {
+            margin-bottom: 10px;
+        }
+
+        .button-detail-book {
+            margin-top: 10px;
+        }
+
+        .button-detail-book div {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+
+}

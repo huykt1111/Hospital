@@ -69,6 +69,35 @@ export const fetchPositionFailed = () => ({
     type: actionTypes.FETCH_POSITION_FAILED
 });
 
+export const fetchPositionFamilyStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            dispatch({
+                type: actionTypes.FETCH_FAMILY_POSITION_START
+            })
+            let res = await getAllCodeService("FAMILY");
+            if (res && res.errCode === 0) {
+                dispatch(fetchPositionFamilySuccess(res.data));
+            }
+            else {
+                dispatch(fetchPositionFamilyFailed());
+            }
+        } catch (e) {
+            dispatch(fetchPositionFamilyFailed());
+            console.log('fetchPostionFamilyStart', e)
+        }
+    }
+};
+
+export const fetchPositionFamilySuccess = (positionFamiLyData) => ({
+    type: actionTypes.FETCH_FAMILY_POSITION_SUCCESS,
+    data: positionFamiLyData
+});
+
+export const fetchPositionFamilyFailed = () => ({
+    type: actionTypes.FETCH_FAMILY_POSITION_FAILED
+});
+
 export const fetchRoleStart = () => {
     return async (dispatch, getState) => {
         try {
@@ -321,7 +350,6 @@ export const getRequiredDoctorInfor = () => {
             let resProvince = await getAllCodeService("PROVINCE");
             let resSpecialty = await getAllSpecialty();
             let resClinic = await getAllClinic();
-
 
             if (resPrice && resPrice.errCode === 0
                 && resPayment && resPayment.errCode === 0
