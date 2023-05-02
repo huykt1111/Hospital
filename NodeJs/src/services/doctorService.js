@@ -173,7 +173,72 @@ let getTopDoctorHome = (limit) => {
         try {
 
             let doctor = await db.ThongTinBacSi.findAll({
-                limit: limit,
+
+                where: {
+                    trangThai: 2
+                },
+
+                include: [
+                    {
+                        model: db.TaiKhoan,
+                        where: {
+                            vaiTro: "R2",
+                            trangThai: 1
+                        }
+                    },
+                    {
+                        model: db.PhongKham, as: 'userClinicData', attributes: ['tenPhongKham', 'diaChi', 'mieuTaHtml', 'mieuTaMarkDown']
+                    },
+                    {
+                        model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi']
+                    },
+                    { model: db.Allcode, as: 'priceIdData', attributes: ['valueEn', 'valueVi'] },
+                    { model: db.Allcode, as: 'provinceIdData', attributes: ['valueEn', 'valueVi'] },
+                    { model: db.Allcode, as: 'paymentIdData', attributes: ['valueEn', 'valueVi'] },
+                    {
+                        model: db.LichKham, as: 'dataDoctorLK', attributes: ['maTk'],
+                        include: [
+                            {
+                                model: db.DatLichKham, as: 'schedulePatientData'
+                            },
+                        ]
+                    },
+                ],
+                attributes: [
+                    'maTk', 'tenPhongKham',
+                    [db.sequelize.literal('(SELECT COUNT(*) FROM DatLichKhams WHERE DatLichKhams.maBS = ThongTinBacSi.maTk)'), 'bookingCount']
+                ],
+                order: [[db.sequelize.literal('bookingCount'), 'DESC']],
+                raw: false,
+                nest: true
+            })
+
+
+            if (doctor && doctor.length > 0) {
+                doctor = doctor.slice(0, limit);
+
+                doctor.map(item => {
+                    item.TaiKhoan.hinhAnh = new Buffer(item.TaiKhoan.hinhAnh, 'base64').toString('binary');
+                    return item;
+                })
+            }
+
+            if (!doctor) doctor = {};
+
+            resolve({
+                errCode: 0,
+                data: doctor
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getAllDoctors = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let doctor = await db.ThongTinBacSi.findAll({
                 where: {
                     trangThai: 2
                 },
@@ -212,23 +277,6 @@ let getTopDoctorHome = (limit) => {
             resolve({
                 errCode: 0,
                 data: doctor
-            })
-        } catch (e) {
-            reject(e);
-        }
-    })
-}
-
-let getAllDoctors = () => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let doctors = await db.User.findAll({
-                where: {
-                    roleId: "R2"
-                },
-                attributes: {
-                    exclude: ['password', 'image']
-                }
             })
             resolve({
                 errCode: 0,
@@ -309,12 +357,9 @@ let bulkCreateSchedule = (data) => {
                     raw: true
                 })
 
-                console.log(schedule)
-
                 let toCreate = _.differenceWith(schedule, existing, (a, b) => {
                     return a.thoiGianKham === b.thoiGianKham && +a.ngayKham === +b.ngayKham;
                 });
-                console.log(toCreate)
                 if (toCreate && toCreate.length > 0) {
                     await db.LichKham.bulkCreate(toCreate);
                 }
@@ -355,8 +400,6 @@ let getScheduleByDate = (doctorId, date) => {
                     raw: false,
                     nest: true
                 })
-
-                console.log(dataSchedule)
 
                 if (!dataSchedule) dataSchedule = [];
 
@@ -530,7 +573,6 @@ let sendRemedy = (data) => {
                     errMessage: "Missing required parameters!"
                 })
             } else {
-                console.log(data)
                 let appointment = await db.DatLichKham.findOne({
                     where: {
                         maBS: data.doctorId,

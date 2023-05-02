@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import moment from "moment";
 import vi from "moment/locale/vi";
 import LoadingOverlay from "react-loading-overlay";
+import { withRouter } from 'react-router';
 
 class BookingModal extends Component {
 
@@ -244,6 +245,12 @@ class BookingModal extends Component {
         return ''
     }
 
+    handleViewLogin = () => {
+        if (this.props.history) {
+            this.props.history.push(`/login`);
+        }
+    }
+
     render() {
 
         let language = this.props.language;
@@ -291,11 +298,11 @@ class BookingModal extends Component {
                                         <div style={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-evenly' }}>
                                             <div>
                                                 <input type="radio" id="personal" name="bookingType" value="personal" checked={this.state.isPersonal} onChange={this.handleRadioChange} />
-                                                <label htmlFor="personal">Đặt cho cá nhân</label>
+                                                <label style={{ marginLeft: '5px;', fontWeight: '600' }} htmlFor="personal">Đặt cho cá nhân</label>
                                             </div>
                                             <div>
                                                 <input type="radio" id="family" name="bookingType" value="family" checked={!this.state.isPersonal} onChange={this.handleRadioChange} />
-                                                <label htmlFor="family">Đặt cho gia đình</label>
+                                                <label style={{ marginLeft: '5px;', fontWeight: '600' }} htmlFor="family">Đặt cho gia đình</label>
                                             </div>
                                         </div>
                                         {this.state.isPersonal ?
@@ -383,9 +390,9 @@ class BookingModal extends Component {
                                             <div className="row">
                                                 <div className="col-12 form-group">
                                                     <label>
-                                                        <FormattedMessage id="patient.booking-modal.name" />
+                                                        <FormattedMessage id="patient.booking-modal.book-for" />
                                                     </label>
-                                                    <div className="col-3 form-group">
+                                                    <div className="col-3">
                                                         <select
                                                             style={{ marginLeft: "-14px" }}
                                                             className='form-control'
@@ -483,16 +490,20 @@ class BookingModal extends Component {
 
                                 </div>
                                 :
-                                <div>Vui lòng đăng nhập</div>
+                                <div className='not-login'>
+                                    <div className='not-login-title'>Bạn chưa đăng nhập xin vui lòng đăng nhập để đặt lịch khám!</div>
+                                    <div className='not-login-now' onClick={() => this.handleViewLogin()}>Đăng nhập ngay</div>
+                                </div>
                             }
                         </div>
                         <div className='booking-modal-footer'>
-                            <button className="btn-booking-confirm"
-                                onClick={() => this.handleConfirmBooking()}
-
-                            >
-                                <FormattedMessage id="patient.booking-modal.btn-confirm" />
-                            </button>
+                            {userInfo && userInfo.user && userInfo.user.id &&
+                                <button className="btn-booking-confirm"
+                                    onClick={() => this.handleConfirmBooking()}
+                                >
+                                    <FormattedMessage id="patient.booking-modal.btn-confirm" />
+                                </button>
+                            }
                             <button className="btn-booking-cancel"
                                 onClick={closeBookingModal}
                             >
@@ -521,4 +532,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookingModal);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BookingModal));

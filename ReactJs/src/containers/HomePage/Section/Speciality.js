@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from 'react-slick';
-import { getAllSpecialty } from '../../../services/userService';
+import { getTopSpecialty } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
 import { withRouter } from 'react-router';
 import { FormattedMessage } from 'react-intl';
@@ -16,7 +16,7 @@ class Speciality extends Component {
     }
 
     async componentDidMount() {
-        let res = await getAllSpecialty();
+        let res = await getTopSpecialty();
         if (res && res.errCode === 0) {
             this.setState({
                 dataSpecially: res.data ? res.data : []

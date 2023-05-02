@@ -126,8 +126,8 @@ class ManagePatient extends Component {
                     text='Loading...'
                 >
                     <div className="manage-patient-container" >
-                        <div className="m-p-title">
-                            Quản lý bệnh nhân khám bệnh
+                        <div className="title">
+                            <FormattedMessage id='manage-patient.title' />
                         </div>
                         <div className="manage-patient-body row">
                             <div className="col-4 form-group">
@@ -139,7 +139,7 @@ class ManagePatient extends Component {
                                 />
                             </div>
                             <div className="col-12 table-manage-patient">
-                                <table style={{ width: '100%' }}>
+                                <table style={{ width: '100%' }} id='customers'>
                                     <tbody>
                                         <tr>
                                             <th>STT</th>
@@ -171,17 +171,15 @@ class ManagePatient extends Component {
                                                             >
                                                                 Xác nhận
                                                             </button>
-
                                                         </td>
                                                     </tr>
                                                 )
                                             })
                                             :
                                             <tr>
-                                                <td colSpan="6" style={{ textAlign: 'center' }}>No data</td>
+                                                <td colSpan="7" style={{ textAlign: 'center' }}>No data</td>
                                             </tr>
                                         }
-
                                     </tbody>
                                 </table>
                             </div>

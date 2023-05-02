@@ -37,15 +37,20 @@
             "crud": "CRUD user",
             "crud-redux": "CRUD redux",
             "clinic": "Phòng khám",
-            "manage-clinic": "Quản lý phòng khám",
+            "manage-clinic": "Cập nhật phòng khám",
             "specialty": "Chuyên khoa",
-            "manage-specialty": "Quản lý chuyên khoa",
+            "manage-specialty": "Cập nhật chuyên khoa",
             "handbook": "Cẩm nang",
-            "manage-handbook": "Quản lý cẩm nang"
+            "manage-handbook": "Cập nhật cẩm nang",
+            "doctor": "Bác sĩ",
+            "doctor-register": "Đăng ký bác sĩ",
+            "user-account": "Tài khoản người dùng",
+            "clinic-register": "Đăng ký thêm phòng",
+            "specialty-register": "Đăng ký thêm chuyên khoa"
         },
         "doctor": {
-            "manage-schedule": "Quản lý kế hoạch khám bệnh",
-            "manage-patient": "Quản lý bệnh nhân khám bệnh"
+            "manage-schedule": "Lên lịch khám bệnh",
+            "manage-patient": "Bệnh nhân khám bệnh"
         }
     },
     "manage-user": {
@@ -70,10 +75,13 @@
         "specialty-popular": "Chuyên khoa phổ biến"
     },
     "manage-schedule": {
-        "title": "Quản lý kế hoạch khám bệnh của bác sĩ",
+        "title": "Kế hoạch khám bệnh của bác sĩ",
         "choose-doctor": "Chọn bác sĩ",
         "choose-date": "Chọn ngày",
         "save": "Lưu thông tin"
+    },
+    "manage-patient": {
+        "title": "Danh sách bệnh nhân khám bệnh"
     },
     "patient": {
         "detail-doctor": {
@@ -101,7 +109,8 @@
             "btn-confirm": "Xác nhận",
             "exit": "Hủy",
             "free-booking": "Miễn phí đặt lịch",
-            "price": "Giá khám: "
+            "price": "Giá khám: ",
+            "book-for": "Đặt lịch hẹn cho: "
         },
         "family": {
             "add": "Thêm mới thành viên mới",
@@ -118,7 +127,8 @@
             "choose": "Chọn",
             "image": "Ảnh đại diện",
             "edit": "Cập nhật thành viên",
-            "create": "Thêm thành viên"
+            "create": "Thêm thành viên",
+            "delete": "Xóa thành viên"
         }
     },
     "admin": {

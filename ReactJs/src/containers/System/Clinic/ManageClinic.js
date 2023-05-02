@@ -165,35 +165,46 @@ class ManageClinic extends Component {
         return (
             <div className="manage-specialty-container">
                 <div className="title text-center">Manage Clinic</div>
-
                 <div className="add-new-specialty row">
-                    <div className="col-6 form-group">
-                        <label>Tên phòng khám</label>
-                        <input className="form-control"
-                            type="text"
-                            value={this.state.name}
-                            onChange={(event) => this.handleOnChangeInput(event, 'name')}
-                        />
-                    </div>
-                    <div className="col-6 form-group">
-                        <label>Địa chỉ phòng khám</label>
-                        <input className="form-control"
-                            type="text"
-                            value={this.state.address}
-                            onChange={(event) => this.handleOnChangeInput(event, 'address')}
-                        />
-                    </div>
                     <div className="col-12 form-group">
-                        <label>Ảnh phòng khám</label>
-                        <input className="form-control-file"
-                            type="file"
-                            onChange={(event) => this.handleOnChangImage(event)}
-                        />
-                        <td style={{ width: '100px' }}>
-                            <div className='content-one-image'
-                                style={{ backgroundImage: `url(${this.state.imageBase64})` }}
-                            ></div>
-                        </td>
+                        <div className="row">
+                            <div className="col-6">
+                                <div className="row">
+                                    <div className="col-12 form-group">
+                                        <label>Tên phòng khám</label>
+                                        <input className="form-control"
+                                            type="text"
+                                            value={this.state.name}
+                                            onChange={(event) => this.handleOnChangeInput(event, 'name')}
+                                        />
+                                    </div>
+                                    <div className="col-12 form-group">
+                                        <label>Địa chỉ phòng khám</label>
+                                        <input className="form-control"
+                                            type="text"
+                                            value={this.state.address}
+                                            onChange={(event) => this.handleOnChangeInput(event, 'address')}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div className="row">
+                                    <div className="col-12 form-group">
+                                        <label>Ảnh phòng khám</label>
+                                        <input className="form-control-file"
+                                            type="file"
+                                            onChange={(event) => this.handleOnChangImage(event)}
+                                        />
+                                        <td style={{ width: '100px' }}>
+                                            <div className='content-one-image'
+                                                style={{ backgroundImage: `url(${this.state.imageBase64})` }}
+                                            ></div>
+                                        </td>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="col-12">

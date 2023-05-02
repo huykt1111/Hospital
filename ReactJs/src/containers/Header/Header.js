@@ -8,6 +8,7 @@ import './Header.scss';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES, USER_ROLE } from '../../utils';
 import _ from 'lodash';
+import logo from '../../assets/logo.jpg';
 
 class Header extends Component {
 
@@ -44,12 +45,16 @@ class Header extends Component {
 
     render() {
         const { processLogout, language, userInfo } = this.props;
-        console.log(this.state.menuApp)
         return (
             <div className="header-container">
-                {/* thanh navigator */}
-                <div className="header-tabs-container">
-                    <Navigator menus={this.state.menuApp} />
+                <div className="header-container-tab-left">
+                    <div className="logo-container">
+                        <img src={logo} />
+                    </div>
+                    {/* thanh navigator */}
+                    <div className="header-tabs-container">
+                        <Navigator menus={this.state.menuApp} />
+                    </div>
                 </div>
                 <div className="languages">
                     <span className='welcome'><FormattedMessage id="homeheader.welcome" />

@@ -82,7 +82,7 @@ class DetailSpecialty extends Component {
                     let arr = data.doctorSpecialty;
                     if (arr && arr.length > 0) {
                         arr.map(item => {
-                            arrDoctorId.push(item.doctorId);
+                            arrDoctorId.push(item.maTk);
                         })
                     }
                 }
@@ -106,12 +106,14 @@ class DetailSpecialty extends Component {
     render() {
         let { arrDoctorId, dataDetailSpecialty, listProvince } = this.state;
         let { language } = this.props;
-        console.log("This.s", arrDoctorId)
         return (
             <div className="detail-specialty-container">
                 <HomeHeader />
                 <div className="detail-specialty-body">
                     <div className='description-specialty'>
+                        <div className='description-specialty-img'
+                            style={{ backgroundImage: `url(${dataDetailSpecialty.hinhAnh})` }}
+                        />
                         {dataDetailSpecialty && !_.isEmpty(dataDetailSpecialty) &&
                             <div>
                                 <div className='title-specialty'>
@@ -169,6 +171,10 @@ class DetailSpecialty extends Component {
                             )
                         })
                     }
+
+                    <div className='special-bottom'>
+
+                    </div>
                 </div>
             </div >
         );

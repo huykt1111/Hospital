@@ -136,7 +136,6 @@ class RegisterDoctor extends Component {
             let dataSelectProvince = this.buildDataInputSelect(resProvince, 'PROVINCE');
             let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'SPECIALTY');
             let dataSelectClinic = this.buildDataInputSelect(resClinic, 'CLINIC');
-            console.log("sadsa", dataSelectClinic)
 
             this.setState({
                 listPrice: dataSelectPrice,
@@ -195,7 +194,6 @@ class RegisterDoctor extends Component {
     }
 
     handleSaveContentMarkdown = () => {
-        console.log("Check state", this.state.user.id)
         this.props.saveDetailDoctors({
             id: parseInt(this.props.match.params.id),
             selectedSpecialty: this.state.selectedSpecialty.value,
@@ -249,7 +247,7 @@ class RegisterDoctor extends Component {
         let { language } = this.props;
         console.log(this.state)
         return (
-            <div div className="manage-doctor-container" style={{ padding: "20px" }}>
+            <div div className="manage-doctor-register-container">
                 <div className="manage-doctor-title">
                     <FormattedMessage id="admin.manage-doctor.register-doctor" />
                 </div>

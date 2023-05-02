@@ -2,16 +2,44 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './HomeHeader.scss';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo.jpg';
 import { LANGUAGES } from '../../utils';
 import { withRouter } from 'react-router';
 import { changeLanguageApp } from '../../store/actions/appActions';
 import * as actions from "../../store/actions";
 
 class HomeHeader extends Component {
+    constructor(props) {
+        super(props);
+        this.searchPlaceHolder = ['Tìm kiếm chuyên khoa', 'Tìm kiếm phòng khám', 'Tìm kiếm bác sĩ'];
+        this.state = {
+            index: 0,
+            searchKey: ''
+        };
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(() => {
+            this.setState((prevState) => ({
+                index: (prevState.index + 1) % this.searchPlaceHolder.length
+            }));
+        }, 3000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
 
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language);
+    }
+
+    onChangeInput = (event, id) => {
+        let copyState = { ...this.state };
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState
+        });
     }
 
     returnToHome = () => {
@@ -52,6 +80,14 @@ class HomeHeader extends Component {
     handleViewRegister = () => {
         if (this.props.history) {
             this.props.history.push(`/register`);
+        }
+    }
+
+    handleSearch = () => {
+        if (this.props.history) {
+            this.props.history.push(`/search`, {
+                key: this.state.searchKey
+            });
         }
     }
 
@@ -133,7 +169,18 @@ class HomeHeader extends Component {
                             </div>
                             <div className='search'>
                                 <i className="fas fa-search"></i>
-                                <input type='text' placeholder='Tìm chuyên khoa khám bệnh' />
+                                <input type='text'
+                                    placeholder={this.searchPlaceHolder[this.state.index]}
+                                    onChange={(event) => { this.onChangeInput(event, 'searchKey') }}
+                                    value={this.state.searchKey}
+                                />
+                                <span onClick={() => this.handleSearch()}>Tìm kiếm</span>
+                                {/* <datalist id='search-home'>
+                                    <option value='Chuyên khoa Nội tiết' />
+                                    <option value='Chuyên khoa Tim mạch' />
+                                    <option value='Chuyên khoa Tiêu hóa' />
+                                    <option value='Chuyên khoa Nhi khoa' />
+                                </datalist> */}
                             </div>
                         </div>
                         <div className='content-down'>

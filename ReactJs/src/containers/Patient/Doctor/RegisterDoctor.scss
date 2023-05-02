@@ -1,10 +1,16 @@
-.manage-doctor-container {
-    padding: 5px;
+.manage-doctor-register-container {
+    padding: 40px;
+    background: #fafafa;
+
+    label {
+        font-weight: bold;
+    }
 
     .manage-doctor-title {
         text-align: center;
-        margin: 15px 0;
+        margin: 10px 0;
         font-size: 20px;
+        color: #0071ba;
         text-transform: uppercase;
         font-weight: 600;
     }

@@ -46,7 +46,6 @@ class ProfileFamily extends Component {
 
     render() {
         let { dataMember } = this.state;
-        console.log("dsadsaads", dataMember);
         let { language } = this.props;
         return (
             <>
@@ -67,7 +66,7 @@ class ProfileFamily extends Component {
                                     ></div>
                                 </div>
                                 <div className="content-two">
-                                    <div>{language === LANGUAGES.VI ?
+                                    <div className='content-two-name'>{language === LANGUAGES.VI ?
                                         <span>{item.ho} {item.ten}</span> :
                                         <span>{item.ten} {item.ho}</span>
                                     }</div>
@@ -86,7 +85,8 @@ class ProfileFamily extends Component {
                                     }
                                 </div>
                                 <div className="button-detail-family">
-                                    <div onClick={() => this.handleUpdate(item.id)}><FormattedMessage id="patient.family.edit" /></div>
+                                    <div className="button-edit" onClick={() => this.handleUpdate(item.id)}><FormattedMessage id="patient.family.edit" /></div>
+                                    <div className="button-delete" onClick={() => this.handleUpdate(item.id)}><FormattedMessage id="patient.family.delete" /></div>
                                 </div>
                             </div>
                         );

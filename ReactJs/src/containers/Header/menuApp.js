@@ -3,7 +3,15 @@ export const adminMenu = [
         name: 'menu.admin.manage-user',
         menus: [
             {
-                name: 'menu.admin.crud', link: '/system/user-manage',
+                name: 'menu.admin.user-account', link: '/system/user-manage',
+            },
+        ]
+    },
+    { //manage clinic
+        name: 'menu.admin.doctor', menus: [
+            {
+                name: 'menu.admin.doctor-register', link: '/system/manage-doctor',
+
             },
         ]
     },
@@ -12,13 +20,8 @@ export const adminMenu = [
             {
                 name: 'menu.admin.manage-clinic', link: '/system/manage-clinic',
             },
-        ]
-    },
-    { //manage clinic
-        name: 'menu.admin.manage-doctor', menus: [
             {
-                name: 'menu.admin.manage-doctor', link: '/system/manage-doctor',
-
+                name: 'menu.admin.clinic-register'
             },
         ]
     },
@@ -27,12 +30,15 @@ export const adminMenu = [
             {
                 name: 'menu.admin.manage-specialty', link: '/system/manage-specialty',
             },
+            {
+                name: 'menu.admin.specialty-register'
+            },
         ]
     },
     { //manage handbook
         name: 'menu.admin.handbook', menus: [
             {
-                name: 'menu.admin.manage-handbook', link: '/system/manage-handbook',
+                name: 'menu.admin.manage-handbook'
             },
         ]
     },

@@ -5,7 +5,8 @@ import './DoctorExtraInfor.scss';
 import { LANGUAGES } from '../../../utils';
 import { FormattedMessage } from 'react-intl';
 import { NumericFormat } from 'react-number-format';
-// import Map from '../../../components/Map';
+import GoogleMapReact from 'google-map-react';
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 
 class DoctorExtraInfor extends Component {
 
@@ -14,8 +15,11 @@ class DoctorExtraInfor extends Component {
         this.state = {
             isShowDetailInfor: false,
             extraInfor: {},
-            map: null,
-            marker: null,
+            center: {
+                lat: 16.047079,
+                lng: 108.206230
+            },
+            zoom: 11,
         }
     }
 
@@ -28,27 +32,6 @@ class DoctorExtraInfor extends Component {
                     extraInfor: res.data
                 })
             }
-
-            // const google = window.google;
-            // const map = new google.maps.Map(document.getElementById('map'), {
-            //     center: { lat: -34.397, lng: 150.644 },
-            //     zoom: 8,
-            // });
-
-            // const geocoder = new google.maps.Geocoder();
-
-            // geocoder.geocode({ address: this.state.extraInfor.diaChiPhongKham }, (results, status) => {
-            //     if (status === 'OK') {
-            //         map.setCenter(results[0].geometry.location);
-            //         const marker = new google.maps.Marker({
-            //             map: map,
-            //             position: results[0].geometry.location,
-            //         });
-            //         this.setState({ map, marker });
-            //     } else {
-            //         console.log('Geocode was not successful for the following reason: ' + status);
-            //     }
-            // });
         }
     }
 
@@ -65,6 +48,26 @@ class DoctorExtraInfor extends Component {
                     extraInfor: res.data
                 })
             }
+            if (this.props.isNotShowMap) {
+
+            }
+            else {
+                const address = res.data.diaChiPhongKham;
+                try {
+                    const result = await geocodeByAddress(address);
+                    if (result.length > 0) {
+                        const lnglat = await getLatLng(result[0]);
+                        console.log(lnglat);
+                        this.setState({
+                            center: lnglat
+                        });
+                    } else {
+                        console.error('No results found');
+                    }
+                } catch (error) {
+                    console.error('Error getting geolocation', error);
+                }
+            }
         }
 
     }
@@ -78,6 +81,7 @@ class DoctorExtraInfor extends Component {
     render() {
         let { isShowDetailInfor, extraInfor } = this.state;
         let { language } = this.props;
+
         return (
             <div className="doctor-extra-infor-container">
                 <div className='content-up'>
@@ -86,7 +90,17 @@ class DoctorExtraInfor extends Component {
                     </div>
                     <div className='name-clinic'>{extraInfor && extraInfor.tenPhongKham ? extraInfor.tenPhongKham : ''}</div>
                     <div className='detail-address'>{extraInfor && extraInfor.diaChiPhongKham ? extraInfor.diaChiPhongKham : ''}</div>
-                    {/* <div id="map" style={{ height: '400px' }}></div> */}
+                    {this.props.showMap &&
+                        <div style={{ height: '50vh', width: '100%' }}>
+                            <GoogleMapReact
+                                bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_JS_API }}
+                                defaultCenter={this.state.center}
+                                defaultZoom={this.state.zoom}
+                            >
+                                <Marker lat={this.state.center.lat} lng={this.state.center.lng} />
+                            </GoogleMapReact>
+                        </div>
+                    }
                 </div>
                 <div className='content-down'>
 
@@ -175,6 +189,8 @@ class DoctorExtraInfor extends Component {
         );
     }
 }
+
+const Marker = () => <div style={{ color: 'red' }}>Hospital <i className="fa fa-map-marker-alt"></i></div>;
 
 const mapStateToProps = state => {
     return {

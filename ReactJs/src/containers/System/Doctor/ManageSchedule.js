@@ -110,7 +110,7 @@ class ManageSchedule extends Component {
 
         return (
             <div className='manage-schedule-container'>
-                <div className='manage-schedule-title'>
+                <div className='title'>
                     <FormattedMessage id='manage-schedule.title' />
                 </div>
                 <div className='container'>

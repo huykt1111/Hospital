@@ -87,7 +87,7 @@ class DetailDoctor extends Component {
                             <DoctorSchedule doctorIdFromParent={this.state.currentDoctorId} />
                         </div>
                         <div className="content-right">
-                            <DoctorExtraInfor doctorIdFromParent={this.state.currentDoctorId} />
+                            <DoctorExtraInfor doctorIdFromParent={this.state.currentDoctorId} showMap={true} />
                         </div>
                     </div>
                     <div className="detail-doctor">

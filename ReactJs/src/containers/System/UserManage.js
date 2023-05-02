@@ -6,6 +6,7 @@ import { getAllUsers, createNewUserService, deleteUserService, editUserService }
 import ModalUser from './ModalUser';
 import ModalEditUser from './ModalEditUser';
 import { emitter } from '../../utils/emitter';
+import ReactPaginate from 'react-paginate';
 
 class UserManage extends Component {
 
@@ -15,7 +16,9 @@ class UserManage extends Component {
             arrUsers: [],
             isOpenModalUser: false,
             isOpenModalEditUser: false,
-            userEdit: {}
+            userEdit: {},
+            currentPage: 1,
+            itemsPerPage: 10,
         }
     }
 
@@ -30,6 +33,17 @@ class UserManage extends Component {
                 arrUsers: response.users
             })
         }
+    }
+
+    handlePageChange = (pageNumber) => {
+        this.setState({ currentPage: pageNumber });
+    }
+
+    getCurrentPageData = () => {
+        const { arrUsers, currentPage, itemsPerPage } = this.state;
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        return arrUsers.slice(startIndex, endIndex);
     }
 
     handleAddNewUser = () => {
@@ -130,6 +144,7 @@ class UserManage extends Component {
 
     render() {
         let arrUsers = this.state.arrUsers;
+        const pageCount = Math.ceil(this.state.arrUsers.length / this.state.itemsPerPage);
         console.log(arrUsers);
         return (
             <div className="user-container">
@@ -160,18 +175,18 @@ class UserManage extends Component {
                         <tbody>
                             <tr>
                                 <th>Email</th>
-                                <th>First name</th>
                                 <th>Last name</th>
+                                <th>First name</th>
                                 <th>Address</th>
                                 <th>Action</th>
                             </tr>
                             {
-                                arrUsers && arrUsers.map((item, index) => {
+                                this.getCurrentPageData().map((item, index) => {
                                     return (
                                         <tr key={index}>
                                             <td>{item.email}</td>
-                                            <td>{item.ten}</td>
                                             <td>{item.ho}</td>
+                                            <td>{item.ten}</td>
                                             <td>{item.diaChi}</td>
                                             <td>
                                                 <button className="btn-edit"
@@ -190,6 +205,22 @@ class UserManage extends Component {
                             }
                         </tbody>
                     </table>
+                    <ReactPaginate
+                        pageCount={pageCount}
+                        onPageChange={({ selected }) => this.handlePageChange(selected + 1)}
+                        containerClassName={"pagination"}
+                        activeClassName={"active"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-item"}
+                        nextClassName={"page-item"}
+                        previousLinkClassName={"page-link"}
+                        nextLinkClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                    />
                 </div>
             </div>
         );

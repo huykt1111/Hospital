@@ -29,7 +29,7 @@ class OutStandingDoctor extends Component {
 
     handleViewDetailDoctor = (doctor) => {
         if (this.props.history) {
-            this.props.history.push(`/detail-doctor/${doctor.id}`);
+            this.props.history.push(`/detail-doctor/${doctor.maTk}`);
         }
     }
 
@@ -37,7 +37,6 @@ class OutStandingDoctor extends Component {
 
         let arrDoctors = this.state.arrDoctors;
         let { language } = this.props;
-        console.log("dsadsa", arrDoctors);
         return (
             <div className='section-share section-outstanding-doctor'>
                 <div className='section-container'>

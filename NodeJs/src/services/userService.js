@@ -1,5 +1,6 @@
 import db from "../models/index";
 import bcrypt from "bcrypt";
+const { Op } = require("sequelize");
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -253,6 +254,122 @@ let getAllCodeService = (typeInput) => {
     })
 }
 
+let getSearchAll = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let keyword = data.keyword;
+            let location = data.location;
+            let specialtyId = data.specialty;
+            let clinicId = data.clinic;
+            let price = data.price;
+            console.log(clinicId)
+            if (location === undefined) {
+                location = '';
+            }
+            if (location === 'ALL') {
+                location = '';
+            }
+            if (specialtyId === 'ALL') {
+                specialtyId = '';
+            }
+            if (clinicId === 'ALL') {
+                clinicId = '';
+            }
+            if (price === 'ALL') {
+                price = '';
+            }
+            if (price === undefined) {
+                price = '';
+            }
+            if (specialtyId === undefined) {
+                specialtyId = '';
+            }
+            if (clinicId === undefined) {
+                clinicId = '';
+            }
+            // doctor
+            let doctor = await db.ThongTinBacSi.findAll({
+                where: {
+                    trangThai: 2,
+                    khuVucLamViec: {
+                        [Op.like]: `%${location}%`
+                    },
+                    chuyenKhoa: {
+                        [Op.like]: `%${specialtyId}%`
+                    },
+                    phongKham: {
+                        [Op.like]: `%${clinicId}%`
+                    },
+                    giaKham: {
+                        [Op.like]: `%${price}%`
+                    }
+                },
+                include: [
+                    {
+                        model: db.TaiKhoan,
+                        attributes: [
+                            'id',
+                            'vaiTro',
+                            'ho',
+                            'ten'
+                        ],
+                        where: {
+                            vaiTro: 'R2',
+                            [Op.or]: [
+                                db.sequelize.literal(`CONCAT(ho, '', ten) LIKE '%${keyword}%'`),
+                                db.sequelize.literal(`CONCAT(ho, ' ', ten) LIKE '%${keyword}%'`),
+                                db.sequelize.literal(`CONCAT(ten, '', ho) LIKE '%${keyword}%'`),
+                                db.sequelize.literal(`CONCAT(ten, ' ', ho) LIKE '%${keyword}%'`),
+                            ]
+                        },
+                    },
+                ],
+                raw: false,
+                nest: true
+            })
+            // clinic
+            let clinic = await db.PhongKham.findAll({
+                where: {
+                    trangThai: 1,
+                    tenPhongKham: {
+                        [Op.like]: `%${keyword}%`
+                    }
+                },
+            });
+            if (clinic && clinic.length > 0) {
+                clinic.map(item => {
+                    item.hinhAnh = new Buffer(item.hinhAnh, 'base64').toString('binary');
+                    return item;
+                })
+            }
+            // specialty
+            let specialty = await db.ChuyenKhoa.findAll({
+                where: {
+                    trangThai: 1,
+                    tenChuyenKhoa: {
+                        [Op.like]: `%${keyword}%`
+                    }
+                },
+            });
+            if (specialty && specialty.length > 0) {
+                specialty.map(item => {
+                    item.hinhAnh = new Buffer(item.hinhAnh, 'base64').toString('binary');
+                    return item;
+                })
+            }
+
+            if (doctor || clinic || specialty) {
+                resolve({ doctor, specialty, clinic, message: 'Get data success!' });
+            } else {
+                resolve({ message: 'Can not find!' });
+            }
+        } catch (e) {
+            console.error(e);
+            reject(e);
+        }
+    });
+};
+
 module.exports = {
     handleUserLogin: handleUserLogin,
     getAllUsers: getAllUsers,
@@ -260,4 +377,5 @@ module.exports = {
     deleteUser: deleteUser,
     updateUserData: updateUserData,
     getAllCodeService: getAllCodeService,
+    getSearchAll: getSearchAll
 }

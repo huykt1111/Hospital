@@ -56,6 +56,20 @@ let getAllClinic = async (req, res) => {
     }
 }
 
+let getTopClinic = async (req, res) => {
+    try {
+        let infor = await clinicService.getTopClinic();
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
 let getDetailClinicById = async (req, res) => {
     try {
         let infor = await clinicService.getDetailClinicById(req.query.id);
@@ -75,6 +89,6 @@ module.exports = {
     getAllClinic: getAllClinic,
     getDetailClinicById: getDetailClinicById,
     deleteClinic,
-    updateClinic
-
+    updateClinic,
+    getTopClinic
 }

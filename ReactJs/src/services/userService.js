@@ -112,6 +112,11 @@ const getAllSpecialty = () => {
     return axios.get(`/api/get-all-specialty`);
 }
 
+const getTopSpecialty = () => {
+    return axios.get(`/api/get-top-specialty`);
+
+}
+
 const getAllDetailSpecialtyById = (data) => {
     return axios.get(`/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`)
 }
@@ -130,6 +135,10 @@ const deleteClinic = (data) => {
 
 const getAllClinic = () => {
     return axios.get(`/api/get-all-clinic`);
+}
+
+const getTopClinic = () => {
+    return axios.get(`/api/get-top-clinic`);
 }
 
 const getAllDetailClinicById = (data) => {
@@ -158,6 +167,10 @@ const getAllBookedByUser = (data) => {
 
 const getAllBookByUser = (data) => {
     return axios.get(`/api/get-all-booked-appointment?id_user=${data.id}`);
+}
+
+const getSearchAll = (data) => {
+    return axios.post(`/api/search-all`, data);
 }
 
 export {
@@ -199,5 +212,8 @@ export {
     getAllBookedByUser,
     getAllBookByUser,
     cancelBook,
-    racingBook
+    racingBook,
+    getTopSpecialty,
+    getTopClinic,
+    getSearchAll
 }

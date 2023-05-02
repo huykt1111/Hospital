@@ -36,9 +36,50 @@ let getAllSpecialty = () => {
             let data = await db.ChuyenKhoa.findAll({
                 where: {
                     trangThai: 1
-                }
+                },
             });
             if (data && data.length > 0) {
+                data.map(item => {
+                    item.hinhAnh = new Buffer(item.hinhAnh, 'base64').toString('binary');
+                    return item;
+                })
+            }
+            resolve({
+                errMessage: 'ok',
+                errCode: 0,
+                data: data
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getTopSpecialty = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.ChuyenKhoa.findAll({
+                where: {
+                    trangThai: 1
+                },
+                include: [
+                    {
+                        model: db.ThongTinBacSi, as: 'userSpecialtyData', attributes: ['chuyenKhoa']
+                    },
+                ],
+                attributes: [
+                    'id',
+                    'tenChuyenKhoa',
+                    'hinhAnh',
+                    [db.sequelize.literal('(SELECT COUNT(*) FROM ThongTinBacSis WHERE ThongTinBacSis.chuyenKhoa = ChuyenKhoa.id)'), 'specialtyCount']
+                ],
+                order: [[db.sequelize.literal('specialtyCount'), 'DESC']],
+                raw: false,
+                nest: true
+            });
+            if (data && data.length > 0) {
+                data = data.slice(0, 8);
+
                 data.map(item => {
                     item.hinhAnh = new Buffer(item.hinhAnh, 'base64').toString('binary');
                     return item;
@@ -131,9 +172,10 @@ let getDetailSpecialtyById = (inputId, location) => {
                         id: inputId,
                         trangThai: 1
                     },
-                    attributes: ['tenChuyenKhoa', 'mieuTaHtml', 'mieuTaMarkDown']
+                    attributes: ['tenChuyenKhoa', 'mieuTaHtml', 'mieuTaMarkDown', 'hinhAnh']
                 })
                 if (data) {
+                    data.hinhAnh = new Buffer(data.hinhAnh, 'base64').toString('binary');
                     let doctorSpecialty = [];
                     if (location === 'ALL') {
                         doctorSpecialty = await db.ThongTinBacSi.findAll({
@@ -200,5 +242,6 @@ module.exports = {
     getAllSpecialty: getAllSpecialty,
     getDetailSpecialtyById: getDetailSpecialtyById,
     deleteSpecialty,
-    updateSpecialty
+    updateSpecialty,
+    getTopSpecialty
 }

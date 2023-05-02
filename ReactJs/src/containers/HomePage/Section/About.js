@@ -8,16 +8,17 @@ class About extends Component {
         return (
             <div className='section-share section-about'>
                 <div className='section-about-header'>
-                    Truyền thông nói về BookingCare
+                    Truyền thông nói về UTE HOSPITAL
                 </div>
                 <div className='section-about-content'>
                     <div className='content-left'>
                         <iframe width="100%" height="400"
-                            src="https://www.youtube.com/embed/FyDQljKtWnI"
-                            title="CÀ PHÊ KHỞI NGHIỆP VTV1 - BOOKINGCARE - HỆ THỐNG ĐẶT LỊCH KHÁM TRỰC TUYẾN"
+                            src="https://www.youtube.com/embed/JIdm23gzOH8"
+                            title="Bệnh viện Hoàn Mỹ Đà Nẵng | Giới thiệu"
                             frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen></iframe>
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen>
+
+                        </iframe>
                     </div>
                     <div className='content-right'>
                         <p>Trong lĩnh vực chăm sóc sức khỏe đã có nhiều giải pháp để hỗ trợ người bệnh theo các hướng khác nhau. Có ứng dụng cung cấp thông tin để người bệnh tham khảo; có nơi tập trung vào mảng bác sĩ gia đình; đưa ra giải pháp về xét nghiệm tại nhà; và có cả nền tảng giúp người bệnh hỏi đáp bác sĩ. Tuy nhiên, đó chưa phải là những giải pháp giúp người bệnh dễ dàng tiếp cận với việc đi khám và giải quyết được vấn đề quá tải tại các bệnh viện.</p>

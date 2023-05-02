@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from 'react-slick';
 import { withRouter } from 'react-router';
-import { getAllClinic } from '../../../services/userService';
+import { getTopClinic } from '../../../services/userService';
 
 class MedicalFacility extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class MedicalFacility extends Component {
     }
 
     async componentDidMount() {
-        let res = await getAllClinic();
+        let res = await getTopClinic();
         if (res && res.errCode === 0) {
             this.setState({
                 dataClinics: res.data ? res.data : []

@@ -22,6 +22,31 @@
         .booking-modal-body {
             padding: 15px;
             height: 100%;
+
+            .not-login {
+                padding: 20px;
+                border-radius: 5px;
+                text-align: center;
+
+                &-title {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                    color: blue;
+                }
+
+                &-now {
+                    color: red;
+                    font-size: 16px;
+                    padding: 10px;
+                    border-radius: 5px;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: rgb(163, 0, 0);
+                    }
+                }
+            }
         }
 
         .booking-modal-footer {

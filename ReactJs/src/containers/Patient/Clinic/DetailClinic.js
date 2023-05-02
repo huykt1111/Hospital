@@ -8,6 +8,8 @@ import DoctorSchedule from '../Doctor/DoctorSchedule';
 import DoctorExtraInfor from '../Doctor/DoctorExtraInfor';
 import ProfileDoctor from '../Doctor/ProfileDoctor';
 import { getAllDetailClinicById } from '../../../services/userService';
+import GoogleMapReact from 'google-map-react';
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import _ from 'lodash';
 
 class DetailClinic extends Component {
@@ -17,6 +19,11 @@ class DetailClinic extends Component {
         this.state = {
             arrDoctorId: [],
             dataDetailClinic: {},
+            center: {
+                lat: 16.047079,
+                lng: 108.206230
+            },
+            zoom: 11,
         }
     }
 
@@ -30,7 +37,6 @@ class DetailClinic extends Component {
 
             if (res && res.errCode == 0) {
                 let data = res.data;
-                console.log("res", data);
                 let arrDoctorId = [];
                 if (data && !_.isEmpty(res.data)) {
                     let arr = data.doctorClinic;
@@ -45,7 +51,24 @@ class DetailClinic extends Component {
                     dataDetailClinic: res.data,
                     arrDoctorId: arrDoctorId,
                 })
+
+                const address = this.state.dataDetailClinic.diaChi;
+                try {
+                    const result = await geocodeByAddress(address);
+                    if (result.length > 0) {
+                        const lnglat = await getLatLng(result[0]);
+                        console.log(lnglat);
+                        this.setState({
+                            center: lnglat
+                        });
+                    } else {
+                        console.error('No results found');
+                    }
+                } catch (error) {
+                    console.error('Error getting geolocation', error);
+                }
             }
+
         }
     }
 
@@ -59,8 +82,8 @@ class DetailClinic extends Component {
 
     render() {
         let { arrDoctorId, dataDetailClinic } = this.state;
-        console.log("đasadsadsa clinicccccccccccccc", arrDoctorId)
         let { language } = this.props;
+
         return (
             <div className="detail-specialty-container">
                 <HomeHeader />
@@ -71,7 +94,16 @@ class DetailClinic extends Component {
                                 <div className='title-specialty'>
                                     {dataDetailClinic.tenPhongKham}
                                 </div>
-
+                                <div style={{ height: '50vh', width: '100%', marginTop: '10px', marginBottom: '10px' }}>
+                                    <GoogleMapReact
+                                        bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_JS_API }}
+                                        center={this.state.center}
+                                        defaultCenter={this.state.center}
+                                        defaultZoom={this.state.zoom}
+                                    >
+                                        <Marker lat={this.state.center.lat} lng={this.state.center.lng} />
+                                    </GoogleMapReact>
+                                </div>
                                 <div dangerouslySetInnerHTML={{ __html: dataDetailClinic.mieuTaHtml }}>
 
                                 </div>
@@ -115,6 +147,8 @@ class DetailClinic extends Component {
         );
     }
 }
+
+const Marker = () => <div style={{ color: 'red' }}>Hospital <i className="fa fa-map-marker-alt"></i></div>;
 
 const mapStateToProps = state => {
     return {

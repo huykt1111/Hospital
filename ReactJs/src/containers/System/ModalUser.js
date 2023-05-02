@@ -115,6 +115,7 @@ class ModalUser extends Component {
                             <label>Email</label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "email") }}
+                                placeholder='quanghuy@gmail.com'
                                 value={this.state.email}
                             />
                         </div>
@@ -126,17 +127,17 @@ class ModalUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>First name</label>
-                            <input type='text'
-                                onChange={(event) => { this.handleOnChangeInput(event, "firstName") }}
-                                value={this.state.firstName}
-                            />
-                        </div>
-                        <div className='input-container'>
                             <label>Last name</label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "lastName") }}
                                 value={this.state.lastName}
+                            />
+                        </div>
+                        <div className='input-container'>
+                            <label>First name</label>
+                            <input type='text'
+                                onChange={(event) => { this.handleOnChangeInput(event, "firstName") }}
+                                value={this.state.firstName}
                             />
                         </div>
                         <div className='input-container'>
@@ -171,6 +172,7 @@ class ModalUser extends Component {
                             <label>Phone number</label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "phoneNumber") }}
+                                placeholder='0961640909'
                                 value={this.state.phoneNumber}
                             />
                         </div>

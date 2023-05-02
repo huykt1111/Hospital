@@ -32,6 +32,13 @@ class ManageSpecialty extends Component {
         await this.getAllSpecialty();
     }
 
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.language != prevProps.language) {
+
+        }
+
+    }
+
     handlePageChange = (pageNumber) => {
         this.setState({ currentPage: pageNumber });
     }
@@ -51,14 +58,6 @@ class ManageSpecialty extends Component {
                 action: CRUD_ACTIONS.CREATE
             })
         }
-    }
-
-
-    async componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.language != prevProps.language) {
-
-        }
-
     }
 
     handleOnChangeInput = (event, id) => {
@@ -157,7 +156,7 @@ class ManageSpecialty extends Component {
         let { language } = this.props;
         return (
             <div className="manage-specialty-container">
-                <div className="ms-title">Quản lý chuyên khoa</div>
+                <div className="title">Quản lý chuyên khoa</div>
 
                 <div className="add-new-specialty row">
                     <div className="col-6 form-group">
@@ -174,11 +173,13 @@ class ManageSpecialty extends Component {
                             type="file"
                             onChange={(event) => this.handleOnChangImage(event)}
                         />
-                        <td style={{ width: '100px' }}>
-                            <div className='content-one-image'
-                                style={{ backgroundImage: `url(${this.state.imageBase64})` }}
-                            ></div>
-                        </td>
+                        {this.state.imageBase64 !== '' &&
+                            <td style={{ width: '100px' }}>
+                                <div className='content-one-image'
+                                    style={{ backgroundImage: `url(${this.state.imageBase64})` }}
+                                ></div>
+                            </td>
+                        }
                     </div>
                     <div className="col-12">
                         <MdEditor style={{ height: '300px' }}

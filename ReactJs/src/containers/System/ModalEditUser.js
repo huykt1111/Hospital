@@ -105,11 +105,9 @@ class ModalEditUser extends Component {
 
     render() {
         let genders = this.state.genderArr;
-        console.log("genders", genders)
         let language = this.props.language;
         let isGetGenders = this.props.isLoadingGender;
         let { gender } = this.state;
-        console.log("genders", gender)
         let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
         return (
             <Modal isOpen={this.props.isOpen}
@@ -137,21 +135,18 @@ class ModalEditUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>First name</label>
-                            <input type='text'
-                                onChange={(event) => { this.handleOnChangeInput(event, "firstName") }}
-                                value={this.state.firstName}
-                            />
-                        </div>
-                        <div className='input-container'>
                             <label>Last name</label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "lastName") }}
                                 value={this.state.lastName}
                             />
                         </div>
-                        <div className="col-12 ">
-                            {isGetGenders === true ? 'Loading genders' : ''}
+                        <div className='input-container'>
+                            <label>First name</label>
+                            <input type='text'
+                                onChange={(event) => { this.handleOnChangeInput(event, "firstName") }}
+                                value={this.state.firstName}
+                            />
                         </div>
                         <div className='input-container'>
                             <label><FormattedMessage id="patient.family.gender" /></label>

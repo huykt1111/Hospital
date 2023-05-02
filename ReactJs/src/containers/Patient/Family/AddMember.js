@@ -228,13 +228,10 @@ class AddMember extends Component {
                 <div className="user-redux-body">
                     <div className="container">
                         <div className="row">
-                            <div className="col-12 my-3">
-                                <FormattedMessage id="patient.family.add" />
-                            </div>
-                            <div className="col-12 ">
+                            <div className="col-12 form-group">
                                 {isGetGenders === true ? 'Loading genders' : ''}
                             </div>
-                            <div className="col-3">
+                            <div className="col-3 form-group">
                                 <label><FormattedMessage id="patient.family.position" /></label>
                                 <select id="inputState"
                                     onChange={(event) => { this.onChangeInput(event, 'position') }}
@@ -252,7 +249,7 @@ class AddMember extends Component {
                                     }
                                 </select>
                             </div>
-                            <div className="col-3">
+                            <div className="col-3 form-group">
                                 <label><FormattedMessage id="patient.family.email" /></label>
                                 <input type="email"
                                     className="form-control"
@@ -261,86 +258,97 @@ class AddMember extends Component {
                                     pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
                                 />
                             </div>
-                            <div className="col-3">
+                            <div className="col-3 form-group">
                                 <label><FormattedMessage id="patient.family.lastname" /></label>
                                 <input type="text"
                                     value={lastName}
                                     className="form-control"
                                     onChange={(event) => { this.onChangeInput(event, 'lastName') }} />
                             </div>
-                            <div className="col-3">
+                            <div className="col-3 form-group">
                                 <label><FormattedMessage id="patient.family.firstname" /></label>
                                 <input type="text"
                                     value={firstName}
                                     className="form-control"
                                     onChange={(event) => { this.onChangeInput(event, 'firstName') }} />
                             </div>
-                            <div className="col-3">
-                                <label><FormattedMessage id="patient.family.gender" /></label>
-                                <select id="inputState"
-                                    onChange={(event) => { this.onChangeInput(event, 'gender') }}
-                                    className="form-control"
-                                    value={gender}
-                                >
-                                    {genders && genders.length > 0 &&
-                                        genders.map((item, index) => {
-                                            return (
-                                                <option key={index} value={item.keyMap}>
-                                                    {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
-                                                </option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </div>
-                            <div className="col-3">
-                                <label><FormattedMessage id="patient.family.birthday" /></label>
-                                <DatePicker
-                                    onChange={this.handleOnChangeDatePicker}
-                                    className="form-control"
-                                    value={this.state.birthday}
-                                    maxDate={yesterday}
-                                />
-                            </div>
-                            <div className="col-3">
-                                <label><FormattedMessage id="patient.family.phonenumber" /></label>
-                                <input type="tel"
-                                    className="form-control"
-                                    value={phoneNumber}
-                                    onChange={(event) => { this.onChangeInput(event, 'phoneNumber') }}
-                                    pattern="[0-9]{10,11}"
-                                    required />
-                            </div>
-                            <div className="col-9">
-                                <label><FormattedMessage id="patient.family.address" /></label>
-                                <input type="text"
-                                    className="form-control"
-                                    value={address}
-                                    onChange={(event) => { this.onChangeInput(event, 'address') }} />
-                            </div>
 
-
-
-                            <div className="col-3">
-                                <label><FormattedMessage id="patient.family.image" /></label>
-                                <div className="preview-img-container">
-                                    <input id="previewImg" type="file" hidden
-                                        onChange={(event) => this.handleOnChangImage(event)}
-                                    />
-                                    <label htmlFor="previewImg"
-                                        className="label-upload">
-                                        Tải ảnh
-                                        <i className="fas fa-upload"></i>
-                                    </label>
-                                    <div className="preview-image"
-                                        style={{ backgroundImage: `url(${this.state.previewImgURL})` }}
-                                        onClick={() => this.openPreviewImage()}
-                                    >
+                            <div className="col-12 form-group">
+                                <div className="row">
+                                    <div className="col-9 form-group">
+                                        <div className="row">
+                                            <div className="col-4 form-group">
+                                                <label><FormattedMessage id="patient.family.gender" /></label>
+                                                <select id="inputState"
+                                                    onChange={(event) => { this.onChangeInput(event, 'gender') }}
+                                                    className="form-control"
+                                                    value={gender}
+                                                >
+                                                    {genders && genders.length > 0 &&
+                                                        genders.map((item, index) => {
+                                                            return (
+                                                                <option key={index} value={item.keyMap}>
+                                                                    {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                                                </option>
+                                                            )
+                                                        })
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div className="col-4 form-group">
+                                                <label><FormattedMessage id="patient.family.birthday" /></label>
+                                                <DatePicker
+                                                    onChange={this.handleOnChangeDatePicker}
+                                                    className="form-control"
+                                                    value={this.state.birthday}
+                                                    maxDate={yesterday}
+                                                />
+                                            </div>
+                                            <div className="col-4 form-group">
+                                                <label><FormattedMessage id="patient.family.phonenumber" /></label>
+                                                <input type="tel"
+                                                    className="form-control"
+                                                    value={phoneNumber}
+                                                    onChange={(event) => { this.onChangeInput(event, 'phoneNumber') }}
+                                                    pattern="[0-9]{10,11}"
+                                                    required />
+                                            </div>
+                                            <div className="col-12 form-group">
+                                                <label><FormattedMessage id="patient.family.address" /></label>
+                                                <input type="text"
+                                                    className="form-control"
+                                                    value={address}
+                                                    onChange={(event) => { this.onChangeInput(event, 'address') }} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-3 form-group">
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <label><FormattedMessage id="patient.family.image" /></label>
+                                                <div className="preview-img-container">
+                                                    <input id="previewImg" type="file" hidden
+                                                        onChange={(event) => this.handleOnChangImage(event)}
+                                                    />
+                                                    <label htmlFor="previewImg"
+                                                        className="label-upload">
+                                                        Tải ảnh
+                                                        <i className="fas fa-upload"></i>
+                                                    </label>
+                                                    <div className="preview-image"
+                                                        style={{ backgroundImage: `url(${this.state.previewImgURL})` }}
+                                                        onClick={() => this.openPreviewImage()}
+                                                    >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-12 my-3">
-                                <button className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning" : "btn btn-primary"}
+
+                            <div className="col-12 my-3 button-create-family">
+                                <button style={{ color: '#fff' }} className={action === CRUD_ACTIONS.EDIT ? "btn btn-warning" : "btn btn-primary"}
                                     onClick={() => this.handleCreateNewMember()}
                                 >
                                     {action === CRUD_ACTIONS.EDIT ?

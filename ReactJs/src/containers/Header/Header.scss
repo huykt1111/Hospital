@@ -4,13 +4,17 @@
     z-index: 99;
     display: flex;
     justify-content: space-between;
-    background-color: $colormain;
-    color: $common-text-color;
+    // background-color: $colormain;
+    // color: $common-text-color;
+    background-color: #fff;
+    color: black;
     height: 40px;
     position: relative;
+    padding: 0 50px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 
     .btn-logout {
-        color: $common-text-color;
+        color: red;
         line-height: 40px;
         height: 40px;
         padding: 0 10px;
@@ -21,6 +25,51 @@
 
         i {
             font-size: $base-size + 1px;
+        }
+    }
+
+    .header-container-tab-left {
+        display: flex;
+
+        .header-tabs-container {
+            .navigator-menu {
+
+                .menu-group {
+                    background: #fff;
+
+                    &:hover {
+                        color: #4cc5d4;
+                    }
+
+                    .menu-list {
+
+                        .menu {
+
+                            .menu-link {
+
+                                &:hover {
+                                    color: #4cc5d4;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: white;
+            cursor: pointer;
+
+            img {
+                height: 40px;
+                margin-right: 10px;
+            }
         }
     }
 
@@ -38,7 +87,7 @@
 
             &.active {
                 opacity: 1;
-                color: yellow;
+                color: #FFA500;
             }
         }
 
@@ -48,7 +97,7 @@
 
             &.active {
                 opacity: 1;
-                color: yellow;
+                color: #FFA500;
             }
         }
     }

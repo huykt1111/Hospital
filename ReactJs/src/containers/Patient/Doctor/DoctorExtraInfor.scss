@@ -70,3 +70,13 @@
         }
     }
 }
+
+.marker {
+    background-color: red;
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    display: inline-block;
+    transform: translate(-50%, -50%);
+}

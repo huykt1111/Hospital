@@ -6,7 +6,6 @@ import { LANGUAGES } from '../../../utils';
 import _ from 'lodash';
 import './ModalBooking.scss';
 
-
 class ModalBooking extends Component {
 
     constructor(props) {
@@ -31,7 +30,6 @@ class ModalBooking extends Component {
     render() {
         let { language } = this.props;
         let doctor = this.props.bookSchedule;
-        console.log("bookkkkkkkkk", doctor)
         const USDollar = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',

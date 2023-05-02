@@ -37,15 +37,20 @@
             "crud": "CRUD user",
             "crud-redux": "CRUD redux",
             "clinic": "Clinics",
-            "manage-clinic": "Manage clinics",
+            "manage-clinic": "Update clinics",
             "specialty": "Specialties",
-            "manage-specialty": "Manage specialties",
+            "manage-specialty": "Update specialties",
             "handbook": "Handbook",
-            "manage-handbook": "Manage handbooks"
+            "manage-handbook": "Update handbooks",
+            "doctor": "Doctor",
+            "doctor-register": "Doctor registration",
+            "user-account": "User account",
+            "clinic-register": "Register more clinics",
+            "specialty-register": "Specialty more clinics"
         },
         "doctor": {
-            "manage-schedule": "Manage Doctor's schedule",
-            "manage-patient": "Management of medical examination patients"
+            "manage-schedule": "Schedule a medical examination",
+            "manage-patient": "Medical examination patients"
         }
     },
     "manage-user": {
@@ -70,10 +75,13 @@
         "specialty-popular": "Popular specialties"
     },
     "manage-schedule": {
-        "title": "Manage doctor's examination plan",
+        "title": "Medical examination plan",
         "choose-doctor": "Choose a doctor",
         "choose-date": "Choose a date",
         "save": "Save infor"
+    },
+    "manage-patient": {
+        "title": "List of patients examined"
     },
     "patient": {
         "detail-doctor": {
@@ -101,7 +109,8 @@
             "btn-confirm": "Confirm",
             "exit": "Cancel",
             "free-booking": "Free booking",
-            "price": "Price: "
+            "price": "Price: ",
+            "book-for": "Schedule an appointment for: "
         },
         "family": {
             "add": "Add a new member",
@@ -117,7 +126,8 @@
             "choose": "Choose",
             "image": "Avatar",
             "edit": "Edit member",
-            "create": "Create Member"
+            "create": "Create Member",
+            "delete": "Delete Member"
         }
     },
     "admin": {

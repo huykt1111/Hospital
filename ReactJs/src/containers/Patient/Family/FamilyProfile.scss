@@ -1,4 +1,7 @@
 .family-profile-container {
+    background: #fafafa;
+    height: 100vh;
+
     .family-profile-body {
         width: 100%;
         display: flex;
@@ -12,20 +15,19 @@
         display: flex;
         justify-content: flex-end;
         align-items: end;
-        margin-top: 50px;
+        padding-top: 50px;
         margin-bottom: 40px;
 
         .button-member-add {
             padding: 10px;
-            border: 1px solid #fff04b;
+            border: 1px solid #4cc5d4;
             border-radius: 10px;
-            background-color: #fff04b;
-            color: black;
-
+            background-color: #4cc5d4;
+            color: white;
             cursor: pointer;
 
             &:hover {
-                background-color: #f3e22c;
+                background-color: #3696a2;
             }
         }
     }

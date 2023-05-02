@@ -4,13 +4,11 @@ div._loading_overlay_wrapper {
     ._loading_overlay_overlay {
         z-index: 10000;
     }
-    }
+}
+
 .manage-patient-container {
-    .m-p-title {
-        font-size: 15px;
-        margin: 10px 0;
-        text-align: center;
-        text-transform: uppercase;
+    .title {
+        margin: 30px 0px;
     }
 
     .manage-patient-body {
