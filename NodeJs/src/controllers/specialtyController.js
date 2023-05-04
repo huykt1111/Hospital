@@ -14,6 +14,20 @@ let createSpecialty = async (req, res) => {
     }
 }
 
+let registerSpecialty = async (req, res) => {
+    try {
+        let infor = await specialtyService.registerSpecialty(req.body);
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
 let updateSpecialty = async (req, res) => {
     try {
         let infor = await specialtyService.updateSpecialty(req.body);
@@ -42,9 +56,51 @@ let deleteSpecialty = async (req, res) => {
     }
 }
 
+let deleteRatifySpecialty = async (req, res) => {
+    try {
+        let infor = await specialtyService.deleteRatifySpecialty(req.body);
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
+let ratifySpecialty = async (req, res) => {
+    try {
+        let infor = await specialtyService.ratifySpecialty(req.body);
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
 let getAllSpecialty = async (req, res) => {
     try {
         let infor = await specialtyService.getAllSpecialty();
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
+let getRegisterSpecialty = async (req, res) => {
+    try {
+        let infor = await specialtyService.getRegisterSpecialty();
         return res.status(200).json(infor)
     }
     catch (e) {
@@ -90,5 +146,9 @@ module.exports = {
     getDetailSpecialtyById: getDetailSpecialtyById,
     deleteSpecialty,
     updateSpecialty,
-    getTopSpecialty
+    getTopSpecialty,
+    registerSpecialty,
+    getRegisterSpecialty,
+    deleteRatifySpecialty,
+    ratifySpecialty
 }

@@ -6,6 +6,7 @@ import FamilyProfile from '../containers/Patient/Family/FamilyProfile';
 import AddMember from '../containers/Patient/Family/AddMember';
 import ManagerBooking from '../containers/Patient/Booking/ManagerBooking';
 import RegisterDoctor from '../containers/Patient/Doctor/RegisterDoctor';
+import ProfileUser from '../containers/Patient/Account/ProfileUser';
 class Doctor extends Component {
     render() {
 
@@ -22,6 +23,8 @@ class Doctor extends Component {
                             <Route path="/update-member/:id" component={AddMember} />
                             <Route path="/add-member/" component={AddMember} />
                             <Route path="/register-doctor/:id" component={RegisterDoctor} />
+                            <Route path="/update-profile-patient/:id" component={ProfileUser} />
+
                         </Switch>
                     </div>
                 </div>

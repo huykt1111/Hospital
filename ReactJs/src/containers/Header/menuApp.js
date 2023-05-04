@@ -1,5 +1,5 @@
 export const adminMenu = [
-    { //manage user
+    {
         name: 'menu.admin.manage-user',
         menus: [
             {
@@ -7,7 +7,7 @@ export const adminMenu = [
             },
         ]
     },
-    { //manage clinic
+    {
         name: 'menu.admin.doctor', menus: [
             {
                 name: 'menu.admin.doctor-register', link: '/system/manage-doctor',
@@ -15,30 +15,32 @@ export const adminMenu = [
             },
         ]
     },
-    { //manage clinic
+    {
         name: 'menu.admin.clinic', menus: [
             {
                 name: 'menu.admin.manage-clinic', link: '/system/manage-clinic',
             },
             {
-                name: 'menu.admin.clinic-register'
+                name: 'menu.admin.ratify-clinic', link: '/system/ratify-clinic',
+
             },
         ]
     },
-    { //manage specialty
+    {
         name: 'menu.admin.specialty', menus: [
             {
                 name: 'menu.admin.manage-specialty', link: '/system/manage-specialty',
             },
             {
-                name: 'menu.admin.specialty-register'
+                name: 'menu.admin.ratify-specialty', link: '/system/ratify-specialty',
+
             },
         ]
     },
-    { //manage handbook
+    {
         name: 'menu.admin.handbook', menus: [
             {
-                name: 'menu.admin.manage-handbook'
+                name: 'menu.admin.manage-handbook', link: '/system/manage-handbook'
             },
         ]
     },
@@ -46,21 +48,48 @@ export const adminMenu = [
 
 export const doctorMenu = [
     {
+        name: 'menu.doctor.account',
+        menus: [
+            {
+                name: 'menu.doctor.update-profile-doctor', link: '/doctor/update-profile-doctor',
+            },
+            {
+                name: 'menu.doctor.update-profile', link: '/doctor/update-profile',
+            },
+        ]
+
+    },
+    {
         name: 'menu.doctor.manage-schedule',
         menus: [
-            { //manage doctor's schedule
+            {
                 name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule',
             },
         ]
 
     },
-    { //manage handbook
+    {
         name: 'menu.doctor.manage-patient',
         menus: [
-            { //Patient management of doctor's examination
+            {
                 name: 'menu.doctor.manage-patient', link: '/doctor/manage-patient',
             },
         ]
     },
-
+    {
+        name: 'menu.doctor.clinic-register',
+        menus: [
+            {
+                name: 'menu.doctor.clinic-register', link: '/doctor/register-clinic'
+            },
+        ]
+    },
+    {
+        name: 'menu.doctor.specialty-register',
+        menus: [
+            {
+                name: 'menu.doctor.specialty-register', link: '/doctor/register-specialty'
+            },
+        ]
+    },
 ];

@@ -48,6 +48,60 @@ let saveDetailInfomationDoctor = (inputData) => {
     })
 }
 
+let updateDetailInfomationDoctor = (inputData) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (inputData && inputData.id !== null) {
+                if (inputData.avatar !== null) {
+                    let user = await db.TaiKhoan.findOne({
+                        where: { id: inputData.id },
+                        raw: false
+                    });
+                    if (user) {
+                        if (inputData.avatar !== '') {
+                            user.hinhAnh = inputData.avatar;
+                            await user.save();
+                        }
+                    }
+                }
+
+                let doctor = await db.ThongTinBacSi.findOne({
+                    where: { maTk: inputData.id },
+                    raw: false
+                });
+
+                if (doctor) {
+                    doctor.chuyenKhoa = inputData.selectedSpecialty;
+                    doctor.phongKham = inputData.selectedClinic;
+                    doctor.chucDanh = inputData.position;
+                    doctor.giaKham = inputData.selectedPrice;
+                    doctor.khuVucLamViec = inputData.selectedProvince;
+                    doctor.phuongThucThanhToan = inputData.selectedPayment;
+                    doctor.diaChiPhongKham = inputData.addressClinic;
+                    doctor.tenPhongKham = inputData.nameClinic;
+                    doctor.ghiChu = inputData.note;
+                    doctor.mieuTa = inputData.description;
+                    doctor.noiDungHTML = inputData.contentHtml;
+                    doctor.noiDungMarkdown = inputData.contentMarkdown;
+                    await doctor.save();
+                    resolve({
+                        errCode: 0,
+                        errorMessage: 'Update succeed!'
+                    })
+                }
+                else {
+                    resolve({
+                        errCode: 0,
+                        errorMessage: 'Not found doctor!'
+                    })
+                }
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 let getAllRegisterDoctors = () => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -59,10 +113,6 @@ let getAllRegisterDoctors = () => {
                 include: [
                     {
                         model: db.TaiKhoan,
-                        // where: {
-                        //     vaiTro: "R3",
-                        //     trangThai: 1
-                        // }
                     },
                     {
                         model: db.PhongKham, as: 'userClinicData', attributes: ['id', 'tenPhongKham', 'diaChi']
@@ -310,6 +360,17 @@ let getDetailDoctor = (inputId) => {
                             model: db.PhongKham, as: 'userClinicData', attributes: ['tenPhongKham', 'diaChi', 'mieuTaHtml', 'mieuTaMarkDown']
                         },
                         {
+                            model: db.LichKham, as: 'dataDoctorLK', attributes: ['maTk', 'ngayKham'],
+                            include: [
+                                {
+                                    model: db.DatLichKham, as: 'schedulePatientData',
+                                    where: {
+                                        trangThai: 'S5'
+                                    }
+                                },
+                            ]
+                        },
+                        {
                             model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi']
                         },
                         { model: db.Allcode, as: 'priceIdData', attributes: ['valueEn', 'valueVi'] },
@@ -481,10 +542,6 @@ let getProfileDoctorById = (inputId) => {
                     include: [
                         {
                             model: db.TaiKhoan,
-                            // where: {
-                            //     vaiTro: "R2",
-                            //     trangThai: 1
-                            // }
                         },
                         {
                             model: db.PhongKham, as: 'userClinicData', attributes: ['tenPhongKham', 'diaChi', 'mieuTaHtml', 'mieuTaMarkDown']
@@ -624,5 +681,6 @@ module.exports = {
     sendRemedy: sendRemedy,
     getAllRegisterDoctors,
     ratifyDoctor,
-    refuseDoctor
+    refuseDoctor,
+    updateDetailInfomationDoctor
 }

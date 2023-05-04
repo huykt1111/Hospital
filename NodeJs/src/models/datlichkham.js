@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             DatLichKham.belongsTo(models.TaiKhoan, { foreignKey: 'maND', targetKey: 'id', as: 'patientData' })
             DatLichKham.belongsTo(models.Allcode, { foreignKey: 'gioiTinh', targetKey: 'keyMap', as: 'genderDataDLK' })
             DatLichKham.belongsTo(models.LichKham, { foreignKey: 'lichKham', targetKey: 'id', as: 'schedulePatientData' })
+            DatLichKham.belongsTo(models.ThongTinBacSi, { foreignKey: 'maBS', targetKey: 'maTk', as: 'userPatientCommentDoctor' });
         }
     }
     DatLichKham.init({

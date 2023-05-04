@@ -42,6 +42,7 @@ class DetailDoctor extends Component {
 
     render() {
         let { detailDoctor } = this.state;
+        console.log(detailDoctor)
         let { language } = this.props;
         let nameVi = '', nameEn = '';
         if (detailDoctor && detailDoctor.positionData && detailDoctor.TaiKhoan) {
@@ -99,9 +100,42 @@ class DetailDoctor extends Component {
 
                     </div>
                     <div className="comment-patient">
-                        <Comment
+                        {/* <Comment
                             data-href={currentURLCMD}
-                        />
+                        /> */}
+                        <div className='comment-patient-title'>Phản hồi của bệnh nhân sau khi đi khám</div>
+                        {
+                            detailDoctor && detailDoctor.dataDoctorLK &&
+                            detailDoctor.dataDoctorLK.length > 0 &&
+                            detailDoctor.dataDoctorLK.map((item, index) => {
+                                return (
+                                    <div key={index}>
+                                        <div>{
+                                            item.schedulePatientData && item.schedulePatientData.length > 0 &&
+                                            item.schedulePatientData.map((itemchild, indexchild) => {
+                                                const timestamp = parseInt(item.ngayKham);
+                                                const dateObj = new Date(timestamp);
+                                                const year = dateObj.getFullYear();
+                                                const month = dateObj.getMonth() + 1;
+                                                const day = dateObj.getDate();
+                                                const formattedDate = `${day}/${month}/${year}`;
+                                                return (
+                                                    <div className='comment-patient-content' key={indexchild}>
+                                                        <div className="comment-patient-name">
+                                                            {itemchild.hoTen}
+                                                            <span><i className="fas fa-check-circle"></i> Đã khám ngày {formattedDate}</span>
+                                                        </div>
+                                                        <div className='comment-patient-comment'>
+                                                            {itemchild.danhGia}
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }</div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </React.Fragment>

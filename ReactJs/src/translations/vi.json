@@ -45,12 +45,17 @@
             "doctor": "Bác sĩ",
             "doctor-register": "Đăng ký bác sĩ",
             "user-account": "Tài khoản người dùng",
-            "clinic-register": "Đăng ký thêm phòng",
-            "specialty-register": "Đăng ký thêm chuyên khoa"
+            "ratify-clinic": "Duyệt phòng khám",
+            "ratify-specialty": "Duyệt chuyên khoa"
         },
         "doctor": {
             "manage-schedule": "Lên lịch khám bệnh",
-            "manage-patient": "Bệnh nhân khám bệnh"
+            "manage-patient": "Bệnh nhân khám bệnh",
+            "account": "Tài khoản",
+            "update-profile": "Cập nhật hồ sơ",
+            "update-profile-doctor": "Cập nhật hồ sơ bác sĩ",
+            "clinic-register": "Đăng ký thêm phòng khám",
+            "specialty-register": "Đăng ký thêm chuyên khoa"
         }
     },
     "manage-user": {
@@ -147,11 +152,13 @@
             "address-clinic": "Địa chỉ phòng khám",
             "note": "Ghi chú",
             "specialty": "Chọn chuyên khoa",
-            "clinic": "Chọn phòng khám"
+            "clinic": "Chọn phòng khám",
+            "update": "Cập nhật hồ sơ"
         },
         "manage-clinic": {
             "create": "Thêm",
-            "edit": "Lưu"
+            "edit": "Lưu",
+            "register": "Đăng kí"
         }
     }
 }

@@ -5,7 +5,6 @@ import './Search.scss';
 import { LANGUAGES } from '../../../utils';
 import { FormattedMessage } from 'react-intl';
 import HomeHeader from '../../HomePage/HomeHeader';
-import { NumericFormat } from 'react-number-format';
 import * as actions from "../../../store/actions";
 import Select from 'react-select';
 import DoctorSchedule from '../Doctor/DoctorSchedule';
@@ -295,6 +294,9 @@ class Search extends Component {
             <div>
                 <HomeHeader />
                 <div className='search-container'>
+                    <div className='search-header-content'>
+
+                    </div>
                     <div className='search-header'>
                         <div className='search-box'>
                             <i className="fas fa-search"></i>

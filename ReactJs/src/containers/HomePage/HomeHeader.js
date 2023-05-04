@@ -83,6 +83,12 @@ class HomeHeader extends Component {
         }
     }
 
+    handleViewUpdateProfile = (userInfo) => {
+        if (this.props.history) {
+            this.props.history.push(`/update-profile-patient/${userInfo.user.id}`);
+        }
+    }
+
     handleSearch = () => {
         if (this.props.history) {
             this.props.history.push(`/search`, {
@@ -132,7 +138,7 @@ class HomeHeader extends Component {
                                         }
                                     </button>
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a className="dropdown-item" href="#"><FormattedMessage id="homeheader.profile" /></a>
+                                        <a className="dropdown-item" onClick={() => this.handleViewUpdateProfile(userInfo)}><FormattedMessage id="homeheader.profile" /></a>
                                         <a className="dropdown-item" onClick={() => this.handleFamily(userInfo)}><FormattedMessage id="homeheader.family" /></a>
                                         <a className="dropdown-item" onClick={() => this.handleDetailBooking(userInfo)}><FormattedMessage id="homeheader.booking" /></a>
                                         <a className="dropdown-item" onClick={() => this.handleLogout(processLogout)}><FormattedMessage id="homeheader.logout" /></a>

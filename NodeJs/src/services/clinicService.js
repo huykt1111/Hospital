@@ -31,6 +31,35 @@ let createClinic = (data) => {
     })
 }
 
+let registerClinic = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.name || !data.address || !data.imageBase64 || !data.descriptionHtml || !data.descriptionMarkdown) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing parameter!'
+                })
+            } else {
+                await db.PhongKham.create({
+                    tenPhongKham: data.name,
+                    hinhAnh: data.imageBase64,
+                    diaChi: data.address,
+                    mieuTaHtml: data.descriptionHtml,
+                    mieuTaMarkDown: data.descriptionMarkdown,
+                    trangThai: 2
+                })
+
+                resolve({
+                    errCode: 0,
+                    errMessage: 'Succeed!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 let updateClinic = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -63,12 +92,58 @@ let updateClinic = (data) => {
     })
 }
 
+let ratifyRegisterClinic = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let clinic = await db.PhongKham.findOne({
+                where: { id: data.id },
+                raw: false
+            });
+            if (clinic) {
+                clinic.trangThai = 1;
+                await clinic.save();
+            }
+            resolve({
+                errCode: 0,
+                errMessage: 'Succeed!'
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 let getAllClinic = () => {
     return new Promise(async (resolve, reject) => {
         try {
             let data = await db.PhongKham.findAll({
                 where: {
                     trangThai: 1
+                },
+            });
+            if (data && data.length > 0) {
+                data.map(item => {
+                    item.hinhAnh = new Buffer(item.hinhAnh, 'base64').toString('binary');
+                    return item;
+                })
+            }
+            resolve({
+                errMessage: 'ok',
+                errCode: 0,
+                data: data
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getRegisterClinic = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.PhongKham.findAll({
+                where: {
+                    trangThai: 2
                 },
             });
             if (data && data.length > 0) {
@@ -160,6 +235,36 @@ let deleteClinic = (data) => {
     })
 }
 
+let deleteRegisterClinic = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (data && data.id !== null) {
+                let clinic = await db.PhongKham.findOne({
+                    where: { id: data.id },
+                    raw: false
+                });
+                if (clinic) {
+                    clinic.trangThai = 0;
+                    await clinic.save();
+                }
+
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Delete succeed!'
+                })
+            }
+            else {
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Delete faided!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 let getDetailClinicById = (inputId) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -222,5 +327,9 @@ module.exports = {
     getDetailClinicById: getDetailClinicById,
     deleteClinic,
     updateClinic,
-    getTopClinic
+    getTopClinic,
+    registerClinic,
+    getRegisterClinic,
+    deleteRegisterClinic,
+    ratifyRegisterClinic
 }

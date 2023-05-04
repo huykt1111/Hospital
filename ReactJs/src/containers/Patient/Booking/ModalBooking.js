@@ -83,7 +83,7 @@ class ModalBooking extends Component {
                                         <span>{doctor.schedulePatientData.dataDoctorLK.mieuTa}</span>
                                     }
                                     <div style={{ color: 'blue', marginTop: '10px' }}>CHI TIẾT HÓA ĐƠN ĐẶT</div>
-                                    <div>Người đặt: <span style={{ color: 'blue' }}>{doctor.patientData.ho + ' ' + doctor.patientData.ten} </span></div>
+                                    {/* <div>Người đặt: <span style={{ color: 'blue' }}>{doctor.patientData.ho + ' ' + doctor.patientData.ten} </span></div> */}
                                     <div>Người khám: <span style={{ color: 'blue' }}>{doctor.hoTen}</span></div>
                                     <div>Thời gian khám: <span style={{ color: 'red' }}>{doctor.schedulePatientData.timeTypeData.valueVi} - {formattedDate}</span></div>
                                     <div>Lý do khám: <span style={{ color: 'blue' }}>{doctor.lyDoKham}</span></div>

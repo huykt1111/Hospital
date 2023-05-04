@@ -135,18 +135,18 @@ class Register extends Component {
         return (
             <>
                 <HomeHeader />
-                <div className='login-background' style={{ height: '125%' }}>
+                <div className='login-background' style={{ height: '100vh', }}>
                     <div className='login-background-container'>
-                        <div className='login-container' style={{ height: '830px' }}>
+                        <div className='login-container' style={{ height: '650px', width: '500px' }}>
                             <div className='login-content row'>
                                 <div className='col-12 text-login'>Register</div>
-                                <div className="col-12 ">
+                                {/* <div className="col-6 ">
                                     {isGetGenders === true ? 'Loading genders' : ''}
-                                </div>
+                                </div> */}
                                 <div className="col-12" style={{ color: 'red' }}>
                                     {this.state.errMessage}
                                 </div>
-                                <div className='col-12 form-group login-input'>
+                                <div className='col-6 form-group login-input'>
                                     <label>Email:</label>
                                     <input type="email"
                                         className="form-control"
@@ -156,7 +156,17 @@ class Register extends Component {
                                         pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
                                     />
                                 </div>
-                                <div className='col-12 form-group login-input'>
+                                <div className='col-6 form-group login-input'>
+                                    <label>Phone Number:</label>
+                                    <input type="tel"
+                                        className="form-control"
+                                        value={phoneNumber}
+                                        placeholder='Phone Number'
+                                        onChange={(event) => { this.onChangeInput(event, 'phoneNumber') }}
+                                        pattern="[0-9]{10,11}"
+                                        required />
+                                </div>
+                                <div className='col-6 form-group login-input'>
                                     <label>Password:</label>
                                     <div className='custom-input-password'>
                                         <input type={this.state.isShowPassword ? 'text' : 'password'}
@@ -172,7 +182,7 @@ class Register extends Component {
                                         </span>
                                     </div>
                                 </div>
-                                <div className='col-12 form-group login-input'>
+                                <div className='col-6 form-group login-input'>
                                     <label>Confirm password:</label>
                                     <div className='custom-input-password'>
                                         <input type={this.state.isShowPassword ? 'text' : 'password'}
@@ -240,17 +250,6 @@ class Register extends Component {
                                         placeholder='Address'
                                         onChange={(event) => { this.onChangeInput(event, 'address') }} />
                                 </div>
-                                <div className='col-12 form-group login-input'>
-                                    <label>Phone Number:</label>
-                                    <input type="tel"
-                                        className="form-control"
-                                        value={phoneNumber}
-                                        placeholder='Phone Number'
-                                        onChange={(event) => { this.onChangeInput(event, 'phoneNumber') }}
-                                        pattern="[0-9]{10,11}"
-                                        required />
-                                </div>
-
                                 <div className='col-12'>
                                     <button className='btn-login'
                                         onClick={() => { this.handleRegister() }}

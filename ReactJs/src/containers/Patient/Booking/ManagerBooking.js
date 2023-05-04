@@ -38,13 +38,9 @@ class ManagerBooking extends Component {
                 <div className="booking-container">
                     <div className="booking-body">
                         <div>
-                            <div className='booking-body-title'>Lịch đang đặt</div>
                             <ScheduleBook />
                         </div>
                         <div>
-                            <div className='booking-body-title'>
-                                Lịch đã đặt
-                            </div>
                             <ScheduleBooked />
                         </div>
                     </div>

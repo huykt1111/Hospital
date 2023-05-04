@@ -10,14 +10,15 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            ThongTinBacSi.belongsTo(models.TaiKhoan, { foreignKey: 'maTk' })
-            ThongTinBacSi.hasMany(models.LichKham, { foreignKey: 'maTk', as: 'dataDoctorLK' })
-            ThongTinBacSi.belongsTo(models.PhongKham, { foreignKey: 'phongKham', targetKey: 'id', as: 'userClinicData' })
-            ThongTinBacSi.belongsTo(models.PhongKham, { foreignKey: 'chuyenKhoa', targetKey: 'id', as: 'userSpecialtyData' })
-            ThongTinBacSi.belongsTo(models.Allcode, { foreignKey: 'chucDanh', targetKey: 'keyMap', as: 'positionData' })
+            ThongTinBacSi.belongsTo(models.TaiKhoan, { foreignKey: 'maTk' });
+            ThongTinBacSi.hasMany(models.LichKham, { foreignKey: 'maTk', as: 'dataDoctorLK' });
+            ThongTinBacSi.belongsTo(models.PhongKham, { foreignKey: 'phongKham', targetKey: 'id', as: 'userClinicData' });
+            ThongTinBacSi.belongsTo(models.ChuyenKhoa, { foreignKey: 'chuyenKhoa', targetKey: 'id', as: 'userSpecialtyData' });
+            ThongTinBacSi.belongsTo(models.Allcode, { foreignKey: 'chucDanh', targetKey: 'keyMap', as: 'positionData' });
             ThongTinBacSi.belongsTo(models.Allcode, { foreignKey: 'giaKham', targetKey: 'keyMap', as: 'priceIdData' });
             ThongTinBacSi.belongsTo(models.Allcode, { foreignKey: 'khuVucLamViec', targetKey: 'keyMap', as: 'provinceIdData' });
             ThongTinBacSi.belongsTo(models.Allcode, { foreignKey: 'phuongThucThanhToan', targetKey: 'keyMap', as: 'paymentIdData' });
+            ThongTinBacSi.hasMany(models.DatLichKham, { foreignKey: 'maBS', as: 'userPatientCommentDoctor' });
         }
     }
     ThongTinBacSi.init({

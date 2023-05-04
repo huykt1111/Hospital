@@ -80,6 +80,19 @@ let postInfoDoctor = async (req, res) => {
     }
 }
 
+let updateDetailInfomationDoctor = async (req, res) => {
+    try {
+        let response = await doctorService.updateDetailInfomationDoctor(req.body);
+        return res.status(200).json(response);
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
 let getDetailDoctor = async (req, res) => {
     try {
         let infor = await doctorService.getDetailDoctor(req.query.id);
@@ -189,5 +202,6 @@ module.exports = {
     sendRemedy: sendRemedy,
     getAllRegisterDoctors,
     ratifyDoctor,
-    refuseDoctor
+    refuseDoctor,
+    updateDetailInfomationDoctor
 }

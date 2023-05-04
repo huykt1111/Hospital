@@ -3,7 +3,7 @@
 
     .intro-doctor {
         display: flex;
-        margin: 0 100px;
+        margin: 0 150px;
 
 
         .content-left {
@@ -45,7 +45,7 @@
     }
 
     .schedule-doctor {
-        margin: 0 100px;
+        margin: 0 150px;
         display: flex;
         padding: 10px 0;
         min-height: 200px;
@@ -63,7 +63,7 @@
         border-top: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
         background-color: #f9f9f9;
-        padding: 10px 100px;
+        padding: 10px 150px;
 
         h1,
         h2,
@@ -77,6 +77,32 @@
     }
 
     .comment-patient {
-        padding: 10px 100px;
+        padding: 10px 150px;
+
+        .comment-patient-title {
+            margin: 15px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .comment-patient-content {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+
+            .comment-patient-name {
+                font-weight: bold;
+
+                span {
+                    margin-left: 10px;
+                    color: #4cc5d4;
+                    text-decoration: none;
+                }
+            }
+
+            .comment-patient-comment {
+                padding-top: 5px;
+            }
+        }
     }
 }

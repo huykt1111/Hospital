@@ -18,6 +18,7 @@ import Patient from '../routes/Patient';
 import VerifyEmail from './Patient/VerifyEmail';
 import DetailSpecialty from './Patient/Specialty/DetailSpecialty';
 import DetailClinic from './Patient/Clinic/DetailClinic';
+import DetailHandbook from './Patient/Handbook/DetailHandbook';
 import Search from './Patient/Search/Search';
 // import FamilyProfile from './Patient/Family/FamilyProfile';
 
@@ -59,6 +60,7 @@ class App extends Component {
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
                                     <Route path={path.SEARCH} component={Search} />
                                     <Route path={path.DETAIL_SPECIALTY} component={DetailSpecialty} />
+                                    <Route path={path.DETAIL_HANDBOOK} component={DetailHandbook} />
                                     <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
                                     <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />
                                     <Route path={path.USER_PROFILE} component={userIsAuthenticated(Patient)} />

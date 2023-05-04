@@ -82,6 +82,8 @@ class ScheduleBook extends Component {
         let { language } = this.props;
         return (
             <>
+                {dataBook && dataBook.length > 0 && <div className='booking-body-title'>Lịch đang đặt</div>
+                }
                 {dataBook && dataBook.length > 0 &&
                     dataBook.map((item, index) => {
                         const timestamp = parseInt(item.schedulePatientData.ngayKham);

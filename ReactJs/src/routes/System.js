@@ -8,6 +8,9 @@ import Header from '../containers/Header/Header';
 import ManageSpecialty from '../containers/System/Specialty/ManageSpecialty';
 import ManageClinic from '../containers/System/Clinic/ManageClinic';
 import ManageDoctor from '../containers/System/Admin/Doctor/ManageDoctor';
+import RatifyClinic from '../containers/System/Admin/Doctor/RatifyClinic';
+import RatifySpecialty from '../containers/System/Admin/Doctor/RatifySpecialty';
+import ManageHandbook from '../containers/System/Handbook/ManageHandbook';
 import _ from 'lodash';
 
 class System extends Component {
@@ -37,6 +40,9 @@ class System extends Component {
                                     <Route path="/system/manage-doctor" component={ManageDoctor} />
                                     <Route path="/system/manage-specialty" component={ManageSpecialty} />
                                     <Route path="/system/manage-clinic" component={ManageClinic} />
+                                    <Route path="/system/manage-handbook" component={ManageHandbook} />
+                                    <Route path="/system/ratify-clinic" component={RatifyClinic} />
+                                    <Route path="/system/ratify-specialty" component={RatifySpecialty} />
                                     <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                                 </Switch>
                             </div>

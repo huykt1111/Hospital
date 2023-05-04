@@ -34,7 +34,6 @@ let updateMemberData = (data) => {
                 where: { id: data.id },
                 raw: false
             });
-            console.log(data);
             if (member) {
                 member.email = data.email;
                 member.ho = data.lastName;

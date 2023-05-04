@@ -30,12 +30,65 @@ let createSpecialty = (data) => {
     })
 }
 
+let registerSpecialty = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.name || !data.imageBase64 || !data.descriptionHtml || !data.descriptionMarkdown) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing parameter!'
+                })
+            } else {
+                await db.ChuyenKhoa.create({
+                    tenChuyenKhoa: data.name,
+                    hinhAnh: data.imageBase64,
+                    mieuTaHtml: data.descriptionHtml,
+                    mieuTaMarkDown: data.descriptionMarkdown,
+                    trangThai: 2
+                })
+
+                resolve({
+                    errCode: 0,
+                    errMessage: 'Succeed!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 let getAllSpecialty = () => {
     return new Promise(async (resolve, reject) => {
         try {
             let data = await db.ChuyenKhoa.findAll({
                 where: {
                     trangThai: 1
+                },
+            });
+            if (data && data.length > 0) {
+                data.map(item => {
+                    item.hinhAnh = new Buffer(item.hinhAnh, 'base64').toString('binary');
+                    return item;
+                })
+            }
+            resolve({
+                errMessage: 'ok',
+                errCode: 0,
+                data: data
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getRegisterSpecialty = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.ChuyenKhoa.findAll({
+                where: {
+                    trangThai: 2
                 },
             });
             if (data && data.length > 0) {
@@ -106,6 +159,66 @@ let deleteSpecialty = (data) => {
                 });
                 if (specialty) {
                     specialty.trangThai = 0;
+                    await specialty.save();
+                }
+
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Delete succeed!'
+                })
+            }
+            else {
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Delete faided!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let deleteRatifySpecialty = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (data && data.id !== null) {
+                let specialty = await db.ChuyenKhoa.findOne({
+                    where: { id: data.id },
+                    raw: false
+                });
+                if (specialty) {
+                    specialty.trangThai = 0;
+                    await specialty.save();
+                }
+
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Delete succeed!'
+                })
+            }
+            else {
+                resolve({
+                    errCode: 0,
+                    errorMessage: 'Delete faided!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let ratifySpecialty = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (data && data.id !== null) {
+                let specialty = await db.ChuyenKhoa.findOne({
+                    where: { id: data.id },
+                    raw: false
+                });
+                if (specialty) {
+                    specialty.trangThai = 1;
                     await specialty.save();
                 }
 
@@ -243,5 +356,9 @@ module.exports = {
     getDetailSpecialtyById: getDetailSpecialtyById,
     deleteSpecialty,
     updateSpecialty,
-    getTopSpecialty
+    getTopSpecialty,
+    registerSpecialty,
+    getRegisterSpecialty,
+    deleteRatifySpecialty,
+    ratifySpecialty
 }

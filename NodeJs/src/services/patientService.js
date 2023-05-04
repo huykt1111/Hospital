@@ -176,7 +176,7 @@ let getAllBookByUser = (UserId) => {
                 let data = await db.DatLichKham.findAll({
                     where: {
                         maND: UserId.id_user,
-                        trangThai: ['S3', 'S1'],
+                        trangThai: ['S3', 'S5'],
                     },
                     include: [
                         {
@@ -290,7 +290,7 @@ let racingBook = (data) => {
                 if (racing) {
                     racing.danhGia = data.comment;
                     racing.start = data.start;
-                    racing.trangThai = 'S1'
+                    racing.trangThai = 'S5'
 
                     await racing.save();
 

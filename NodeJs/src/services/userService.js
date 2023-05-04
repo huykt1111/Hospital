@@ -204,6 +204,9 @@ let updateUserData = (data) => {
                 user.ten = data.firstName;
                 user.gioiTinh = data.gender;
                 user.ngaySinh = data.birthday;
+                if (data.birthday !== "") {
+                    user.ngaySinh = data.birthday;
+                }
                 user.diaChi = data.address;
                 user.soDienThoai = data.phoneNumber;
 
@@ -262,7 +265,6 @@ let getSearchAll = (data) => {
             let specialtyId = data.specialty;
             let clinicId = data.clinic;
             let price = data.price;
-            console.log(clinicId)
             if (location === undefined) {
                 location = '';
             }

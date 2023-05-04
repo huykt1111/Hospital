@@ -45,12 +45,17 @@
             "doctor": "Doctor",
             "doctor-register": "Doctor registration",
             "user-account": "User account",
-            "clinic-register": "Register more clinics",
-            "specialty-register": "Specialty more clinics"
+            "ratify-clinic": "Ratify clinic",
+            "ratify-specialty": "Ratify specialty"
         },
         "doctor": {
             "manage-schedule": "Schedule a medical examination",
-            "manage-patient": "Medical examination patients"
+            "manage-patient": "Medical examination patients",
+            "account": "Account",
+            "update-profile": "Update profile",
+            "update-profile-doctor": "Update doctor's profile",
+            "clinic-register": "Register more clinics",
+            "specialty-register": "Specialty more clinics"
         }
     },
     "manage-user": {
@@ -146,11 +151,13 @@
             "address-clinic": "Clinic address",
             "note": "Note",
             "specialty": "Choose a specialty",
-            "clinic": "Choose a clinic"
+            "clinic": "Choose a clinic",
+            "update": "Update profile"
         },
         "manage-clinic": {
             "create": "Create",
-            "edit": "Save"
+            "edit": "Save",
+            "register": "Register"
         }
     }
 }

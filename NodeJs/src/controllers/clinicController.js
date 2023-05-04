@@ -14,9 +14,37 @@ let createClinic = async (req, res) => {
     }
 }
 
+let registerClinic = async (req, res) => {
+    try {
+        let infor = await clinicService.registerClinic(req.body);
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
 let updateClinic = async (req, res) => {
     try {
         let infor = await clinicService.updateClinic(req.body);
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
+let ratifyRegisterClinic = async (req, res) => {
+    try {
+        let infor = await clinicService.ratifyRegisterClinic(req.body);
         return res.status(200).json(infor)
     }
     catch (e) {
@@ -42,9 +70,37 @@ let deleteClinic = async (req, res) => {
     }
 }
 
+let deleteRegisterClinic = async (req, res) => {
+    try {
+        let infor = await clinicService.deleteRegisterClinic(req.body);
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
 let getAllClinic = async (req, res) => {
     try {
         let infor = await clinicService.getAllClinic();
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
+let getRegisterClinic = async (req, res) => {
+    try {
+        let infor = await clinicService.getRegisterClinic();
         return res.status(200).json(infor)
     }
     catch (e) {
@@ -90,5 +146,9 @@ module.exports = {
     getDetailClinicById: getDetailClinicById,
     deleteClinic,
     updateClinic,
-    getTopClinic
+    getTopClinic,
+    registerClinic,
+    getRegisterClinic,
+    deleteRegisterClinic,
+    ratifyRegisterClinic
 }

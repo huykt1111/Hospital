@@ -162,17 +162,12 @@ class AddMember extends Component {
             }
         }
         else {
-            console.log(this.state);
             let formattedDate = this.state.birthday;
-            console.log(formattedDate);
             if (isNaN(parseInt(formattedDate))) {
                 formattedDate = new Date(this.state.birthday).getTime();
-                console.log(formattedDate);
-
             }
             else {
                 formattedDate = "";
-                console.log(formattedDate);
             }
             if (this.state.action === CRUD_ACTIONS.EDIT) {
                 let res = await updateMemberData({
@@ -187,7 +182,6 @@ class AddMember extends Component {
                     positionId: this.state.position,
                     avatar: this.state.avatar,
                 })
-                console.log(res)
                 if (res.errCode === 0) {
                     alert('Member update successful.');
                     if (this.props.history) {
