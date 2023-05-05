@@ -86,7 +86,7 @@ class RegisterSpecialty extends Component {
 
                 <div className="add-new-specialty row">
                     <div className="col-6 form-group">
-                        <label>Tên chuyên khoa</label>
+                        <label><FormattedMessage id="admin.manage-specialty.name-specialty" /></label>
                         <input className="form-control"
                             type="text"
                             value={this.state.name}
@@ -94,7 +94,7 @@ class RegisterSpecialty extends Component {
                         />
                     </div>
                     <div className="col-6 form-group">
-                        <label>Ảnh chuyên khoa</label>
+                        <label><FormattedMessage id="admin.manage-specialty.specialty-photo" /></label>
                         <input className="form-control-file"
                             type="file"
                             onChange={(event) => this.handleOnChangImage(event)}

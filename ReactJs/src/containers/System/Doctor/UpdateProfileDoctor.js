@@ -458,7 +458,7 @@ class UpdateProfileDoctor extends Component {
                             />
                             <label htmlFor="previewImg"
                                 className="label-upload">
-                                Tải ảnh
+                                <FormattedMessage id="patient.family.upload" />
                                 <i className="fas fa-upload"></i>
                             </label>
                             <div className="preview-image"
@@ -472,7 +472,7 @@ class UpdateProfileDoctor extends Component {
 
                 <div className="manage-doctor-editor" style={{ marginTop: "30px" }}>
                     <label>
-                        Chi tiết hồ sơ làm việc
+                        <FormattedMessage id="admin.manage-doctor.detail-doctor" />
                     </label>
                     <MdEditor style={{ height: '300px' }}
                         renderHTML={text => mdParser.render(text)}

@@ -156,11 +156,11 @@ class ManageSpecialty extends Component {
         let { language } = this.props;
         return (
             <div className="manage-specialty-container">
-                <div className="title">Quản lý chuyên khoa</div>
+                <div className="title"><FormattedMessage id="menu.admin.manage-specialty" /></div>
 
                 <div className="add-new-specialty row">
                     <div className="col-6 form-group">
-                        <label>Tên chuyên khoa</label>
+                        <label><FormattedMessage id="admin.manage-specialty.name-specialty" /></label>
                         <input className="form-control"
                             type="text"
                             value={this.state.name}
@@ -168,7 +168,7 @@ class ManageSpecialty extends Component {
                         />
                     </div>
                     <div className="col-6 form-group">
-                        <label>Ảnh chuyên khoa</label>
+                        <label><FormattedMessage id="admin.manage-specialty.specialty-photo" /></label>
                         <input className="form-control-file"
                             type="file"
                             onChange={(event) => this.handleOnChangImage(event)}
@@ -204,10 +204,10 @@ class ManageSpecialty extends Component {
                     <table id="customers">
                         <tbody>
                             <tr>
-                                <th>ID</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Action</th>
+                                <th><FormattedMessage id="admin.manage-specialty.id" /></th>
+                                <th><FormattedMessage id="admin.manage-specialty.specialty-photo" /></th>
+                                <th><FormattedMessage id="admin.manage-specialty.name-specialty" /></th>
+                                <th><FormattedMessage id="admin.manage-account.action" /></th>
                             </tr>
                             {
                                 this.getCurrentPageData().map((item, index) => {

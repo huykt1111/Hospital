@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Slider from 'react-slick';
 import { withRouter } from 'react-router';
 import { getTopClinic } from '../../../services/userService';
+import { FormattedMessage } from 'react-intl';
 
 class MedicalFacility extends Component {
     constructor(props) {
@@ -34,8 +35,12 @@ class MedicalFacility extends Component {
             <div className='section-share section-medical-facility'>
                 <div className='section-container'>
                     <div className='section-header'>
-                        <span className='title-section'>Phòng khám nổi bậc</span>
-                        <button className='btn-section'>xem thêm</button>
+                        <span className='title-section'>
+                            <FormattedMessage id='patient.clinic.top-clinic' />
+                        </span>
+                        <button className='btn-section'>
+                            <FormattedMessage id='homepage.more-info' />
+                        </button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>

@@ -92,7 +92,7 @@ class RegisterClinic extends Component {
                             <div className="col-6">
                                 <div className="row">
                                     <div className="col-12 form-group">
-                                        <label>Tên phòng khám</label>
+                                        <label><FormattedMessage id="admin.manage-clinic.name-clinic" /></label>
                                         <input className="form-control"
                                             type="text"
                                             value={this.state.name}
@@ -100,7 +100,7 @@ class RegisterClinic extends Component {
                                         />
                                     </div>
                                     <div className="col-12 form-group">
-                                        <label>Địa chỉ phòng khám</label>
+                                        <label><FormattedMessage id="admin.manage-clinic.address-clinic" /></label>
                                         <input className="form-control"
                                             type="text"
                                             value={this.state.address}
@@ -112,7 +112,7 @@ class RegisterClinic extends Component {
                             <div className="col-6">
                                 <div className="row">
                                     <div className="col-12 form-group">
-                                        <label>Ảnh phòng khám</label>
+                                        <label><FormattedMessage id="admin.manage-clinic.clinic-photo" /></label>
                                         <input className="form-control-file"
                                             type="file"
                                             onChange={(event) => this.handleOnChangImage(event)}

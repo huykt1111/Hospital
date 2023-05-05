@@ -6,7 +6,7 @@ import './Login.scss';
 import { handleLoginApi } from '../../services/userService';
 import HomeHeader from '../HomePage/HomeHeader';
 import { withRouter } from 'react-router';
-
+import { FormattedMessage } from 'react-intl';
 
 class Login extends Component {
     constructor(props) {
@@ -77,29 +77,30 @@ class Login extends Component {
 
     render() {
         return (
-
             <>
                 <HomeHeader />
                 <div className='login-background'>
                     <div className='login-background-container'>
                         <div className='login-container'>
                             <div className='login-content row'>
-                                <div className='col-12 text-login'>Login</div>
+                                <div className='col-12 text-login'>
+                                    <FormattedMessage id="homeheader.login" />
+                                </div>
                                 <div className='col-12 form-group login-input'>
-                                    <label>Username:</label>
+                                    <label><FormattedMessage id="homeheader.account" />:</label>
                                     <input type='text'
                                         className='form-control'
-                                        placeholder='Enter your username'
+                                        placeholder="Nhập tài khoản của bạn"
                                         value={this.state.username}
                                         onChange={(event) => this.handleOnChangeUsername(event)}
                                     />
                                 </div>
                                 <div className='col-12 form-group login-input'>
-                                    <label>Password:</label>
+                                    <label><FormattedMessage id="homeheader.password" />:</label>
                                     <div className='custom-input-password'>
                                         <input type={this.state.isShowPassword ? 'text' : 'password'}
                                             className='form-control'
-                                            placeholder='Enter your password'
+                                            placeholder="Nhập mật khẩu của bạn"
                                             onChange={(event) => { this.handleOnChangePassword(event) }}
                                             onKeyDown={(event) => this.handleKeyDown(event)}
                                         />
@@ -117,21 +118,21 @@ class Login extends Component {
                                     <button className='btn-login'
                                         onClick={() => { this.handleLogin() }}
                                     >
-                                        Login
+                                        <FormattedMessage id="homeheader.login" />
                                     </button>
                                 </div>
                                 <div className='col-12 register'>
-                                    <span className='register-title'>No account:
+                                    <span className='register-title'><FormattedMessage id="homeheader.no-account" />:
                                         <span className='register-title-button'
                                             onClick={() => this.handleViewRegister()}
-                                        >Register now!</span>
+                                        ><FormattedMessage id="homeheader.register-now" />!</span>
                                     </span>
                                 </div>
                                 <div className='col-12'>
-                                    <span className='forgot-password'>Forgot your password</span>
+                                    <span className='forgot-password'><FormattedMessage id="homeheader.forgot-password" /></span>
                                 </div>
                                 <div className='col-12 text-center mt-3'>
-                                    <span className='text-other-login'>Or login with</span>
+                                    <span className='text-other-login'><FormattedMessage id="homeheader.login-with" /></span>
                                 </div>
                                 <div className='col-12 social-login'>
                                     <i className="fab fa-google-plus-g google"></i>

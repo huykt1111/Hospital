@@ -2,8 +2,8 @@
     "homeheader": {
         "speciality": "Chuyên khoa",
         "searchdoctor": "Tìm bác sĩ theo chuyên khoa",
-        "health-facility": "Cơ sở y tế",
-        "select-room": "Chọn bệnh viện phòng khám",
+        "health-facility": "Phòng khám",
+        "select-room": "Chọn phòng khám",
         "doctor": "Bác sĩ",
         "choose-doctor": "Chọn bác sĩ giỏi",
         "fee": "Gói khám",
@@ -17,7 +17,19 @@
         "register": "Đăng kí",
         "registration-doctor": "Đăng ký bác sĩ",
         "registration-doctor-title": "Đăng ký để trở thành bác sĩ",
-        "booking": "Lịch đặt"
+        "booking": "Lịch đặt",
+        "account": "Tài khoản",
+        "password": "Mật khẩu",
+        "confirm-password": "Nhập lại mật khẩu",
+        "name-placeholder": "Nhập tên của bạn",
+        "password-placeholder": "Nhập mật khẩu của bạn",
+        "no-account": "Chưa có tài khoản",
+        "already-account": "Đã có tài khoản",
+        "login-now": "Đăng nhập ngay",
+        "register-now": "Đăng ký ngay",
+        "forgot-password": "Quên mật khẩu của bạn",
+        "login-with": "Hoặc đăng nhập với",
+        "search": "Tìm kiếm"
     },
     "banner": {
         "title-1": "Nền tảng y tế",
@@ -77,7 +89,12 @@
     "homepage": {
         "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
         "more-info": "Xem thêm",
-        "specialty-popular": "Chuyên khoa phổ biến"
+        "more-info-hand-book": "Xem tất cả bài viết",
+        "media-talk-hospital": "Truyền thông nói về UTE HOSPITAL",
+        "media-talk-hospital-content": "Trong lĩnh vực chăm sóc sức khỏe đã có nhiều giải pháp để hỗ trợ người bệnh theo các hướng khác nhau. Có ứng dụng cung cấp thông tin để người bệnh tham khảo; có nơi tập trung vào mảng bác sĩ gia đình; đưa ra giải pháp về xét nghiệm tại nhà; và có cả nền tảng giúp người bệnh hỏi đáp bác sĩ. Tuy nhiên, đó chưa phải là những giải pháp giúp người bệnh dễ dàng tiếp cận với việc đi khám và giải quyết được vấn đề quá tải tại các bệnh viện.",
+        "specialty-popular": "Chuyên khoa phổ biến",
+        "info-hospital-footer": "2023 Nguyễn Quang Huy. Xem thêm thông tin, vui lòng đến facebook của tôi.",
+        "click-here": "Bấm vào đây"
     },
     "manage-schedule": {
         "title": "Kế hoạch khám bệnh của bác sĩ",
@@ -89,11 +106,19 @@
         "title": "Danh sách bệnh nhân khám bệnh"
     },
     "patient": {
+        "clinic": {
+            "top-clinic": "Phòng khám nổi bật"
+        },
+        "handbook": {
+            "handbook": "Cẩm nang"
+        },
         "detail-doctor": {
             "schedule": "Lịch khám",
             "no-schedule": "Không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác!",
             "choose": "Chọn ",
-            "book-free": " và đặt (miễn phí)"
+            "book-free": " và đặt (miễn phí)",
+            "comment-patient": "Phản hồi của bệnh nhân sau khi đi khám",
+            "checked-today": "Đã khám ngày"
         },
         "extra-infor-doctor": {
             "text-address": "Địa chỉ khám",
@@ -103,11 +128,15 @@
             "hide-price": "Ẩn bảng giá"
         },
         "booking-modal": {
+            "examination-time": "Thời gian khám",
+            "schedule-book": "Lịch khám đang đặt",
+            "schedule-booked": "Lịch khám đã đặt",
             "title": "Thông tin đặt lịch khám bệnh",
             "name": "Họ tên",
             "phone-number": "Số điện thoại",
             "email": "Địa chỉ Email",
             "address": "Địa chỉ liên hệ",
+            "address-clinic": "Địa chỉ phòng khám",
             "reason": "Lý do khám",
             "birthday": "Ngày sinh",
             "gender": "Giới tính",
@@ -115,7 +144,23 @@
             "exit": "Hủy",
             "free-booking": "Miễn phí đặt lịch",
             "price": "Giá khám: ",
-            "book-for": "Đặt lịch hẹn cho: "
+            "book-for": "Đặt lịch hẹn cho: ",
+            "detail": "Chi tiết",
+            "racing": "Đánh giá",
+            "book-personal": "Đặt cho cá nhân",
+            "book-family": "Đặt cho gia đình",
+            "choose-date": "Chọn ngày khám",
+            "no-data": "Không có dữ liệu",
+            "id": "STT",
+            "not-login": "Bạn chưa đăng nhập xin vui lòng đăng nhập để đặt lịch khám",
+            "login-now": "Đăng nhập ngay",
+            "confirm": "Xác nhận",
+            "send-medical": "Gửi hóa đơn khám bệnh",
+            "email-patient": "Email bệnh nhân",
+            "re-examination-date": "Ngày tái khám",
+            "prescription": "Đơn thuốc",
+            "select-prescription": "Chọn file đơn thuốc",
+            "send": "Gửi"
         },
         "family": {
             "add": "Thêm mới thành viên mới",
@@ -130,10 +175,12 @@
             "position": "Chức danh",
             "save": "Lưu thành viên",
             "choose": "Chọn",
-            "image": "Ảnh đại diện",
+            "image": "Hình ảnh",
+            "add-member": "Thêm thành viên",
             "edit": "Cập nhật thành viên",
             "create": "Thêm thành viên",
-            "delete": "Xóa thành viên"
+            "delete": "Xóa thành viên",
+            "upload": "Tải ảnh"
         }
     },
     "admin": {
@@ -153,12 +200,43 @@
             "note": "Ghi chú",
             "specialty": "Chọn chuyên khoa",
             "clinic": "Chọn phòng khám",
-            "update": "Cập nhật hồ sơ"
+            "update": "Cập nhật hồ sơ",
+            "detail-doctor": "Chi tiết hồ sơ làm việc"
         },
         "manage-clinic": {
             "create": "Thêm",
             "edit": "Lưu",
-            "register": "Đăng kí"
+            "register": "Đăng kí",
+            "name-clinic": "Tên phòng khám",
+            "address-clinic": "Địa chỉ phòng khám",
+            "clinic-photo": "Ảnh phòng khám",
+            "image": "Hình ảnh",
+            "id": "STT"
+        },
+        "manage-specialty": {
+            "create": "Thêm",
+            "edit": "Lưu",
+            "register": "Đăng kí",
+            "name-specialty": "Tên chuyên khoa",
+            "specialty-photo": "Ảnh chuyên khoa",
+            "image": "Hình ảnh",
+            "id": "STT"
+        },
+        "manage-handbook": {
+            "create": "Thêm",
+            "edit": "Lưu",
+            "name-handbook": "Tên cẩm nang",
+            "handbook-photo": "Ảnh cẩm nang",
+            "image": "Hình ảnh",
+            "id": "STT"
+        },
+        "manage-account": {
+            "add": "Thêm tài khoản mới",
+            "edit": "Sửa tài khoản",
+            "action": "Hành động",
+            "add-new": "Thêm mới",
+            "close": "Đóng",
+            "save": "Lưu thay đổi"
         }
     }
 }

@@ -163,7 +163,7 @@ class ManageHandbook extends Component {
 
                 <div className="add-new-specialty row">
                     <div className="col-6 form-group">
-                        <label>Tên cẩm nang</label>
+                        <label><FormattedMessage id="admin.manage-handbook.name-handbook" /></label>
                         <input className="form-control"
                             type="text"
                             value={this.state.name}
@@ -171,7 +171,7 @@ class ManageHandbook extends Component {
                         />
                     </div>
                     <div className="col-6 form-group">
-                        <label>Ảnh cẩm nang</label>
+                        <label><FormattedMessage id="admin.manage-handbook.handbook-photo" /></label>
                         <input className="form-control-file"
                             type="file"
                             onChange={(event) => this.handleOnChangImage(event)}
@@ -207,10 +207,10 @@ class ManageHandbook extends Component {
                     <table id="customers">
                         <tbody>
                             <tr>
-                                <th>ID</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Action</th>
+                                <th><FormattedMessage id="admin.manage-handbook.id" /></th>
+                                <th><FormattedMessage id="admin.manage-handbook.handbook-photo" /></th>
+                                <th><FormattedMessage id="admin.manage-handbook.name-handbook" /></th>
+                                <th><FormattedMessage id="admin.manage-account.action" /></th>
                             </tr>
                             {
                                 this.getCurrentPageData().map((item, index) => {

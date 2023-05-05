@@ -298,11 +298,15 @@ class BookingModal extends Component {
                                         <div style={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-evenly' }}>
                                             <div>
                                                 <input type="radio" id="personal" name="bookingType" value="personal" checked={this.state.isPersonal} onChange={this.handleRadioChange} />
-                                                <label style={{ marginLeft: '5px;', fontWeight: '600' }} htmlFor="personal">Đặt cho cá nhân</label>
+                                                <label style={{ marginLeft: '5px;', fontWeight: '600' }} htmlFor="personal">
+                                                    <FormattedMessage id="patient.booking-modal.book-personal" />
+                                                </label>
                                             </div>
                                             <div>
                                                 <input type="radio" id="family" name="bookingType" value="family" checked={!this.state.isPersonal} onChange={this.handleRadioChange} />
-                                                <label style={{ marginLeft: '5px;', fontWeight: '600' }} htmlFor="family">Đặt cho gia đình</label>
+                                                <label style={{ marginLeft: '5px;', fontWeight: '600' }} htmlFor="family">
+                                                    <FormattedMessage id="patient.booking-modal.book-family" />
+                                                </label>
                                             </div>
                                         </div>
                                         {this.state.isPersonal ?
@@ -491,8 +495,8 @@ class BookingModal extends Component {
                                 </div>
                                 :
                                 <div className='not-login'>
-                                    <div className='not-login-title'>Bạn chưa đăng nhập xin vui lòng đăng nhập để đặt lịch khám!</div>
-                                    <div className='not-login-now' onClick={() => this.handleViewLogin()}>Đăng nhập ngay</div>
+                                    <div className='not-login-title'><FormattedMessage id="patient.booking-modal.not-login" />!</div>
+                                    <div className='not-login-now' onClick={() => this.handleViewLogin()}><FormattedMessage id="patient.booking-modal.login-now" /></div>
                                 </div>
                             }
                         </div>

@@ -108,11 +108,11 @@ class ModalUser extends Component {
                 className={'modal-user-container'}
                 size="lg"
             >
-                <ModalHeader toggle={() => { this.toggle() }}>Create a new user</ModalHeader>
+                <ModalHeader toggle={() => { this.toggle() }}> <FormattedMessage id="admin.manage-account.add" /></ModalHeader>
                 <ModalBody>
                     <div className="modal-user-body">
                         <div className='input-container'>
-                            <label>Email</label>
+                            <label><FormattedMessage id="patient.family.email" /></label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "email") }}
                                 placeholder='quanghuy@gmail.com'
@@ -120,28 +120,28 @@ class ModalUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Password</label>
+                            <label><FormattedMessage id="homeheader.password" /></label>
                             <input type='password'
                                 onChange={(event) => { this.handleOnChangeInput(event, "password") }}
                                 value={this.state.password}
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Last name</label>
+                            <label><FormattedMessage id="patient.family.lastname" /></label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "lastName") }}
                                 value={this.state.lastName}
                             />
                         </div>
                         <div className='input-container'>
-                            <label>First name</label>
+                            <label><FormattedMessage id="patient.family.firstname" /></label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "firstName") }}
                                 value={this.state.firstName}
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Gender:</label>
+                            <label><FormattedMessage id="patient.family.gender" /></label>
                             <select id="inputState"
                                 onChange={(event) => { this.handleOnChangeInput(event, 'gender') }}
                                 className="form-control"
@@ -159,7 +159,7 @@ class ModalUser extends Component {
                             </select>
                         </div>
                         <div className='input-container'>
-                            <label>Date of Birth:</label>
+                            <label><FormattedMessage id="patient.family.birthday" /></label>
                             <DatePicker
                                 onChange={this.handleOnChangeDatePicker}
                                 placeholder='Date of birth'
@@ -169,7 +169,7 @@ class ModalUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Phone number</label>
+                            <label><FormattedMessage id="patient.family.phonenumber" /></label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "phoneNumber") }}
                                 placeholder='0961640909'
@@ -177,7 +177,7 @@ class ModalUser extends Component {
                             />
                         </div>
                         <div className='input-container max-width-input'>
-                            <label>Address</label>
+                            <label><FormattedMessage id="patient.family.address" /></label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "address") }}
                                 value={this.state.address}
@@ -190,9 +190,11 @@ class ModalUser extends Component {
                         className="px-3"
                         onClick={() => { this.handleAddNewUser() }}
                     >
-                        Add new
+                        <FormattedMessage id="admin.manage-account.add-new" />
                     </Button>{' '}
-                    <Button color="secondary" className="px-3" onClick={() => { this.toggle() }}>Close</Button>
+                    <Button color="secondary" className="px-3" onClick={() => { this.toggle() }}>
+                        <FormattedMessage id="admin.manage-account.close" />
+                    </Button>
                 </ModalFooter>
             </Modal>
         )

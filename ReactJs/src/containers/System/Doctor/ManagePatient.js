@@ -131,7 +131,7 @@ class ManagePatient extends Component {
                         </div>
                         <div className="manage-patient-body row">
                             <div className="col-4 form-group">
-                                <label>Chọn ngày khám</label>
+                                <label><FormattedMessage id="patient.booking-modal.choose-date" /></label>
                                 <DatePicker
                                     onChange={this.handleOnChangeDatePicker}
                                     className="form-control"
@@ -142,13 +142,13 @@ class ManagePatient extends Component {
                                 <table style={{ width: '100%' }} id='customers'>
                                     <tbody>
                                         <tr>
-                                            <th>STT</th>
-                                            <th>Thời gian</th>
-                                            <th>Họ và tên</th>
-                                            <th>Giới tính</th>
-                                            <th>Địa chỉ</th>
-                                            <th>Lý do khám</th>
-                                            <th>Actions</th>
+                                            <th><FormattedMessage id="patient.booking-modal.id" /></th>
+                                            <th><FormattedMessage id="patient.booking-modal.examination-time" /></th>
+                                            <th><FormattedMessage id="patient.booking-modal.name" /></th>
+                                            <th><FormattedMessage id="patient.booking-modal.gender" /></th>
+                                            <th><FormattedMessage id="patient.booking-modal.birthday" /></th>
+                                            <th><FormattedMessage id="patient.booking-modal.reason" /></th>
+                                            <th><FormattedMessage id="admin.manage-account.action" /></th>
                                         </tr>
                                         {dataPatient && dataPatient.length > 0 ?
                                             dataPatient.map((item, index) => {
@@ -169,7 +169,7 @@ class ManagePatient extends Component {
                                                                 className="mp-btn-confirm"
                                                                 onClick={() => this.handleBtnConfirm(item)}
                                                             >
-                                                                Xác nhận
+                                                                <FormattedMessage id="patient.booking-modal.confirm" />
                                                             </button>
                                                         </td>
                                                     </tr>
@@ -177,7 +177,7 @@ class ManagePatient extends Component {
                                             })
                                             :
                                             <tr>
-                                                <td colSpan="7" style={{ textAlign: 'center' }}>No data</td>
+                                                <td colSpan="7" style={{ textAlign: 'center' }}><FormattedMessage id="patient.booking-modal.no-data" /></td>
                                             </tr>
                                         }
                                     </tbody>

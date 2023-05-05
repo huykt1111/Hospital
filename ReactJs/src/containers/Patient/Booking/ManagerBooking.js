@@ -44,8 +44,6 @@ class ManagerBooking extends Component {
                             <ScheduleBooked />
                         </div>
                     </div>
-
-
                 </div >
             </React.Fragment>
         );

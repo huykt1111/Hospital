@@ -49,7 +49,7 @@ class ModalDoctor extends Component {
                 className={'modal-user-container'}
                 size="lg"
             >
-                <ModalHeader toggle={() => { this.toggle() }}>Registered doctor details</ModalHeader>
+                <ModalHeader toggle={() => { this.toggle() }}>Chi tiết thông tin bác sĩ đăng ký</ModalHeader>
                 <ModalBody>
                     <div className="register-doctor-detail-container">
                         <div className="intro-doctor">

@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import './RemedyModal.scss';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import moment from "moment";
-import { Toast } from 'react-toastify';
 import { CommonUtils } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 
@@ -83,7 +81,9 @@ class RemedyModal extends Component {
                 size="lg"
                 centered
             >
-                <div className="modal-header"><h5 className="modal-title">Gửi hóa đơn khám bệnh</h5>
+                <div className="modal-header"><h5 className="modal-title">
+                    <FormattedMessage id="patient.booking-modal.send-medical" />
+                </h5>
                     <button type="button" className="close" aria-label="Close" onClick={closeRemedyModal}>
                         <span aria-hidden="true">×</span>
                     </button>
@@ -91,7 +91,9 @@ class RemedyModal extends Component {
                 <ModalBody>
                     <div className="row">
                         <div className="col-6 form-group">
-                            <label>Email bệnh nhân</label>
+                            <label>
+                                <FormattedMessage id="patient.booking-modal.email-patient" />
+                            </label>
                             <input className='form-control'
                                 type="email"
                                 onChange={(event) => this.handleOnChangeEmail(event)}
@@ -99,7 +101,9 @@ class RemedyModal extends Component {
 
                         </div>
                         <div className="col-6 form-group">
-                            <label>Đơn thuốc</label>
+                            <label>
+                                <FormattedMessage id="patient.booking-modal.prescription" />
+                            </label>
                             <input className='form-control'
                                 type="email"
                                 onChange={(event) => { this.onChangeInput(event, 'donThuoc') }}
@@ -107,7 +111,9 @@ class RemedyModal extends Component {
 
                         </div>
                         <div className="col-6 form-group">
-                            <label>Ngày tái khám</label>
+                            <label>
+                                <FormattedMessage id="patient.booking-modal.re-examination-date" />
+                            </label>
                             <DatePicker
                                 onChange={this.handleOnChangeDatePicker}
                                 className="form-control"
@@ -116,14 +122,16 @@ class RemedyModal extends Component {
                             />
                         </div>
                         <div className="col-6 form-group">
-                            <label>Chọn file đơn thuốc</label>
+                            <label>
+                                <FormattedMessage id="patient.booking-modal.select-prescription" />
+                            </label>
                             <input type="file" className='form-control-file' onChange={(event) => this.handleOnChangImage(event)} />
                         </div>
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={() => this.handleSendRemedy()}>Send</Button>{' '}
-                    <Button color="secondary" onClick={closeRemedyModal}>Cancel</Button>
+                    <Button color="primary" onClick={() => this.handleSendRemedy()}><FormattedMessage id="patient.booking-modal.send" /></Button>{' '}
+                    <Button color="secondary" onClick={closeRemedyModal}><FormattedMessage id="patient.booking-modal.exit" /></Button>
                 </ModalFooter>
             </Modal>
         );

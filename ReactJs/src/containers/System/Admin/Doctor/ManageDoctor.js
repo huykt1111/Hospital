@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import './ManageDoctor.scss';
 import { getAllRegisterDoctors, ratifyDoctor, refuseDoctor } from '../../../../services/userService';
 import ModalDoctor from './ModalDoctor';
-import ModalEditUser from '../../ModalEditUser';
-import { emitter } from '../../../../utils/emitter';
 import { LANGUAGES } from '../../../../utils';
 import { toast } from "react-toastify";
 import ReactPaginate from 'react-paginate';
@@ -116,18 +114,18 @@ class ManageDoctor extends Component {
                         handleRatify={this.handleRatify}
                     />
                 }
-                <div className="title text-center">Manage doctor</div>
+                <div className="title text-center"><FormattedMessage id="menu.admin.doctor-register" /></div>
                 <div className="doctor-register mt-4 mx-1">
                     <table id="customers">
                         <tbody>
                             <tr>
-                                <th>Avatar</th>
-                                <th>Email</th>
-                                <th>Last name</th>
-                                <th>First name</th>
-                                <th>Position</th>
-                                <th>Address</th>
-                                <th>Action</th>
+                                <th><FormattedMessage id="patient.family.image" /></th>
+                                <th><FormattedMessage id="patient.family.email" /></th>
+                                <th><FormattedMessage id="patient.family.lastname" /></th>
+                                <th><FormattedMessage id="patient.family.firstname" /></th>
+                                <th><FormattedMessage id="patient.family.position" /></th>
+                                <th><FormattedMessage id="patient.family.address" /></th>
+                                <th><FormattedMessage id="admin.manage-account.action" /></th>
                             </tr>
                             {
                                 this.getCurrentPageData().map((item, index) => {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 
 class HomeFooter extends Component {
 
@@ -7,7 +8,10 @@ class HomeFooter extends Component {
 
         return (
             <div className='home-footer'>
-                <p>&copy; 2023 Nguyễn Quang Huy. More Information, please visit my email.<a target='_blank' href='https://github.com/huykt1111/Hospital-ReactJs'>&#8594; Click here! &#8592;</a></p>
+                <p>&copy; <FormattedMessage id='homepage.info-hospital-footer' />
+                    <a target='_blank' href='https://github.com/huykt1111/Hospital-ReactJs'>
+                        &#8594; <FormattedMessage id='homepage.click-here' />! &#8592;
+                    </a></p>
             </div>
         );
     }

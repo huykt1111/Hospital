@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from 'react-slick';
 import { getAllHandBook } from '../../../services/userService';
-import { LANGUAGES } from '../../../utils';
 import { withRouter } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 
@@ -35,8 +34,12 @@ class HandBook extends Component {
             <div className='section-share section-handbook'>
                 <div className='section-container'>
                     <div className='section-header'>
-                        <span className='title-section'>Cẩm nang</span>
-                        <button className='btn-section'>tất cả các bài viết</button>
+                        <span className='title-section'>
+                            <FormattedMessage id='patient.handbook.handbook' />
+                        </span>
+                        <button className='btn-section'>
+                            <FormattedMessage id='homepage.more-info-hand-book' />
+                        </button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>

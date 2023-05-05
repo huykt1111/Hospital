@@ -60,7 +60,7 @@ class ModalBooking extends Component {
                 className={'modal-user-container'}
                 size="lg"
             >
-                <ModalHeader toggle={() => { this.toggle() }}>Detail Book</ModalHeader>
+                <ModalHeader toggle={() => { this.toggle() }}>Chi tiết đã đặt</ModalHeader>
                 <ModalBody>
                     <div className="register-doctor-detail-container">
                         <div className="intro-doctor">

@@ -8,6 +8,7 @@ import DoctorSchedule from './DoctorSchedule';
 import DoctorExtraInfor from './DoctorExtraInfor';
 import LikeAndShare from '../SocialPlugin/LikeAndShare';
 import Comment from '../SocialPlugin/Comment';
+import { FormattedMessage } from 'react-intl';
 
 class DetailDoctor extends Component {
 
@@ -103,7 +104,9 @@ class DetailDoctor extends Component {
                         {/* <Comment
                             data-href={currentURLCMD}
                         /> */}
-                        <div className='comment-patient-title'>Phản hồi của bệnh nhân sau khi đi khám</div>
+                        <div className='comment-patient-title'>
+                            <FormattedMessage id="patient.detail-doctor.comment-patient" />
+                        </div>
                         {
                             detailDoctor && detailDoctor.dataDoctorLK &&
                             detailDoctor.dataDoctorLK.length > 0 &&
@@ -123,7 +126,7 @@ class DetailDoctor extends Component {
                                                     <div className='comment-patient-content' key={indexchild}>
                                                         <div className="comment-patient-name">
                                                             {itemchild.hoTen}
-                                                            <span><i className="fas fa-check-circle"></i> Đã khám ngày {formattedDate}</span>
+                                                            <span><i className="fas fa-check-circle"></i> <FormattedMessage id="patient.detail-doctor.checked-today" /> {formattedDate}</span>
                                                         </div>
                                                         <div className='comment-patient-comment'>
                                                             {itemchild.danhGia}

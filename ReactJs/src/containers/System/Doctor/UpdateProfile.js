@@ -269,7 +269,7 @@ class UpdateProfile extends Component {
                                                     />
                                                     <label htmlFor="previewImg"
                                                         className="label-upload">
-                                                        Tải ảnh
+                                                        <FormattedMessage id="patient.family.upload" />
                                                         <i className="fas fa-upload"></i>
                                                     </label>
                                                     <div className="preview-image"

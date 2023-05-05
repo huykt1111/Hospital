@@ -2,8 +2,8 @@
     "homeheader": {
         "speciality": "Medical speciality",
         "searchdoctor": "Find a doctor by speciality",
-        "health-facility": "Health facility",
-        "select-room": "Choose hospital clinic",
+        "health-facility": "Clinic",
+        "select-room": "Choose clinic",
         "doctor": "Doctor",
         "choose-doctor": "Choose a good doctor",
         "fee": "Checkup package",
@@ -17,7 +17,19 @@
         "login": "Login",
         "logout": "Log out",
         "register": "Register",
-        "booking": "Booking schedule"
+        "booking": "Booking schedule",
+        "account": "Account",
+        "password": "Password",
+        "confirm-password": "Confirm password",
+        "name-placeholder": "Enter your name",
+        "password-placeholder": "Enter your password",
+        "no-account": "No account",
+        "already-account": "Already have an account",
+        "login-now": "Login now",
+        "register-now": "Register now",
+        "forgot-password": "Forgot your password",
+        "login-with": "Or login with",
+        "search": "Search"
     },
     "banner": {
         "title-1": "Medical platform",
@@ -77,7 +89,12 @@
     "homepage": {
         "outstanding-doctor": "Outstanding Doctor of the Week",
         "more-info": "See more",
-        "specialty-popular": "Popular specialties"
+        "more-info-hand-book": "View all posts",
+        "specialty-popular": "Popular specialties",
+        "media-talk-hospital-content": "In the field of health care, there are many solutions to support patients in different directions. There are applications that provide information for patients to refer to; there are places focusing on family doctors; offer home testing solutions; and has a platform to help patients ask and answer doctors. However, these are not solutions to help patients easily access medical examination and solve the problem of overcrowding at hospitals.",
+        "media-talk-hospital": "Media talk about UTE HOSPITAL",
+        "info-hospital-footer": "2023 Nguyễn Quang Huy. More Information, please visit my facebook.",
+        "click-here": "Click here"
     },
     "manage-schedule": {
         "title": "Medical examination plan",
@@ -89,11 +106,19 @@
         "title": "List of patients examined"
     },
     "patient": {
+        "clinic": {
+            "top-clinic": "Outstanding clinic"
+        },
+        "handbook": {
+            "handbook": "HandBook"
+        },
         "detail-doctor": {
             "schedule": "Schedule",
             "no-schedule": "No appointment available during this time, please choose another time!",
             "choose": "Choose ",
-            "book-free": " and book (free)"
+            "book-free": " and book (free)",
+            "comment-patient": "Patient feedback after visiting",
+            "checked-today": "Checked today"
         },
         "extra-infor-doctor": {
             "text-address": "Address of examination",
@@ -103,19 +128,39 @@
             "hide-price": "Hide price list"
         },
         "booking-modal": {
+            "examination-time": "Examination time",
+            "schedule-book": "Scheduled examination",
+            "schedule-booked": "Scheduled appointment",
             "title": "Information to book a medical appointment",
+            "address-clinic": "Clinic address",
             "name": "Full name",
             "phone-number": "Phone number",
             "email": "Email address",
             "address": "Address",
-            "reason": "Reason for examination",
+            "reason": "Reason",
             "birthday": "Date of birth",
             "gender": "Sex",
             "btn-confirm": "Confirm",
             "exit": "Cancel",
             "free-booking": "Free booking",
             "price": "Price: ",
-            "book-for": "Schedule an appointment for: "
+            "book-for": "Schedule an appointment for: ",
+            "detail": "Detail",
+            "racing": "Evaluate",
+            "book-personal": "Set for personal",
+            "book-family": "Book for family",
+            "choose-date": "Choose a date",
+            "no-data": "No data",
+            "id": "ID",
+            "not-login": "You are not logged in, please login to make an appointment",
+            "login-now": "Login now",
+            "confirm": "Confirm",
+            "send-medical": "Send medical bills",
+            "email-patient": "Patient email",
+            "re-examination-date": "Re-examination date",
+            "prescription": "Prescription",
+            "select-prescription": "Select the prescription file",
+            "send": "Send"
         },
         "family": {
             "add": "Add a new member",
@@ -130,9 +175,11 @@
             "save": "Save member",
             "choose": "Choose",
             "image": "Avatar",
+            "add-member": "Add member",
             "edit": "Edit member",
             "create": "Create Member",
-            "delete": "Delete Member"
+            "delete": "Delete Member",
+            "upload": "Upload"
         }
     },
     "admin": {
@@ -152,12 +199,44 @@
             "note": "Note",
             "specialty": "Choose a specialty",
             "clinic": "Choose a clinic",
-            "update": "Update profile"
+            "update": "Update profile",
+            "detail-doctor": "Details of work profile"
         },
         "manage-clinic": {
             "create": "Create",
             "edit": "Save",
-            "register": "Register"
+            "register": "Register",
+            "name-clinic": "Clinic name",
+            "address-clinic": "Clinic address",
+            "clinic-photo": "Clinic photo",
+            "image": "Image",
+            "id": "ID"
+        },
+        "manage-specialty": {
+            "create": "Create",
+            "edit": "Save",
+            "register": "Register",
+            "name-specialty": "Specialty name",
+            "specialty-photo": "Specialty photo",
+            "image": "Image",
+            "id": "ID"
+        },
+        "manage-handbook": {
+            "create": "Create",
+            "edit": "Save",
+            "register": "Register",
+            "name-handbook": "Handbook name",
+            "handbook-photo": "Handbook photo",
+            "image": "Image",
+            "id": "ID"
+        },
+        "manage-account": {
+            "add": "Add new user",
+            "edit": "Edit a user",
+            "action": "Action",
+            "add-new": "Add new",
+            "close": "Close",
+            "save": "Save changes"
         }
     }
 }

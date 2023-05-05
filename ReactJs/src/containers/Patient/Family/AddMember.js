@@ -217,7 +217,10 @@ class AddMember extends Component {
         return (
             <div className="user-redux-container">
                 <div className="title" >
-                    Add New Member
+                    {action === CRUD_ACTIONS.EDIT ?
+                        <FormattedMessage id="patient.family.edit" /> :
+                        <FormattedMessage id="patient.family.create" />
+                    }
                 </div>
                 <div className="user-redux-body">
                     <div className="container">
@@ -326,7 +329,7 @@ class AddMember extends Component {
                                                     />
                                                     <label htmlFor="previewImg"
                                                         className="label-upload">
-                                                        Tải ảnh
+                                                        <FormattedMessage id="patient.family.upload" />
                                                         <i className="fas fa-upload"></i>
                                                     </label>
                                                     <div className="preview-image"

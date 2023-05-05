@@ -91,7 +91,7 @@ class ScheduleBook extends Component {
             <>
                 {dataBook && dataBook.length > 0 &&
                     <div className='booking-body-title'>
-                        Lịch đã đặt
+                        <FormattedMessage id="patient.booking-modal.schedule-booked" />
                     </div>
                 }
                 {dataBook && dataBook.length > 0 &&
@@ -132,27 +132,29 @@ class ScheduleBook extends Component {
                                 <div className="content-two">
                                     <div>{language === LANGUAGES.VI ?
                                         <span>{item.schedulePatientData.doctorData.ho} {item.schedulePatientData.doctorData.ten}</span> :
-                                        <span>{item.schedulePatientData.doctorData.ten} {item.schedulePatientData.doctorData.ho}</span>
+                                        <span>{item.schedulePatientData.doctorData.ten + " " + item.schedulePatientData.doctorData.ho}</span>
                                     }</div>
                                 </div>
                                 <div className="content-three">
 
                                     {language === LANGUAGES.VI ?
-                                        <div style={{ fontWeight: '600' }}>Lịch đặt: <div style={{ color: 'red' }}>{item.schedulePatientData.timeTypeData.valueVi} - {formattedDate}</div></div>
+                                        <div style={{ fontWeight: '600' }}><FormattedMessage id="patient.booking-modal.examination-time" /> <div style={{ color: 'red' }}>{item.schedulePatientData.timeTypeData.valueVi} - {formattedDate}</div></div>
                                         :
-                                        <div style={{ fontWeight: '600' }}>Lịch đặt: <div style={{ color: 'red' }}>{item.schedulePatientData.timeTypeData.valueEn}- {formattedDate}</div></div>
+                                        <div style={{ fontWeight: '600' }}><FormattedMessage id="patient.booking-modal.examination-time" /> <div style={{ color: 'red' }}>{item.schedulePatientData.timeTypeData.valueEn}- {formattedDate}</div></div>
                                     }
                                 </div>
                                 <div className="content-five">
-                                    <div>Địa chỉ phòng khám: <span style={{ fontWeight: '400' }}>{item.schedulePatientData.dataDoctorLK.diaChiPhongKham}</span></div>
+                                    <div><FormattedMessage id="patient.booking-modal.address-clinic" />: <span style={{ fontWeight: '400' }}>{item.schedulePatientData.dataDoctorLK.diaChiPhongKham}</span></div>
                                 </div>
                                 <div className="content-four">
-                                    <div style={{ fontWeight: '600' }}>Lý do khám: <span style={{ fontWeight: '400' }}>{item.lyDoKham}</span></div>
+                                    <div style={{ fontWeight: '600' }}><FormattedMessage id="patient.booking-modal.reason" />: <span style={{ fontWeight: '400' }}>{item.lyDoKham}</span></div>
                                 </div>
                                 <div className="button-detail-book">
-                                    <div onClick={() => this.handleViewDoctor(item)}>Chi tiết</div>
+                                    <div onClick={() => this.handleViewDoctor(item)}><FormattedMessage id="patient.booking-modal.detail" /></div>
                                     {item.danhGia === null &&
-                                        <div style={{ color: 'red' }} onClick={() => this.handleViewCommnent(item)}>Đánh giá</div>
+                                        <div style={{ color: 'red' }} onClick={() => this.handleViewCommnent(item)}>
+                                            <FormattedMessage id="patient.booking-modal.racing" />
+                                        </div>
                                     }
                                 </div>
                             </div >

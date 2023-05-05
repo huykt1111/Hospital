@@ -37,7 +37,7 @@ class FamilyProfile extends Component {
                 <div className="family-profile-container">
                     <div className="button-member">
                         <div className='button-member-add' onClick={() => this.handleCreateMember()}>
-                            Thêm thành viên
+                            <FormattedMessage id="patient.family.add-member" />
                         </div>
                     </div>
                     <div className="family-profile-body">

@@ -92,11 +92,11 @@ class RatifyClinic extends Component {
                     <table id="customers">
                         <tbody>
                             <tr>
-                                <th>ID</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Action</th>
+                                <th><FormattedMessage id="admin.manage-clinic.id" /></th>
+                                <th><FormattedMessage id="admin.manage-clinic.clinic-photo" /></th>
+                                <th><FormattedMessage id="admin.manage-clinic.name-clinic" /></th>
+                                <th><FormattedMessage id="admin.manage-clinic.address-clinic" /></th>
+                                <th><FormattedMessage id="admin.manage-account.action" /></th>
                             </tr>
                             {
                                 this.getCurrentPageData().map((item, index) => {

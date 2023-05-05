@@ -7,6 +7,7 @@ import { createNewUserService } from '../../services/userService';
 import HomeHeader from '../HomePage/HomeHeader';
 import { withRouter } from 'react-router';
 import DatePicker from '../../components/Input/DatePicker';
+import { FormattedMessage } from 'react-intl';
 
 class Register extends Component {
     constructor(props) {
@@ -139,39 +140,38 @@ class Register extends Component {
                     <div className='login-background-container'>
                         <div className='login-container' style={{ height: '650px', width: '500px' }}>
                             <div className='login-content row'>
-                                <div className='col-12 text-login'>Register</div>
-                                {/* <div className="col-6 ">
-                                    {isGetGenders === true ? 'Loading genders' : ''}
-                                </div> */}
+                                <div className='col-12 text-login'>
+                                    <FormattedMessage id="homeheader.register" />
+                                </div>
                                 <div className="col-12" style={{ color: 'red' }}>
                                     {this.state.errMessage}
                                 </div>
                                 <div className='col-6 form-group login-input'>
-                                    <label>Email:</label>
+                                    <label><FormattedMessage id="patient.family.email" />:</label>
                                     <input type="email"
                                         className="form-control"
                                         value={email}
-                                        placeholder='Enter your email'
+                                        placeholder='Nhập email'
                                         onChange={(event) => { this.onChangeInput(event, 'email') }}
                                         pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
                                     />
                                 </div>
                                 <div className='col-6 form-group login-input'>
-                                    <label>Phone Number:</label>
+                                    <label><FormattedMessage id="patient.family.phonenumber" />:</label>
                                     <input type="tel"
                                         className="form-control"
                                         value={phoneNumber}
-                                        placeholder='Phone Number'
+                                        placeholder='Nhập số điện thoại'
                                         onChange={(event) => { this.onChangeInput(event, 'phoneNumber') }}
                                         pattern="[0-9]{10,11}"
                                         required />
                                 </div>
                                 <div className='col-6 form-group login-input'>
-                                    <label>Password:</label>
+                                    <label><FormattedMessage id="homeheader.password" />:</label>
                                     <div className='custom-input-password'>
                                         <input type={this.state.isShowPassword ? 'text' : 'password'}
                                             className='form-control'
-                                            placeholder='Enter your password'
+                                            placeholder='Nhập mật khẩu'
                                             onChange={(event) => { this.onChangeInput(event, 'password') }}
                                             value={password}
                                         />
@@ -183,11 +183,11 @@ class Register extends Component {
                                     </div>
                                 </div>
                                 <div className='col-6 form-group login-input'>
-                                    <label>Confirm password:</label>
+                                    <label><FormattedMessage id="homeheader.confirm-password" />:</label>
                                     <div className='custom-input-password'>
                                         <input type={this.state.isShowPassword ? 'text' : 'password'}
                                             className='form-control'
-                                            placeholder='Confirm password'
+                                            placeholder='Xác nhận lại mật khẩu'
                                             onChange={(event) => { this.onChangeInput(event, 'confirmPassword') }}
                                             value={confirmPassword}
                                         />
@@ -199,23 +199,23 @@ class Register extends Component {
                                     </div>
                                 </div>
                                 <div className='col-6 form-group login-input'>
-                                    <label>Last Name:</label>
+                                    <label><FormattedMessage id="patient.family.lastname" />:</label>
                                     <input type="text"
                                         value={lastName}
-                                        placeholder='Last Name'
+                                        placeholder='Nhập họ'
                                         className="form-control"
                                         onChange={(event) => { this.onChangeInput(event, 'lastName') }} />
                                 </div>
                                 <div className='col-6 form-group login-input'>
-                                    <label>First Name:</label>
+                                    <label><FormattedMessage id="patient.family.firstname" />:</label>
                                     <input type="text"
                                         value={firstName}
                                         className="form-control"
-                                        placeholder='First Name'
+                                        placeholder='Nhập tên'
                                         onChange={(event) => { this.onChangeInput(event, 'firstName') }} />
                                 </div>
                                 <div className='col-6 form-group login-input'>
-                                    <label>Gender:</label>
+                                    <label><FormattedMessage id="patient.family.gender" />:</label>
                                     <select id="inputState"
                                         onChange={(event) => { this.onChangeInput(event, 'gender') }}
                                         className="form-control"
@@ -233,42 +233,42 @@ class Register extends Component {
                                     </select>
                                 </div>
                                 <div className='col-6 form-group login-input'>
-                                    <label>Date of Birth:</label>
+                                    <label><FormattedMessage id="patient.family.birthday" />:</label>
                                     <DatePicker
                                         onChange={this.handleOnChangeDatePicker}
-                                        placeholder='Date of birth'
+                                        placeholder='Nhập ngày sinh'
                                         className="form-control"
                                         value={this.state.birthday}
                                         maxDate={yesterday}
                                     />
                                 </div>
                                 <div className='col-12 form-group login-input'>
-                                    <label>Address:</label>
+                                    <label><FormattedMessage id="patient.family.address" />:</label>
                                     <input type="text"
                                         className="form-control"
                                         value={address}
-                                        placeholder='Address'
+                                        placeholder='Nhập địa chỉ'
                                         onChange={(event) => { this.onChangeInput(event, 'address') }} />
                                 </div>
                                 <div className='col-12'>
                                     <button className='btn-login'
                                         onClick={() => { this.handleRegister() }}
                                     >
-                                        Login
+                                        <FormattedMessage id="homeheader.register" />
                                     </button>
                                 </div>
                                 <div className='col-12 register'>
-                                    <span className='register-title'>Already have an account:
+                                    <span className='register-title'><FormattedMessage id="homeheader.already-account" />:
                                         <span className='register-title-button'
                                             onClick={() => this.handleViewLogin()}
-                                        >Login now!</span>
+                                        ><FormattedMessage id="homeheader.login-now" />!</span>
                                     </span>
                                 </div>
                                 <div className='col-12'>
-                                    <span className='forgot-password'>Forgot your password</span>
+                                    <span className='forgot-password'><FormattedMessage id="homeheader.forgot-password" /></span>
                                 </div>
                                 <div className='col-12 text-center mt-3'>
-                                    <span className='text-other-login'>Or login with</span>
+                                    <span className='text-other-login'><FormattedMessage id="homeheader.login-with" /></span>
                                 </div>
                                 <div className='col-12 social-login'>
                                     <i className="fab fa-google-plus-g google"></i>

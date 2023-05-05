@@ -164,14 +164,14 @@ class ManageClinic extends Component {
         let { language } = this.props;
         return (
             <div className="manage-specialty-container">
-                <div className="title text-center">Manage Clinic</div>
+                <div className="title text-center"><FormattedMessage id="menu.admin.manage-clinic" /></div>
                 <div className="add-new-specialty row">
                     <div className="col-12 form-group">
                         <div className="row">
                             <div className="col-6">
                                 <div className="row">
                                     <div className="col-12 form-group">
-                                        <label>Tên phòng khám</label>
+                                        <label><FormattedMessage id="admin.manage-clinic.name-clinic" /></label>
                                         <input className="form-control"
                                             type="text"
                                             value={this.state.name}
@@ -179,7 +179,7 @@ class ManageClinic extends Component {
                                         />
                                     </div>
                                     <div className="col-12 form-group">
-                                        <label>Địa chỉ phòng khám</label>
+                                        <label><FormattedMessage id="admin.manage-clinic.address-clinic" /></label>
                                         <input className="form-control"
                                             type="text"
                                             value={this.state.address}
@@ -191,7 +191,7 @@ class ManageClinic extends Component {
                             <div className="col-6">
                                 <div className="row">
                                     <div className="col-12 form-group">
-                                        <label>Ảnh phòng khám</label>
+                                        <label><FormattedMessage id="admin.manage-clinic.clinic-photo" /></label>
                                         <input className="form-control-file"
                                             type="file"
                                             onChange={(event) => this.handleOnChangImage(event)}
@@ -231,11 +231,11 @@ class ManageClinic extends Component {
                     <table id="customers">
                         <tbody>
                             <tr>
-                                <th>ID</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Action</th>
+                                <th><FormattedMessage id="admin.manage-clinic.id" /></th>
+                                <th><FormattedMessage id="admin.manage-clinic.clinic-photo" /></th>
+                                <th><FormattedMessage id="admin.manage-clinic.name-clinic" /></th>
+                                <th><FormattedMessage id="admin.manage-clinic.address-clinic" /></th>
+                                <th><FormattedMessage id="admin.manage-account.action" /></th>
                             </tr>
                             {
                                 this.getCurrentPageData().map((item, index) => {

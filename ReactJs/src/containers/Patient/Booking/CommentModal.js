@@ -120,7 +120,7 @@ class CommentModal extends Component {
                 className={'modal-comment-container'}
                 size="lg"
             >
-                <ModalHeader toggle={() => { this.toggle() }}>Comment</ModalHeader>
+                <ModalHeader toggle={() => { this.toggle() }}>Đánh giá</ModalHeader>
                 <ModalBody>
                     <div className="row">
                         <div className="register-doctor-detail-container">
@@ -152,7 +152,7 @@ class CommentModal extends Component {
                                         <StarRating defaultValue={3} onChange={this.handleRatingChange} />
                                     </div>
                                     <div className='col-12 form-group login-input'>
-                                        <label>Comment:</label>
+                                        <label>Nội dung đánh giá:</label>
                                         <input type="text"
                                             className="form-control"
                                             value={this.state.comment}

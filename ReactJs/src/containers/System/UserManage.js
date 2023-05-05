@@ -162,23 +162,23 @@ class UserManage extends Component {
                         editUser={this.doEditUser}
                     />
                 }
-                <div className="title text-center">Manage users</div>
+                <div className="title text-center"><FormattedMessage id="menu.admin.user-account" /></div>
                 <div className='mx-1'>
                     <button className="btn btn-primary px-3"
                         onClick={() => this.handleAddNewUser()}>
                         <i className="fas fa-plus"></i>
-                        Add new users
+                        <FormattedMessage id="admin.manage-account.add" />
                     </button>
                 </div>
                 <div className="user-table mt-4 mx-1">
                     <table id="customers">
                         <tbody>
                             <tr>
-                                <th>Email</th>
-                                <th>Last name</th>
-                                <th>First name</th>
-                                <th>Address</th>
-                                <th>Action</th>
+                                <th><FormattedMessage id="patient.family.email" /></th>
+                                <th><FormattedMessage id="patient.family.lastname" /></th>
+                                <th><FormattedMessage id="patient.family.firstname" /></th>
+                                <th><FormattedMessage id="patient.family.address" /></th>
+                                <th><FormattedMessage id="admin.manage-account.action" /></th>
                             </tr>
                             {
                                 this.getCurrentPageData().map((item, index) => {

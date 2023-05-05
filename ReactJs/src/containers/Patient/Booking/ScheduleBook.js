@@ -47,12 +47,6 @@ class ScheduleBook extends Component {
         })
     }
 
-    handleUpdate = (idMember) => {
-        // if (this.props.history) {
-        //     this.props.history.push(`/update-member/${idMember}`);
-        // }
-    }
-
     handleViewDoctor = (item) => {
         this.setState({
             isOpenModalDoctor: true,
@@ -82,7 +76,9 @@ class ScheduleBook extends Component {
         let { language } = this.props;
         return (
             <>
-                {dataBook && dataBook.length > 0 && <div className='booking-body-title'>Lịch đang đặt</div>
+                {dataBook && dataBook.length > 0 && <div className='booking-body-title'>
+                    <FormattedMessage id="patient.booking-modal.schedule-book" />
+                </div>
                 }
                 {dataBook && dataBook.length > 0 &&
                     dataBook.map((item, index) => {
@@ -119,19 +115,19 @@ class ScheduleBook extends Component {
                                 <div className="content-three">
 
                                     {language === LANGUAGES.VI ?
-                                        <div style={{ fontWeight: '600' }}>Lịch đặt: <div style={{ color: 'red' }}>{item.schedulePatientData.timeTypeData.valueVi} - {formattedDate}</div></div>
+                                        <div style={{ fontWeight: '600' }}><FormattedMessage id="patient.booking-modal.examination-time" /> <div style={{ color: 'red' }}>{item.schedulePatientData.timeTypeData.valueVi} - {formattedDate}</div></div>
                                         :
-                                        <div style={{ fontWeight: '600' }}>Lịch đặt: <div style={{ color: 'red' }}>{item.schedulePatientData.timeTypeData.valueEn}- {formattedDate}</div></div>
+                                        <div style={{ fontWeight: '600' }}><FormattedMessage id="patient.booking-modal.examination-time" /> <div style={{ color: 'red' }}>{item.schedulePatientData.timeTypeData.valueEn}- {formattedDate}</div></div>
                                     }
                                 </div>
                                 <div className="content-five">
-                                    <div>Địa chỉ phòng khám: <span style={{ fontWeight: '400' }}>{item.schedulePatientData.dataDoctorLK.diaChiPhongKham}</span></div>
+                                    <div><FormattedMessage id="patient.booking-modal.address-clinic" />: <span style={{ fontWeight: '400' }}>{item.schedulePatientData.dataDoctorLK.diaChiPhongKham}</span></div>
                                 </div>
                                 <div className="content-four">
-                                    <div style={{ fontWeight: '600' }}>Lý do khám: <span style={{ fontWeight: '400' }}>{item.lyDoKham}</span></div>
+                                    <div style={{ fontWeight: '600' }}><FormattedMessage id="patient.booking-modal.reason" />: <span style={{ fontWeight: '400' }}>{item.lyDoKham}</span></div>
                                 </div>
                                 <div className="button-detail-book">
-                                    <div onClick={() => this.handleViewDoctor(item)}>Chi tiết</div>
+                                    <div onClick={() => this.handleViewDoctor(item)}><FormattedMessage id="patient.booking-modal.detail" /></div>
                                 </div>
                             </div >
                         );

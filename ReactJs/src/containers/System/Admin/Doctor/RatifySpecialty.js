@@ -93,10 +93,10 @@ class RatifySpecialty extends Component {
                     <table id="customers">
                         <tbody>
                             <tr>
-                                <th>ID</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Action</th>
+                                <th><FormattedMessage id="admin.manage-specialty.id" /></th>
+                                <th><FormattedMessage id="admin.manage-specialty.specialty-photo" /></th>
+                                <th><FormattedMessage id="admin.manage-specialty.name-specialty" /></th>
+                                <th><FormattedMessage id="admin.manage-account.action" /></th>
                             </tr>
                             {
                                 this.getCurrentPageData().map((item, index) => {

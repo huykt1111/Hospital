@@ -115,11 +115,11 @@ class ModalEditUser extends Component {
                 className={'modal-user-container'}
                 size="lg"
             >
-                <ModalHeader toggle={() => { this.toggle() }}>Edit a user</ModalHeader>
+                <ModalHeader toggle={() => { this.toggle() }}><FormattedMessage id="admin.manage-account.edit" /></ModalHeader>
                 <ModalBody>
                     <div className="modal-user-body">
                         <div className='input-container'>
-                            <label>Email</label>
+                            <label><FormattedMessage id="patient.family.email" /></label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "email") }}
                                 value={this.state.email}
@@ -127,7 +127,7 @@ class ModalEditUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Password</label>
+                            <label><FormattedMessage id="homeheader.password" /></label>
                             <input type='password'
                                 onChange={(event) => { this.handleOnChangeInput(event, "password") }}
                                 value={this.state.password}
@@ -135,14 +135,14 @@ class ModalEditUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Last name</label>
+                            <label><FormattedMessage id="patient.family.lastname" /></label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "lastName") }}
                                 value={this.state.lastName}
                             />
                         </div>
                         <div className='input-container'>
-                            <label>First name</label>
+                            <label><FormattedMessage id="patient.family.firstname" /></label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "firstName") }}
                                 value={this.state.firstName}
@@ -167,7 +167,7 @@ class ModalEditUser extends Component {
                             </select>
                         </div>
                         <div className='input-container'>
-                            <label>Date of Birth:</label>
+                            <label><FormattedMessage id="patient.family.birthday" /></label>
                             <DatePicker
                                 onChange={this.handleOnChangeDatePicker}
                                 placeholder='Date of birth'
@@ -177,14 +177,14 @@ class ModalEditUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Phone number</label>
+                            <label><FormattedMessage id="patient.family.phonenumber" /></label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "phoneNumber") }}
                                 value={this.state.phoneNumber}
                             />
                         </div>
                         <div className='input-container max-width-input'>
-                            <label>Address</label>
+                            <label><FormattedMessage id="patient.family.address" /></label>
                             <input type='text'
                                 onChange={(event) => { this.handleOnChangeInput(event, "address") }}
                                 value={this.state.address}
@@ -197,9 +197,11 @@ class ModalEditUser extends Component {
                         className="px-3"
                         onClick={() => { this.handleSaveUser() }}
                     >
-                        Save changes
+                        <FormattedMessage id="admin.manage-account.save" />
                     </Button>{' '}
-                    <Button color="secondary" className="px-3" onClick={() => { this.toggle() }}>Close</Button>
+                    <Button color="secondary" className="px-3" onClick={() => { this.toggle() }}>
+                        <FormattedMessage id="admin.manage-account.close" />
+                    </Button>
                 </ModalFooter>
             </Modal>
         )

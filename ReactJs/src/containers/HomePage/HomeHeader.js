@@ -180,7 +180,7 @@ class HomeHeader extends Component {
                                     onChange={(event) => { this.onChangeInput(event, 'searchKey') }}
                                     value={this.state.searchKey}
                                 />
-                                <span onClick={() => this.handleSearch()}>Tìm kiếm</span>
+                                <span onClick={() => this.handleSearch()}><FormattedMessage id="homeheader.search" /></span>
                                 {/* <datalist id='search-home'>
                                     <option value='Chuyên khoa Nội tiết' />
                                     <option value='Chuyên khoa Tim mạch' />

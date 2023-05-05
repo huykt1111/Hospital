@@ -305,7 +305,7 @@ class Search extends Component {
                                 onChange={(event) => { this.onChangeInput(event, 'searchText') }}
                                 value={this.state.searchText}
                             />
-                            <span onClick={() => this.handleSearch()}>Tìm kiếm</span>
+                            <span onClick={() => this.handleSearch()}><FormattedMessage id="homeheader.search" /></span>
                         </div>
                         <div className="search-filter">
                             <div className="search-specialty-doctor">
@@ -403,7 +403,7 @@ class Search extends Component {
                                             />
                                             <div className='cl-content-left-content'>
                                                 <div className='cl-content-left-more' onClick={() => this.handleViewClinicDetail(item)}>
-                                                    Xem thêm
+                                                    <FormattedMessage id="homepage.more-info" />
                                                 </div>
                                                 <div className='cl-content-left-address'>
                                                     <i className="fas fa-map-marker-alt"></i> {item.diaChi}
@@ -432,7 +432,7 @@ class Search extends Component {
                                             />
                                             <div className='cl-content-left-content' style={{ marginLeft: '30px' }}>
                                                 <div className='cl-content-left-more' onClick={() => this.handleViewDetailSpecialty(item)}>
-                                                    Xem thêm
+                                                    <FormattedMessage id="homepage.more-info" />
                                                 </div>
                                             </div>
                                         </div>
