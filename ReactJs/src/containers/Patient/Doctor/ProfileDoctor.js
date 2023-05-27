@@ -59,7 +59,6 @@ class ProfileDoctor extends Component {
                 :
                 moment.unix(+dataTime.ngayKham / 1000).locale("en").format('ddd - MM/DD/YYYY')
 
-            console.log(moment.unix(+dataTime.ngayKham / 1000).format('dddd - DD/MM/YYYY'))
             return (
                 <>
                     <div>{time} - {date}</div>

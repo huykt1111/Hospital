@@ -10,12 +10,20 @@ import About from './Section/About';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './HomePage.scss';
+import { cancelBookOverdue } from '../../services/userService';
 
 class HomePage extends Component {
 
-    // handleAfterChange = (index, dontAnimate) => {
+    constructor(props) {
+        super(props);
+        this.state = {
 
-    // }
+        }
+    }
+
+    async componentDidMount() {
+        await cancelBookOverdue();
+    }
 
     render() {
         let settings = {

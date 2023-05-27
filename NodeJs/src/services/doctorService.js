@@ -364,9 +364,9 @@ let getDetailDoctor = (inputId) => {
                             include: [
                                 {
                                     model: db.DatLichKham, as: 'schedulePatientData',
-                                    where: {
-                                        trangThai: 'S5'
-                                    }
+                                    // where: {
+                                    //     trangThai: 'S5'
+                                    // }
                                 },
                             ]
                         },

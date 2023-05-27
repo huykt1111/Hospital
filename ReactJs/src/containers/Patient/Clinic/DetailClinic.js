@@ -7,7 +7,7 @@ import HomeHeader from '../../HomePage/HomeHeader';
 import DoctorSchedule from '../Doctor/DoctorSchedule';
 import DoctorExtraInfor from '../Doctor/DoctorExtraInfor';
 import ProfileDoctor from '../Doctor/ProfileDoctor';
-import { getAllDetailClinicById } from '../../../services/userService';
+import { getAllDetailClinicById, onClickClinic } from '../../../services/userService';
 import GoogleMapReact from 'google-map-react';
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import _ from 'lodash';
@@ -35,6 +35,10 @@ class DetailClinic extends Component {
                 id: id
             });
 
+            await onClickClinic({
+                id: id
+            });
+
             if (res && res.errCode == 0) {
                 let data = res.data;
                 let arrDoctorId = [];
@@ -57,7 +61,6 @@ class DetailClinic extends Component {
                     const result = await geocodeByAddress(address);
                     if (result.length > 0) {
                         const lnglat = await getLatLng(result[0]);
-                        console.log(lnglat);
                         this.setState({
                             center: lnglat
                         });

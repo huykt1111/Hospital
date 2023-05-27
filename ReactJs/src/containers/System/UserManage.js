@@ -174,6 +174,7 @@ class UserManage extends Component {
                     <table id="customers">
                         <tbody>
                             <tr>
+                                <th><FormattedMessage id="patient.family.id" /></th>
                                 <th><FormattedMessage id="patient.family.email" /></th>
                                 <th><FormattedMessage id="patient.family.lastname" /></th>
                                 <th><FormattedMessage id="patient.family.firstname" /></th>
@@ -184,6 +185,7 @@ class UserManage extends Component {
                                 this.getCurrentPageData().map((item, index) => {
                                     return (
                                         <tr key={index}>
+                                            <td>{item.id}</td>
                                             <td>{item.email}</td>
                                             <td>{item.ho}</td>
                                             <td>{item.ten}</td>

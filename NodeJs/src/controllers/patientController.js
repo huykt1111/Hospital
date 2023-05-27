@@ -84,11 +84,71 @@ let getAllBookByUser = async (req, res) => {
     }
 }
 
+let getAllPatientBookSchedule = async (req, res) => {
+    try {
+        let infor = await patientService.getAllPatientBookSchedule(req.query);
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
+let getAllPatientBookAndCancel = async (req, res) => {
+    try {
+        let infor = await patientService.getAllPatientBookAndCancel(req.query);
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
+let getPatientBookSucceed = async (req, res) => {
+    try {
+        let infor = await patientService.getPatientBookSucceed(req.query);
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
+let cancelBookOverdue = async (req, res) => {
+    try {
+        let infor = await patientService.cancelBookOverdue(req.query);
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
 module.exports = {
     postBookAppointment: postBookAppointment,
     postVerifyBookAppointment: postVerifyBookAppointment,
     getAllBookedByUser,
     getAllBookByUser,
     cancelBook,
-    racingBook
+    racingBook,
+    getAllPatientBookSchedule,
+    getAllPatientBookAndCancel,
+    getPatientBookSucceed,
+    cancelBookOverdue
 }

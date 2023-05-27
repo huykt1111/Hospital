@@ -60,7 +60,6 @@ class RegisterDoctor extends Component {
             }
 
         }
-        console.log(this.state.user)
     }
 
     buildDataInputSelect = (inputData, type) => {
@@ -210,6 +209,19 @@ class RegisterDoctor extends Component {
             contentMarkdown: this.state.contentMarkdown,
             avatar: this.state.avatar
         })
+
+        this.setState({
+            contentHtml: '',
+            contentMarkdown: '',
+            description: '',
+            nameClinic: '',
+            addressClinic: '',
+            note: '',
+            name: '',
+            previewImgURL: '',
+            avatar: '',
+            position: ''
+        })
     }
 
     handleChangeSelectDoctorInfor = async (selectedDoctor, name) => {
@@ -245,7 +257,6 @@ class RegisterDoctor extends Component {
         let { position } = this.state;
         let positions = this.state.positionArr;
         let { language } = this.props;
-        console.log(this.state)
         return (
             <div div className="manage-doctor-register-container">
                 <div className="manage-doctor-title">
@@ -389,7 +400,7 @@ class RegisterDoctor extends Component {
                                 <i className="fas fa-upload"></i>
                             </label>
                             <div className="preview-image"
-                                style={{ backgroundImage: `url(${this.state.previewImgURL})`, height: '113px', width: '57%' }}
+                                style={{ backgroundImage: `url(${this.state.previewImgURL})` }}
                                 onClick={() => this.openPreviewImage()}
                             >
                             </div>

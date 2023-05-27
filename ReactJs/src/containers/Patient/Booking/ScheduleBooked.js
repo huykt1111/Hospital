@@ -69,7 +69,6 @@ class ScheduleBook extends Component {
     }
 
     handleComment = async (Comment) => {
-        console.log(Comment)
         let res = await racingBook(Comment);
         if (res && res.errCode === 0) {
             this.setState({

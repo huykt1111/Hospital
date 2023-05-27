@@ -42,6 +42,20 @@ let updateClinic = async (req, res) => {
     }
 }
 
+let onClickClinic = async (req, res) => {
+    try {
+        let infor = await clinicService.onClickClinic(req.body);
+        return res.status(200).json(infor)
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
+
 let ratifyRegisterClinic = async (req, res) => {
     try {
         let infor = await clinicService.ratifyRegisterClinic(req.body);
@@ -150,5 +164,6 @@ module.exports = {
     registerClinic,
     getRegisterClinic,
     deleteRegisterClinic,
-    ratifyRegisterClinic
+    ratifyRegisterClinic,
+    onClickClinic
 }

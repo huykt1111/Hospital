@@ -58,6 +58,11 @@ class AddMember extends Component {
                 birthday: formattedDate,
             })
         }
+        else {
+            this.setState({
+                action: CRUD_ACTIONS.CREATE
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {

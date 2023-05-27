@@ -39,7 +39,6 @@ class ManageDoctor extends Component {
 
     getAllUserFromReact = async () => {
         let response = await getAllRegisterDoctors();
-        console.log(response);
         if (response && response.errCode === 0) {
             this.setState({
                 arrUsers: response.data
@@ -48,7 +47,6 @@ class ManageDoctor extends Component {
     }
 
     handleViewDoctor = (item) => {
-        console.log(item);
         this.setState({
             isOpenModalDoctor: true,
             doctorRegister: item
@@ -64,7 +62,6 @@ class ManageDoctor extends Component {
     handleRatify = async (user) => {
         try {
             let res = await ratifyDoctor({ maTk: user });
-            console.log(res);
             if (res && res.errCode === 0) {
                 this.setState({
                     isOpenModalDoctor: false

@@ -26,7 +26,6 @@ class ManagePatient extends Component {
     async componentDidMount() {
 
         this.getDataPatient()
-
     }
 
     getDataPatient = async () => {
@@ -62,6 +61,7 @@ class ManagePatient extends Component {
     }
 
     handleBtnConfirm = (item) => {
+        console.log(item)
         let data = {
             doctorId: item.maBS,
             patientId: item.maND,

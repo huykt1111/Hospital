@@ -1,0 +1,66 @@
+.statistical-container {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    .statistical-left {
+        width: 50%;
+        text-align: center;
+
+        p {
+            font-size: 18px;
+            color: rgb(136, 132, 216);
+        }
+
+        .statistical-month {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .intro-doctor {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            .content-left-image {
+                margin-top: 10px;
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-color: #eee;
+            }
+
+            .content-left-name {
+                font-size: 16px;
+                margin-top: 10px;
+                color: blue;
+            }
+
+        }
+    }
+
+    .statistical-right {
+        width: 50%;
+        text-align: center;
+
+        p {
+            font-size: 18px;
+            color: rgb(130, 202, 157);
+        }
+
+        .statistical-book {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

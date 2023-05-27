@@ -372,6 +372,98 @@ let getSearchAll = (data) => {
     });
 };
 
+let sendChatBox = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameters!'
+                });
+
+            } else {
+                await db.NhanTin.create({
+                    maND: data.maND,
+                    maBS: data.maBS,
+                    maNN: data.maNN,
+                    noiDung: data.noiDung
+                })
+                resolve({
+                    errCode: 0,
+                    errMessage: 'Succeed!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getChatDoctorByUser = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let chatbox = await db.NhanTin.findAll({
+                where: {
+                    maND: data.maND,
+                    maBS: data.maBS
+                },
+            });
+            resolve({
+                errMessage: 'ok',
+                errCode: 0,
+                chatbox: chatbox
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getChatDoctorByDoctor = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let chatbox = await db.NhanTin.findAll({
+                where: {
+                    maBS: data.maBS
+                },
+                include: [
+                    {
+                        model: db.TaiKhoan,
+                        as: 'patientChatData',
+                        attributes: ['id', 'ho', 'ten']
+                    }
+                ],
+                raw: false,
+                nest: true
+            });
+
+            let groupedChatbox = {};
+
+            for (let chat of chatbox) {
+                const maND = chat.maND;
+                if (groupedChatbox[maND]) {
+                    groupedChatbox[maND].chatboxes.push(chat);
+                } else {
+                    groupedChatbox[maND] = {
+                        dataPatient: [chat.patientChatData],
+                        chatboxes: [chat]
+                    };
+                }
+            }
+
+            let dataPatient = Object.values(groupedChatbox);
+
+            resolve({
+                errMessage: 'ok',
+                errCode: 0,
+                chatbox: dataPatient
+            });
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 module.exports = {
     handleUserLogin: handleUserLogin,
     getAllUsers: getAllUsers,
@@ -379,5 +471,8 @@ module.exports = {
     deleteUser: deleteUser,
     updateUserData: updateUserData,
     getAllCodeService: getAllCodeService,
-    getSearchAll: getSearchAll
+    getSearchAll: getSearchAll,
+    sendChatBox: sendChatBox,
+    getChatDoctorByUser: getChatDoctorByUser,
+    getChatDoctorByDoctor: getChatDoctorByDoctor
 }

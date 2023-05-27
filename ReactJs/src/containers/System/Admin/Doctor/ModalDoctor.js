@@ -94,9 +94,9 @@ class ModalDoctor extends Component {
                         className="px-3"
                         onClick={() => { this.handleRatify() }}
                     >
-                        Ratify
+                        Duyệt
                     </Button>{' '}
-                    <Button color="secondary" className="px-3" onClick={() => { this.toggle() }}>Close</Button>
+                    <Button color="secondary" className="px-3" onClick={() => { this.toggle() }}>Đóng</Button>
                 </ModalFooter>
             </Modal>
         )

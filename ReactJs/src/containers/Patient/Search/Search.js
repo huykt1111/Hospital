@@ -168,7 +168,6 @@ class Search extends Component {
     }
 
     handleSearch = async () => {
-        console.log(this.state);
         this.setState({
             arrDoctorId: [],
             arrClinic: [],
@@ -203,7 +202,6 @@ class Search extends Component {
             arrSpecialty: [],
         })
         let location = event.target.value;
-        console.log(location)
         let res = await getSearchAll({
             keyword: this.state.searchText,
             location: location,

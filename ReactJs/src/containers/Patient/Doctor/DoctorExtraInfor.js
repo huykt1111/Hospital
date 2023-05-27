@@ -57,7 +57,6 @@ class DoctorExtraInfor extends Component {
                     const result = await geocodeByAddress(address);
                     if (result.length > 0) {
                         const lnglat = await getLatLng(result[0]);
-                        console.log(lnglat);
                         this.setState({
                             center: lnglat
                         });

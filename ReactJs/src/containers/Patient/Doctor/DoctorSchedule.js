@@ -16,8 +16,11 @@ class DoctorSchedule extends Component {
             allDays: [],
             allAvailableTime: [],
             isOpenModalBooking: false,
-            dataScheduleTimeModal: {}
+            dataScheduleTimeModal: {},
+            time: new Date()
         }
+        this.timerID = null;
+        this.tick = this.tick.bind(this);
     }
 
     async componentDidMount() {
@@ -35,6 +38,14 @@ class DoctorSchedule extends Component {
                 allDays: allDays,
             })
         }
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    tick() {
+        this.setState({ time: new Date() });
     }
 
     capitalizeFirstLetter(string) {
@@ -117,15 +128,18 @@ class DoctorSchedule extends Component {
     }
 
     render() {
-        let { allDays, allAvailableTime, isOpenModalBooking, dataScheduleTimeModal } = this.state;
+        let { allDays, allAvailableTime, isOpenModalBooking, dataScheduleTimeModal, time } = this.state;
         let { language } = this.props;
+        let timeen = this.state.time.toLocaleTimeString();
+        let timevi = new Date("2000-01-01 " + timeen);
+        let currentTime = timevi.getHours();
+        let numberTime = 0;
         return (
             <>
                 <div className="doctor-schedule-container">
                     <div className="all-schedules">
                         <select onChange={(event) => this.handleOnChangeSelect(event)}>
                             {allDays && allDays.length > 0 && allDays.map((item, index) => {
-                                let timeVi = language === LANGUAGES.V
                                 return (
                                     <option
                                         key={index}
@@ -152,24 +166,136 @@ class DoctorSchedule extends Component {
                                         {allAvailableTime.map((item, index) => {
                                             let timeDisplay = language === LANGUAGES.VI ?
                                                 item.timeTypeData.valueVi : item.timeTypeData.valueEn;
-                                            return (
-                                                <button
-                                                    key={index}
-                                                    className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
-                                                    onClick={() => this.handleClickScheduleTime(item)}
-                                                >
-                                                    {timeDisplay}
-                                                </button>
-                                            )
+                                            let timestamp = parseInt(item.ngayKham); // Giá trị thời gian từ chuỗi
+                                            let bookingDate = new Date(timestamp); // Tạo đối tượng Date từ giá trị thời gian
+                                            let currentDate = new Date();
+                                            console.log(bookingDate);
+                                            if (bookingDate.getFullYear() === currentDate.getFullYear() &&
+                                                bookingDate.getMonth() === currentDate.getMonth() &&
+                                                bookingDate.getDate() === currentDate.getDate()) {
+
+                                                if (item.thoiGianKham === "T1" && currentTime < 9) {
+                                                    numberTime = 1;
+                                                    return (
+                                                        <button
+                                                            key={index}
+                                                            className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                                            onClick={() => this.handleClickScheduleTime(item)}
+                                                        >
+                                                            {timeDisplay}
+                                                        </button>
+                                                    )
+                                                }
+                                                if (item.thoiGianKham === "T2" && currentTime < 10) {
+                                                    numberTime = 1;
+                                                    return (
+                                                        <button
+                                                            key={index}
+                                                            className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                                            onClick={() => this.handleClickScheduleTime(item)}
+                                                        >
+                                                            {timeDisplay}
+                                                        </button>
+                                                    )
+                                                }
+                                                if (item.thoiGianKham === "T3" && currentTime < 11) {
+                                                    numberTime = 1;
+                                                    return (
+                                                        <button
+                                                            key={index}
+                                                            className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                                            onClick={() => this.handleClickScheduleTime(item)}
+                                                        >
+                                                            {timeDisplay}
+                                                        </button>
+                                                    )
+                                                }
+                                                if (item.thoiGianKham === "T4" && currentTime < 13) {
+                                                    numberTime = 1;
+                                                    return (
+                                                        <button
+                                                            key={index}
+                                                            className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                                            onClick={() => this.handleClickScheduleTime(item)}
+                                                        >
+                                                            {timeDisplay}
+                                                        </button>
+                                                    )
+                                                }
+                                                if (item.thoiGianKham === "T5" && currentTime < 14) {
+                                                    numberTime = 1;
+                                                    return (
+                                                        <button
+                                                            key={index}
+                                                            className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                                            onClick={() => this.handleClickScheduleTime(item)}
+                                                        >
+                                                            {timeDisplay}
+                                                        </button>
+                                                    )
+                                                }
+                                                if (item.thoiGianKham === "T6" && currentTime < 15) {
+                                                    numberTime = 1;
+                                                    return (
+                                                        <button
+                                                            key={index}
+                                                            className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                                            onClick={() => this.handleClickScheduleTime(item)}
+                                                        >
+                                                            {timeDisplay}
+                                                        </button>
+                                                    )
+                                                }
+                                                if (item.thoiGianKham === "T7" && currentTime < 16) {
+                                                    numberTime = 1;
+                                                    return (
+                                                        <button
+                                                            key={index}
+                                                            className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                                            onClick={() => this.handleClickScheduleTime(item)}
+                                                        >
+                                                            {timeDisplay}
+                                                        </button>
+                                                    )
+                                                }
+                                                if (item.thoiGianKham === "T8" && currentTime < 17) {
+                                                    numberTime = 1;
+                                                    return (
+                                                        <button
+                                                            key={index}
+                                                            className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                                            onClick={() => this.handleClickScheduleTime(item)}
+                                                        >
+                                                            {timeDisplay}
+                                                        </button>
+                                                    )
+                                                }
+                                            }
+                                            else {
+                                                numberTime = 1;
+                                                return (
+                                                    <button
+                                                        key={index}
+                                                        className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                                        onClick={() => this.handleClickScheduleTime(item)}
+                                                    >
+                                                        {timeDisplay}
+                                                    </button>
+                                                )
+                                            }
                                         })}
                                     </div>
-                                    <div className="book-free">
-                                        <span>
-                                            <FormattedMessage id="patient.detail-doctor.choose" />
-                                            <i className='far fa-hand-point-up'></i>
-                                            <FormattedMessage id="patient.detail-doctor.book-free" />
-                                        </span>
-                                    </div>
+                                    {numberTime !== 0 ?
+                                        <div className="book-free">
+                                            <span>
+                                                <FormattedMessage id="patient.detail-doctor.choose" />
+                                                <i className='far fa-hand-point-up'></i>
+                                                <FormattedMessage id="patient.detail-doctor.book-free" />
+                                            </span>
+                                        </div>
+                                        :
+                                        <div className="no-schedule"><FormattedMessage id="patient.detail-doctor.no-schedule" /></div>
+                                    }
                                 </React.Fragment>
                                 :
 

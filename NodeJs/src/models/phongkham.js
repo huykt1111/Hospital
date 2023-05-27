@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
         mieuTaHtml: DataTypes.TEXT,
         mieuTaMarkDown: DataTypes.TEXT,
         hinhAnh: DataTypes.STRING,
-        trangThai: DataTypes.INTEGER
+        trangThai: DataTypes.INTEGER,
+        click: DataTypes.INTEGER,
     }, {
         sequelize,
         modelName: 'PhongKham',

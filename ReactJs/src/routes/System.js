@@ -11,6 +11,7 @@ import ManageDoctor from '../containers/System/Admin/Doctor/ManageDoctor';
 import RatifyClinic from '../containers/System/Admin/Doctor/RatifyClinic';
 import RatifySpecialty from '../containers/System/Admin/Doctor/RatifySpecialty';
 import ManageHandbook from '../containers/System/Handbook/ManageHandbook';
+import Statistical from '../containers/System/Statistical';
 import _ from 'lodash';
 
 class System extends Component {
@@ -43,6 +44,7 @@ class System extends Component {
                                     <Route path="/system/manage-handbook" component={ManageHandbook} />
                                     <Route path="/system/ratify-clinic" component={RatifyClinic} />
                                     <Route path="/system/ratify-specialty" component={RatifySpecialty} />
+                                    <Route path="/system/statistical" component={Statistical} />
                                     <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                                 </Switch>
                             </div>

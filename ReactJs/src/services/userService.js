@@ -20,6 +20,10 @@ const updateMemberData = (data) => {
     return axios.post(`/api/update-member-family`, data);
 }
 
+const deleteMemberData = (data) => {
+    return axios.post(`/api/delete-member-family`, data);
+}
+
 const getAllUsers = (inputId) => {
     return axios.get(`/api/get-all-users?id=${inputId}`);
 }
@@ -177,6 +181,10 @@ const getTopClinic = () => {
     return axios.get(`/api/get-top-clinic`);
 }
 
+const onClickClinic = (data) => {
+    return axios.post(`/api/click-clinic`, data);
+}
+
 const getAllDetailClinicById = (data) => {
     return axios.get(`/api/get-detail-clinic-by-id?id=${data.id}`)
 }
@@ -227,6 +235,34 @@ const getAllHandBook = () => {
 
 const getDetailHandBookById = (data) => {
     return axios.get(`/api/get-detail-handbook-by-id?id=${data.id}`)
+}
+
+const sendChatBox = (data) => {
+    return axios.post(`/api/chat-doctor`, data);
+}
+
+const getChatDoctorByUser = (data) => {
+    return axios.get(`/api/get-chat-by-user?maND=${data.maND}&maBS=${data.maBS}`)
+}
+
+const getChatDoctorByDoctor = (data) => {
+    return axios.get(`/api/get-chat-by-doctor?maBS=${data.maBS}`)
+}
+
+const getAllPatientBookSchedule = (data) => {
+    return axios.get(`/api/get-all-patient-book-month`)
+}
+
+const getAllPatientBookAndCancel = (data) => {
+    return axios.get(`/api/get-all-patient-book-cancel`)
+}
+
+const getPatientBookSucceed = (data) => {
+    return axios.get(`/api/get-all-patient-book-succeed?trangThai=${data.trangThai}`)
+}
+
+const cancelBookOverdue = (data) => {
+    return axios.get(`/api/cancel-book-overdue`)
 }
 
 export {
@@ -286,4 +322,13 @@ export {
     getDetailHandBookById,
     deleteHandBook,
     updateHandBook,
+    deleteMemberData,
+    sendChatBox,
+    getChatDoctorByUser,
+    getChatDoctorByDoctor,
+    onClickClinic,
+    getAllPatientBookSchedule,
+    getAllPatientBookAndCancel,
+    getPatientBookSucceed,
+    cancelBookOverdue
 }

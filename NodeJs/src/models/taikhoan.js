@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
             TaiKhoan.belongsTo(models.Allcode, { foreignKey: 'gioiTinh', targetKey: 'keyMap', as: 'genderData' })
             TaiKhoan.hasMany(models.LichKham, { foreignKey: 'maTk', as: 'doctorData' })
             TaiKhoan.hasMany(models.DatLichKham, { foreignKey: 'maND', as: 'patientData' })
+            TaiKhoan.hasMany(models.NhanTin, { foreignKey: 'maND', as: 'patientChatData' })
+            TaiKhoan.hasMany(models.NhanTin, { foreignKey: 'maBS', as: 'doctorChatData' })
         }
     }
     TaiKhoan.init({

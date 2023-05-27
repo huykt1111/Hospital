@@ -10,6 +10,11 @@ let updateMemberData = async (req, res) => {
     return res.status(200).json(message);
 }
 
+let deleteMemberData = async (req, res) => {
+    let message = await familyService.deleteMemberData(req.body);
+    return res.status(200).json(message);
+}
+
 let getAllMember = async (req, res) => {
     try {
         let message = await familyService.getAllMember(req.query);
@@ -43,5 +48,6 @@ module.exports = {
     createNewMember,
     getAllMember,
     getMember,
-    updateMemberData
+    updateMemberData,
+    deleteMemberData
 }

@@ -295,13 +295,13 @@ export const saveDetailDoctors = (data) => {
             let res = await saveDetailDoctorsService(data);
             console.log('res', res);
             if (res && res.errCode === 0) {
-                toast.success("Save infor detail doctor succeed!");
+                toast.success("Đăng ký trở thành bác sĩ thành công!");
                 dispatch({
                     type: actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS,
                 })
             }
             else {
-                toast.error("Save infor detail doctor error!");
+                toast.error("Đăng ký trở thành bác sĩ thất bại!");
 
                 dispatch({
                     type: actionTypes.SAVE_DETAIL_DOCTOR_FAILED,

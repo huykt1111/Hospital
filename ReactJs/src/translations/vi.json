@@ -58,7 +58,8 @@
             "doctor-register": "Đăng ký bác sĩ",
             "user-account": "Tài khoản người dùng",
             "ratify-clinic": "Duyệt phòng khám",
-            "ratify-specialty": "Duyệt chuyên khoa"
+            "ratify-specialty": "Duyệt chuyên khoa",
+            "statistical": "Thống kê"
         },
         "doctor": {
             "manage-schedule": "Lên lịch khám bệnh",
@@ -66,8 +67,9 @@
             "account": "Tài khoản",
             "update-profile": "Cập nhật hồ sơ",
             "update-profile-doctor": "Cập nhật hồ sơ bác sĩ",
-            "clinic-register": "Đăng ký thêm phòng khám",
-            "specialty-register": "Đăng ký thêm chuyên khoa"
+            "clinic-register": "Đăng ký phòng khám",
+            "specialty-register": "Đăng ký chuyên khoa",
+            "chat-patient": "Tin bắn bệnh nhân"
         }
     },
     "manage-user": {
@@ -163,6 +165,7 @@
             "send": "Gửi"
         },
         "family": {
+            "id": "ID",
             "add": "Thêm mới thành viên mới",
             "email": "Email",
             "password": "Mật khẩu",

@@ -79,7 +79,6 @@ class CommentModal extends Component {
     }
 
     handleRatingChange = (rating) => {
-        console.log(`Rating changed to ${rating}`);
         this.setState({
             rating: rating
         })

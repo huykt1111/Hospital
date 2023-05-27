@@ -68,6 +68,34 @@ let updateMemberData = (data) => {
     })
 }
 
+let deleteMemberData = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            let member = await db.ThanhVienGiaDinh.findOne({
+                where: { id: data.id },
+                raw: false
+            });
+            if (member) {
+                await member.destroy();
+
+                resolve({
+                    errCode: 0,
+                    message: 'Delete the member success!'
+                })
+            }
+            else {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'User not found!'
+                });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 let getAllMember = (idUser) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -136,7 +164,6 @@ let getMember = (idUser) => {
                     raw: false,
                     nest: true
                 });
-                // console.log(data);
                 if (data && JSON.stringify(data).length > 0) {
                     data.hinhAnh = new Buffer(data.hinhAnh, 'base64').toString('binary');
                 }
@@ -157,5 +184,6 @@ module.exports = {
     createNewMember,
     getAllMember,
     getMember,
-    updateMemberData
+    updateMemberData,
+    deleteMemberData
 }

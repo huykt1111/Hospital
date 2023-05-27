@@ -17,11 +17,15 @@ let initWebRouters = (app) => {
     router.put('/api/edit-user', userController.handleEditUser);
     router.post('/api/delete-user', userController.handleDeleteUser);
     router.get('/api/allcode', userController.getAllCode);
+    router.post('/api/chat-doctor', userController.sendChatBox);
+    router.get('/api/get-chat-by-user', userController.getChatDoctorByUser);
+    router.get('/api/get-chat-by-doctor', userController.getChatDoctorByDoctor);
 
     router.post('/api/create-new-member-family', familyController.createNewMember);
     router.get('/api/get-all-member', familyController.getAllMember);
     router.get('/api/get-member', familyController.getMember);
     router.post('/api/update-member-family', familyController.updateMemberData);
+    router.post('/api/delete-member-family', familyController.deleteMemberData);
 
     router.get('/api/top-doctor-home', doctorController.getTopDoctorHome);
     router.get('/api/get-all-doctors', doctorController.getAllDoctors);
@@ -44,6 +48,10 @@ let initWebRouters = (app) => {
     router.post('/api/verify-book-appointment', patientController.postVerifyBookAppointment);
     router.get('/api/get-all-book-appointment', patientController.getAllBookedByUser);
     router.get('/api/get-all-booked-appointment', patientController.getAllBookByUser);
+    router.get('/api/get-all-patient-book-month', patientController.getAllPatientBookSchedule);
+    router.get('/api/get-all-patient-book-cancel', patientController.getAllPatientBookAndCancel);
+    router.get('/api/get-all-patient-book-succeed', patientController.getPatientBookSucceed);
+    router.get('/api/cancel-book-overdue', patientController.cancelBookOverdue);
 
     router.post('/api/create-new-specialty', specialtyController.createSpecialty);
     router.post('/api/register-new-specialty', specialtyController.registerSpecialty);
@@ -61,6 +69,7 @@ let initWebRouters = (app) => {
     router.post('/api/delete-clinic', clinicController.deleteClinic);
     router.post('/api/delete-register-clinic', clinicController.deleteRegisterClinic);
     router.post('/api/update-clinic', clinicController.updateClinic);
+    router.post('/api/click-clinic', clinicController.onClickClinic);
     router.post('/api/ratify-clinic', clinicController.ratifyRegisterClinic);
     router.get('/api/get-all-clinic', clinicController.getAllClinic);
     router.get('/api/get-register-clinic', clinicController.getRegisterClinic);

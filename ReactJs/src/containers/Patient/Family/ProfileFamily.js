@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { getAllMember } from '../../../services/userService'
+import { getAllMember, deleteMemberData } from '../../../services/userService'
 import './ProfileFamily.scss';
 import { LANGUAGES } from '../../../utils';
-import { NumericFormat } from 'react-number-format';
 import { FormattedMessage } from 'react-intl';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
-import moment from "moment";
-import vi from "moment/locale/vi";
-import { Link } from 'react-router-dom';
-
+import { toast } from "react-toastify";
 
 class ProfileFamily extends Component {
 
@@ -22,6 +18,10 @@ class ProfileFamily extends Component {
     }
 
     async componentDidMount() {
+        this.getAllMember();
+    }
+
+    getAllMember = async () => {
         const { userInfo } = this.props;
         let id = userInfo.user.id;
         let data = await getAllMember({ id });
@@ -43,6 +43,25 @@ class ProfileFamily extends Component {
         }
     }
 
+    handleDelete = async (idMember) => {
+        try {
+            if (window.confirm('Bạn có chắc chắn muốn xóa thành viên này không?')) {
+                let res = await deleteMemberData({ id: idMember });
+                if (res && res.errCode === 0) {
+
+                    toast.success("Xóa thành viên thành công!")
+
+                    this.getAllMember();
+                }
+                else {
+                    alert(res.errMessage)
+                }
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     render() {
         let { dataMember } = this.state;
@@ -54,7 +73,7 @@ class ProfileFamily extends Component {
                         const timestamp = parseInt(item.ngaySinh);
                         const dateObj = new Date(timestamp);
                         const year = dateObj.getFullYear();
-                        const month = dateObj.getMonth() + 1; // Lưu ý: getMonth() trả về giá trị từ 0 đến 11
+                        const month = dateObj.getMonth() + 1;
                         const day = dateObj.getDate();
                         const formattedDate = `${day}/${month}/${year}`;
 
@@ -86,7 +105,7 @@ class ProfileFamily extends Component {
                                 </div>
                                 <div className="button-detail-family">
                                     <div className="button-edit" onClick={() => this.handleUpdate(item.id)}><FormattedMessage id="patient.family.edit" /></div>
-                                    <div className="button-delete" onClick={() => this.handleUpdate(item.id)}><FormattedMessage id="patient.family.delete" /></div>
+                                    <div className="button-delete" onClick={() => this.handleDelete(item.id)}><FormattedMessage id="patient.family.delete" /></div>
                                 </div>
                             </div>
                         );

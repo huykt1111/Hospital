@@ -8,6 +8,7 @@ import UpdateProfileDoctor from '../containers/System/Doctor/UpdateProfileDoctor
 import UpdateProfile from '../containers/System/Doctor/UpdateProfile';
 import RegisterClinic from '../containers/System/Doctor/RegisterClinic';
 import RegisterSpecialty from '../containers/System/Doctor/RegisterSpecialty';
+import ChatBoxPatient from '../containers/System/Doctor/ChatBoxPatient';
 
 class Doctor extends Component {
     render() {
@@ -26,6 +27,7 @@ class Doctor extends Component {
                             <Route path="/doctor/manage-patient" component={ManagePatient} />
                             <Route path="/doctor/register-clinic" component={RegisterClinic} />
                             <Route path="/doctor/register-specialty" component={RegisterSpecialty} />
+                            <Route path="/doctor/chat-patient" component={ChatBoxPatient} />
                         </Switch>
                     </div>
                 </div>

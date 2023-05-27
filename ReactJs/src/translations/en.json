@@ -58,7 +58,8 @@
             "doctor-register": "Doctor registration",
             "user-account": "User account",
             "ratify-clinic": "Ratify clinic",
-            "ratify-specialty": "Ratify specialty"
+            "ratify-specialty": "Ratify specialty",
+            "statistical": "Statistical"
         },
         "doctor": {
             "manage-schedule": "Schedule a medical examination",
@@ -66,8 +67,9 @@
             "account": "Account",
             "update-profile": "Update profile",
             "update-profile-doctor": "Update doctor's profile",
-            "clinic-register": "Register more clinics",
-            "specialty-register": "Specialty more clinics"
+            "clinic-register": "Register clinic",
+            "specialty-register": "Register specialty",
+            "chat-patient": "Patient message"
         }
     },
     "manage-user": {
@@ -163,6 +165,7 @@
             "send": "Send"
         },
         "family": {
+            "id": "ID",
             "add": "Add a new member",
             "email": "Email",
             "firstname": "First name",

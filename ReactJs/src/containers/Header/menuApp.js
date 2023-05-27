@@ -44,6 +44,13 @@ export const adminMenu = [
             },
         ]
     },
+    {
+        name: 'menu.admin.statistical', menus: [
+            {
+                name: 'menu.admin.statistical', link: '/system/statistical'
+            },
+        ]
+    }
 ];
 
 export const doctorMenu = [
@@ -73,6 +80,14 @@ export const doctorMenu = [
         menus: [
             {
                 name: 'menu.doctor.manage-patient', link: '/doctor/manage-patient',
+            },
+        ]
+    },
+    {
+        name: 'menu.doctor.chat-patient',
+        menus: [
+            {
+                name: 'menu.doctor.chat-patient', link: '/doctor/chat-patient'
             },
         ]
     },

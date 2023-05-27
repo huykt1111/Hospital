@@ -128,10 +128,10 @@ class ModalBooking extends Component {
                             className="px-3"
                             onClick={() => { this.handleCancel() }}
                         >
-                            Cancel booking
+                            Hủy lịch khám
                         </Button>
                     }
-                    <Button color="secondary" className="px-3" onClick={() => { this.toggle() }}>Close</Button>
+                    <Button color="secondary" className="px-3" onClick={() => { this.toggle() }}>Đóng</Button>
                 </ModalFooter>
             </Modal>
         )

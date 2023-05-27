@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import HomeHeader from '../../HomePage/HomeHeader';
-import { getDetailInforDoctor } from '../../../services/userService'
+import { getDetailInforDoctor, sendChatBox, getChatDoctorByUser } from '../../../services/userService'
 import './DetailDoctor.scss';
 import { LANGUAGES } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorExtraInfor from './DoctorExtraInfor';
 import LikeAndShare from '../SocialPlugin/LikeAndShare';
-import Comment from '../SocialPlugin/Comment';
+// import Comment from '../SocialPlugin/Comment';
 import { FormattedMessage } from 'react-intl';
 
 class DetailDoctor extends Component {
@@ -17,6 +17,9 @@ class DetailDoctor extends Component {
         this.state = {
             detailDoctor: {},
             currentDoctorId: -1,
+            chatbox: [],
+            inputValue: '',
+            isOpen: false,
         }
     }
 
@@ -32,18 +35,58 @@ class DetailDoctor extends Component {
                     detailDoctor: res.data,
                 })
             }
+
+            this.handleGetChatBox();
         }
-
-
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
 
+    handleGetChatBox = async () => {
+        if (this.props.userInfo && this.props.userInfo.user && this.state.detailDoctor) {
+            let res = await getChatDoctorByUser({
+                maND: this.props.userInfo.user.id,
+                maBS: this.state.detailDoctor.maTk,
+            });
+            if (res && res.errCode == 0) {
+                this.setState({
+                    chatbox: res.chatbox,
+                })
+            }
+
+        }
+    }
+
+    handleMessageSubmit = async (e) => {
+        e.preventDefault();
+        const { inputValue } = this.state;
+        if (inputValue.trim() !== '') {
+            if (this.props.userInfo && this.props.userInfo.user && this.state.detailDoctor) {
+                await sendChatBox({
+                    maND: this.props.userInfo.user.id,
+                    maBS: this.state.detailDoctor.maTk,
+                    maNN: this.props.userInfo.user.id,
+                    noiDung: inputValue
+                });
+            }
+            this.handleGetChatBox();
+            this.setState({
+                inputValue: ''
+            })
+        }
+    };
+
+    toggleChatbox = () => {
+        this.setState((prevState) => ({
+            isOpen: !prevState.isOpen,
+        }));
+    };
+
+
     render() {
         let { detailDoctor } = this.state;
-        console.log(detailDoctor)
         let { language } = this.props;
         let nameVi = '', nameEn = '';
         if (detailDoctor && detailDoctor.positionData && detailDoctor.TaiKhoan) {
@@ -55,6 +98,8 @@ class DetailDoctor extends Component {
             "https://developers.facebook.com/docs/plugins/" : window.location.href;
         let currentURLCMD = +process.env.REACT_APP_IS_LOCALHOST === 1 ?
             "https://developers.facebook.com/docs/plugins/comments#configurator" : window.location.href;
+        let { inputValue, isOpen, chatbox } = this.state;
+        console.log("chatbox", chatbox)
         return (
             <React.Fragment >
                 <HomeHeader isShowBanner={false} />
@@ -123,15 +168,17 @@ class DetailDoctor extends Component {
                                                 const day = dateObj.getDate();
                                                 const formattedDate = `${day}/${month}/${year}`;
                                                 return (
-                                                    <div className='comment-patient-content' key={indexchild}>
-                                                        <div className="comment-patient-name">
-                                                            {itemchild.hoTen}
-                                                            <span><i className="fas fa-check-circle"></i> <FormattedMessage id="patient.detail-doctor.checked-today" /> {formattedDate}</span>
+                                                    itemchild.danhGia !== null ? (
+                                                        <div className='comment-patient-content' key={indexchild}>
+                                                            <div className="comment-patient-name">
+                                                                {itemchild.hoTen}
+                                                                <span><i className="fas fa-check-circle"></i> <FormattedMessage id="patient.detail-doctor.checked-today" /> {formattedDate}</span>
+                                                            </div>
+                                                            <div className='comment-patient-comment'>
+                                                                {itemchild.danhGia}
+                                                            </div>
                                                         </div>
-                                                        <div className='comment-patient-comment'>
-                                                            {itemchild.danhGia}
-                                                        </div>
-                                                    </div>
+                                                    ) : null
                                                 )
                                             })
                                         }</div>
@@ -140,6 +187,69 @@ class DetailDoctor extends Component {
                             })
                         }
                     </div>
+                    {this.props.userInfo && this.props.userInfo.user &&
+                        <div className={`chatbox-container ${isOpen ? 'open' : ''}`}>
+                            <div className="chatbox-toggle" onClick={this.toggleChatbox}>
+                                Nhắn tin với bác sĩ
+                            </div>
+                            <div className="chatbox">
+                                <div className="chatbox-profile-doctor">
+                                    <div className='content-image'
+                                        style={{ backgroundImage: `url(${detailDoctor && detailDoctor.TaiKhoan && detailDoctor.TaiKhoan.hinhAnh ? detailDoctor.TaiKhoan.hinhAnh : ''})` }}
+                                    />
+                                    <div className="content-right">
+                                        <div className="up">
+                                            {detailDoctor && detailDoctor.positionData && detailDoctor.TaiKhoan &&
+                                                detailDoctor.positionData.valueVi + ", " + detailDoctor.TaiKhoan.ho + " " + detailDoctor.TaiKhoan.ten}
+                                        </div>
+                                        <div className="down">
+                                            {detailDoctor && detailDoctor.mieuTa &&
+                                                <span>{detailDoctor.mieuTa.slice(0, 100) + '...'}</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                {chatbox && chatbox.length > 0 &&
+                                    chatbox.map((message, index) => (
+                                        <div key={index} className="message">
+                                            {message.maND === message.maNN ?
+                                                <>
+                                                    <div className="message-text">
+                                                        <span>{message.noiDung}</span>
+                                                    </div>
+                                                    <div className="message-timestamp">
+                                                        {new Date(message.createdAt).toLocaleString()}
+                                                    </div>
+                                                </>
+                                                :
+                                                <>
+                                                    <div className="message-doctor">
+                                                        <div className="message-text-reply">
+                                                            <span>{message.noiDung}</span>
+                                                        </div>
+                                                        <div className="message-timestamp-reply">
+                                                            {new Date(message.createdAt).toLocaleString()}
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            }
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                            {isOpen && (
+                                <form onSubmit={this.handleMessageSubmit} className="chatbox-input">
+                                    <input
+                                        type="text"
+                                        value={inputValue}
+                                        onChange={(e) => this.setState({ inputValue: e.target.value })}
+                                        placeholder="Nhập nội dung tin nhắn..."
+                                    />
+                                    <button type="submit">Gửi</button>
+                                </form>
+                            )}
+                        </div>
+                    }
                 </div>
             </React.Fragment>
         );
@@ -149,6 +259,7 @@ class DetailDoctor extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
+        userInfo: state.user.userInfo,
     };
 };
 

@@ -43,6 +43,11 @@ let handleCreateNewUser = async (req, res) => {
     return res.status(200).json(message);
 }
 
+let sendChatBox = async (req, res) => {
+    let message = await userService.sendChatBox(req.body);
+    return res.status(200).json(message);
+}
+
 let getSearchAll = async (req, res) => {
     let message = await userService.getSearchAll(req.body);
     return res.status(200).json(message);
@@ -55,7 +60,6 @@ let handleEditUser = async (req, res) => {
 }
 
 let handleDeleteUser = async (req, res) => {
-    console.log(req.body.data.id)
     if (!req.body.data.id) {
         return res.status(200).json({
             errCode: 1,
@@ -78,6 +82,30 @@ let getAllCode = async (req, res) => {
     }
 }
 
+let getChatDoctorByUser = async (req, res) => {
+    try {
+        let data = await userService.getChatDoctorByUser(req.query);
+        return res.status(200).json(data);
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server'
+        })
+    }
+}
+
+let getChatDoctorByDoctor = async (req, res) => {
+    try {
+        let data = await userService.getChatDoctorByDoctor(req.query);
+        return res.status(200).json(data);
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server'
+        })
+    }
+}
+
 module.exports = {
     handleLogin: handleLogin,
     handleGetAllUsers: handleGetAllUsers,
@@ -85,5 +113,8 @@ module.exports = {
     handleEditUser: handleEditUser,
     handleDeleteUser: handleDeleteUser,
     getAllCode: getAllCode,
-    getSearchAll: getSearchAll
+    getSearchAll: getSearchAll,
+    sendChatBox: sendChatBox,
+    getChatDoctorByUser: getChatDoctorByUser,
+    getChatDoctorByDoctor: getChatDoctorByDoctor
 }
