@@ -181,12 +181,7 @@ class HomeHeader extends Component {
                                     value={this.state.searchKey}
                                 />
                                 <span onClick={() => this.handleSearch()}><FormattedMessage id="homeheader.search" /></span>
-                                {/* <datalist id='search-home'>
-                                    <option value='Chuyên khoa Nội tiết' />
-                                    <option value='Chuyên khoa Tim mạch' />
-                                    <option value='Chuyên khoa Tiêu hóa' />
-                                    <option value='Chuyên khoa Nhi khoa' />
-                                </datalist> */}
+
                             </div>
                         </div>
                         <div className='content-down'>
@@ -243,8 +238,7 @@ class HomeHeader extends Component {
                         </div>
                     </div>
                 }
-            </React.Fragment >
-
+            </React.Fragment>
         );
     }
 

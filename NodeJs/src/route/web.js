@@ -52,6 +52,7 @@ let initWebRouters = (app) => {
     router.get('/api/get-all-patient-book-cancel', patientController.getAllPatientBookAndCancel);
     router.get('/api/get-all-patient-book-succeed', patientController.getPatientBookSucceed);
     router.get('/api/cancel-book-overdue', patientController.cancelBookOverdue);
+    router.get('/api/lock-account', patientController.lockAccount);
 
     router.post('/api/create-new-specialty', specialtyController.createSpecialty);
     router.post('/api/register-new-specialty', specialtyController.registerSpecialty);

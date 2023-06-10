@@ -102,7 +102,7 @@ class ManageHandbook extends Component {
         if (action === CRUD_ACTIONS.CREATE) {
             let res = await createHandBook(this.state);
             if (res && res.errCode === 0) {
-                toast.success("Add new handbook succeed!")
+                toast.success("Thêm cẩm nang thành công!")
                 this.getAllHandBook();
                 this.setState({
                     name: '',
@@ -117,7 +117,7 @@ class ManageHandbook extends Component {
         if (action === CRUD_ACTIONS.EDIT) {
             let res = await updateHandBook(this.state);
             if (res && res.errCode === 0) {
-                toast.success("Update handbook succeed!")
+                toast.success("Cập nhật thành công!")
                 this.getAllHandBook();
                 this.setState({
                     idHandbook: '',

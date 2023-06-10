@@ -3,8 +3,6 @@ require('dotenv').config();
 import _ from "lodash";
 import emailService from "./emailService";
 
-const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
-
 let saveDetailInfomationDoctor = (inputData) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -20,27 +18,40 @@ let saveDetailInfomationDoctor = (inputData) => {
                     }
                 }
 
-                await db.ThongTinBacSi.create({
-                    maTk: inputData.id,
-                    chuyenKhoa: inputData.selectedSpecialty,
-                    phongKham: inputData.selectedClinic,
-                    chucDanh: inputData.position,
-                    giaKham: inputData.selectedPrice,
-                    khuVucLamViec: inputData.selectedProvince,
-                    phuongThucThanhToan: inputData.selectedPayment,
-                    diaChiPhongKham: inputData.addressClinic,
-                    tenPhongKham: inputData.nameClinic,
-                    ghiChu: inputData.note,
-                    mieuTa: inputData.description,
-                    noiDungHTML: inputData.contentHtml,
-                    noiDungMarkdown: inputData.contentMarkdown,
-                    trangThai: 1,
-                })
+                let doctor = await db.ThongTinBacSi.findOne({
+                    where: { maTk: inputData.id },
+                    raw: false
+                });
 
-                resolve({
-                    errCode: 0,
-                    errorMessage: 'Register infor doctor succeed!'
-                })
+                if (doctor) {
+                    resolve({
+                        errCode: 2,
+                        errorMessage: 'Register infor doctor faided!'
+                    })
+                }
+                else {
+                    await db.ThongTinBacSi.create({
+                        maTk: inputData.id,
+                        chuyenKhoa: inputData.selectedSpecialty,
+                        phongKham: inputData.selectedClinic,
+                        chucDanh: inputData.position,
+                        giaKham: inputData.selectedPrice,
+                        khuVucLamViec: inputData.selectedProvince,
+                        phuongThucThanhToan: inputData.selectedPayment,
+                        diaChiPhongKham: inputData.addressClinic,
+                        tenPhongKham: inputData.nameClinic,
+                        ghiChu: inputData.note,
+                        mieuTa: inputData.description,
+                        noiDungHTML: inputData.contentHtml,
+                        noiDungMarkdown: inputData.contentMarkdown,
+                        trangThai: 1,
+                    })
+
+                    resolve({
+                        errCode: 0,
+                        errorMessage: 'Register infor doctor succeed!'
+                    })
+                }
             }
         } catch (e) {
             reject(e);

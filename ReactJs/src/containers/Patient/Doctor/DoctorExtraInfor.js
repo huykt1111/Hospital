@@ -19,7 +19,7 @@ class DoctorExtraInfor extends Component {
                 lat: 16.047079,
                 lng: 108.206230
             },
-            zoom: 11,
+            zoom: 13,
         }
     }
 

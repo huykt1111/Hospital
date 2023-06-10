@@ -122,7 +122,7 @@ class CommentModal extends Component {
                 <ModalHeader toggle={() => { this.toggle() }}>Đánh giá</ModalHeader>
                 <ModalBody>
                     <div className="row">
-                        <div className="register-doctor-detail-container">
+                        <div className="register-doctor-detail-container" style={{ height: '350px' }}>
                             <div className="intro-doctor">
                                 <div className='content-left'>
                                     <div className='content-left-image'
@@ -170,9 +170,9 @@ class CommentModal extends Component {
                         className="px-3"
                         onClick={() => { this.handleComment() }}
                     >
-                        Racing
+                        Đánh giá
                     </Button>
-                    <Button color="secondary" className="px-3" onClick={() => { this.toggle() }}>Close</Button>
+                    <Button color="secondary" className="px-3" onClick={() => { this.toggle() }}>Thoát</Button>
                 </ModalFooter>
             </Modal>
         )

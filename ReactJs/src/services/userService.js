@@ -265,6 +265,10 @@ const cancelBookOverdue = (data) => {
     return axios.get(`/api/cancel-book-overdue`)
 }
 
+const lockAccount = (data) => {
+    return axios.get(`/api/lock-account`)
+}
+
 export {
     handleLoginApi,
     createNewMember,
@@ -330,5 +334,6 @@ export {
     getAllPatientBookSchedule,
     getAllPatientBookAndCancel,
     getPatientBookSucceed,
-    cancelBookOverdue
+    cancelBookOverdue,
+    lockAccount
 }

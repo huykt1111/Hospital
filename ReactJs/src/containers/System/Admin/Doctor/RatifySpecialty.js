@@ -52,7 +52,7 @@ class RatifySpecialty extends Component {
 
         let res = await ratifySpecialty({ id: id });
         if (res && res.errCode === 0) {
-            toast.success("Ratify specialty succeed!")
+            toast.success("Xác nhận chuyên khoa thành công!")
             this.getRegisterSpecialty();
 
         } else {
@@ -102,7 +102,7 @@ class RatifySpecialty extends Component {
                                 this.getCurrentPageData().map((item, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{item.id}</td>
+                                            <td>{index + 1}</td>
                                             <td style={{ width: '100px' }}>
                                                 <div className='content-one-image'
                                                     style={{ backgroundImage: `url(${item.hinhAnh})` }}

@@ -189,48 +189,6 @@ let getRegisterClinic = () => {
     })
 }
 
-// let getTopClinic = () => {
-//     return new Promise(async (resolve, reject) => {
-//         try {
-//             let data = await db.PhongKham.findAll({
-//                 where: {
-//                     trangThai: 1
-//                 },
-//                 include: [
-//                     {
-//                         model: db.ThongTinBacSi, as: 'userClinicData', attributes: ['phongKham']
-//                     },
-//                 ],
-//                 attributes: [
-//                     'id',
-//                     'tenPhongKham',
-//                     'diaChi',
-//                     'hinhAnh',
-//                     [db.sequelize.literal('(SELECT COUNT(*) FROM ThongTinBacSis WHERE ThongTinBacSis.phongKham = PhongKham.id)'), 'clinicCount']
-//                 ],
-//                 order: [[db.sequelize.literal('clinicCount'), 'DESC']],
-//                 raw: false,
-//                 nest: true
-//             });
-//             if (data && data.length > 0) {
-//                 data = data.slice(0, 8);
-
-//                 data.map(item => {
-//                     item.hinhAnh = new Buffer(item.hinhAnh, 'base64').toString('binary');
-//                     return item;
-//                 })
-//             }
-//             resolve({
-//                 errMessage: 'ok',
-//                 errCode: 0,
-//                 data: data
-//             })
-//         } catch (e) {
-//             reject(e);
-//         }
-//     })
-// }
-
 let getTopClinic = () => {
     return new Promise(async (resolve, reject) => {
         try {

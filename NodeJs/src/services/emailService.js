@@ -2,23 +2,22 @@ require('dotenv').config();
 import nodemailer from "nodemailer";
 
 let sendSimpleEmail = async (dataSend) => {
-    // create reusable transporter object using the default SMTP transport
+
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
-        secure: false, // true for 465, false for other ports
+        secure: false,
         auth: {
-            user: process.env.EMAIL_APP, // generated ethereal user
-            pass: process.env.EMAIL_APP_PASSWORD, // generated ethereal password
+            user: process.env.EMAIL_APP,
+            pass: process.env.EMAIL_APP_PASSWORD,
         },
     });
 
-    // send mail with defined transport object
+
     let info = await transporter.sendMail({
-        from: '"Booking Appoitment 👻" <huylmht10@gmail.com>', // sender address
-        to: dataSend.receiverEmail, // list of receivers
-        subject: "THÔNG TIN ĐẶT LỊCH KHÁM BỆNH ✔", // Subject line
-        // text: "Hello world?", // plain text body
+        from: '"Booking Appoitment 👻" <huylmht10@gmail.com>',
+        to: dataSend.receiverEmail,
+        subject: "THÔNG TIN ĐẶT LỊCH KHÁM BỆNH ✔",
         html: getBodyHtmlEmail(dataSend),
     });
 }
@@ -92,27 +91,27 @@ let getBodyHtmlEmailRemedy = (dataSend) => {
 let sendAttachment = async (dataSend) => {
     return new Promise(async (resolve, reject) => {
         try {
-            // create reusable transporter object using the default SMTP transport
+
             let transporter = nodemailer.createTransport({
                 host: "smtp.gmail.com",
                 port: 587,
-                secure: false, // true for 465, false for other ports
+                secure: false,
                 auth: {
-                    user: process.env.EMAIL_APP, // generated ethereal user
-                    pass: process.env.EMAIL_APP_PASSWORD, // generated ethereal password
+                    user: process.env.EMAIL_APP,
+                    pass: process.env.EMAIL_APP_PASSWORD,
                 },
             });
 
-            // send mail with defined transport object
+
             let info = await transporter.sendMail({
-                from: '"Booking Appoitment 👻" <huylmht10@gmail.com>', // sender address
-                to: dataSend.email, // list of receivers
-                subject: "KẾT QUẢ ĐẶT LỊCH KHÁM BỆNH ✔", // Subject line
-                // text: "Hello world?", // plain text body
+                from: '"Booking Appoitment 👻" <huylmht10@gmail.com>',
+                to: dataSend.email,
+                subject: "KẾT QUẢ ĐẶT LỊCH KHÁM BỆNH ✔",
+
                 html: getBodyHtmlEmailRemedy(dataSend),
                 attachments: [
 
-                    {   // encoded string as an attachment
+                    {
                         filename: `remedy-${dataSend.patientId}-${new Date().getTime()}.png`,
                         content: dataSend.imgBase64.split("base64,")[1],
                         encoding: 'base64'

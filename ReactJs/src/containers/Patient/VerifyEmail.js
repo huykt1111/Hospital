@@ -63,7 +63,7 @@ class VerifyEmail extends Component {
                         <div>
                             {errCode === 0 ?
                                 <div className='infor-booking'>
-                                    Xác nhận lịch hẹn thành công!
+                                    Xác nhận lịch hẹn thành công. vui lòng đến đúng giờ khám. Xin cảm ơn quý khách!
                                 </div>
                                 :
                                 <div className='infor-booking'>

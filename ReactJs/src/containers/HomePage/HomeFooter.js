@@ -9,7 +9,7 @@ class HomeFooter extends Component {
         return (
             <div className='home-footer'>
                 <p>&copy; <FormattedMessage id='homepage.info-hospital-footer' />
-                    <a target='_blank' href='https://github.com/huykt1111/Hospital-ReactJs'>
+                    <a target='_blank' href='https://www.facebook.com/messages/t/100011078104112'>
                         &#8594; <FormattedMessage id='homepage.click-here' />! &#8592;
                     </a></p>
             </div>

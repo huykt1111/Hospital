@@ -73,7 +73,7 @@ class RatifyClinic extends Component {
     handleRatifyClinic = async (id) => {
         let res = await ratifyRegisterClinic({ id: id });
         if (res && res.errCode === 0) {
-            toast.success("Ratify clinic succeed!")
+            toast.success("Xác nhận phòng khám thành công!")
             this.getRegisterClinic();
         } else {
             toast.error("Something wrongs....")
@@ -102,7 +102,7 @@ class RatifyClinic extends Component {
                                 this.getCurrentPageData().map((item, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{item.id}</td>
+                                            <td>{index + 1}</td>
                                             <td style={{ width: '100px' }}>
                                                 <div className='content-one-image'
                                                     style={{ backgroundImage: `url(${item.hinhAnh})` }}

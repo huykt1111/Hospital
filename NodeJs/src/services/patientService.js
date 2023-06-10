@@ -247,7 +247,8 @@ let getAllBookByUser = (UserId) => {
                 let data = await db.DatLichKham.findAll({
                     where: {
                         maND: UserId.id_user,
-                        trangThai: ['S3', 'S5'],
+                        trangThai: ['S3', 'S5']
+
                     },
                     include: [
                         {
@@ -565,6 +566,65 @@ let cancelBookOverdue = () => {
     });
 };
 
+let lockAccount = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.DatLichKham.findAll({
+                include: [
+                    {
+                        model: db.LichKham, as: 'schedulePatientData',
+                    }
+                ],
+                raw: false,
+                nest: true
+            });
+
+            const cancellationCountMap = {};
+            const currentDate = new Date();
+            const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            data.forEach((item) => {
+                if (item.trangThai === "S4" && item.createdAt >= startOfMonth && item.createdAt <= endOfMonth) {
+                    const userId = item.maND;
+                    if (cancellationCountMap[userId]) {
+                        cancellationCountMap[userId]++;
+                    } else {
+                        cancellationCountMap[userId] = 1;
+                    }
+                }
+            });
+
+            const lockedAccounts = [];
+
+            for (const userId in cancellationCountMap) {
+                if (cancellationCountMap[userId] > 6) {
+                    lockedAccounts.push(userId);
+                    let userLock = await db.TaiKhoan.findOne({
+                        where: {
+                            id: userId,
+                            trangThai: 1
+                        },
+                        raw: false
+                    })
+
+                    if (userLock) {
+                        userLock.trangThai = 0;
+                        await userLock.save();
+                    }
+                }
+            }
+
+            resolve({
+                errMessage: 'ok',
+                errCode: 0,
+                lockedAccounts: lockedAccounts,
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 module.exports = {
     postBookAppointment: postBookAppointment,
     postVerifyBookAppointment: postVerifyBookAppointment,
@@ -575,5 +635,6 @@ module.exports = {
     getAllPatientBookSchedule,
     getAllPatientBookAndCancel,
     getPatientBookSucceed,
-    cancelBookOverdue
+    cancelBookOverdue,
+    lockAccount
 }

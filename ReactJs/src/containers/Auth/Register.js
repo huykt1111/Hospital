@@ -138,7 +138,7 @@ class Register extends Component {
                 <HomeHeader />
                 <div className='login-background' style={{ height: '100vh', }}>
                     <div className='login-background-container'>
-                        <div className='login-container' style={{ height: '650px', width: '500px' }}>
+                        <div className='login-container' style={{ height: '600px', width: '500px' }}>
                             <div className='login-content row'>
                                 <div className='col-12 text-login'>
                                     <FormattedMessage id="homeheader.register" />
@@ -267,13 +267,13 @@ class Register extends Component {
                                 <div className='col-12'>
                                     <span className='forgot-password'><FormattedMessage id="homeheader.forgot-password" /></span>
                                 </div>
-                                <div className='col-12 text-center mt-3'>
+                                {/* <div className='col-12 text-center mt-3'>
                                     <span className='text-other-login'><FormattedMessage id="homeheader.login-with" /></span>
                                 </div>
                                 <div className='col-12 social-login'>
                                     <i className="fab fa-google-plus-g google"></i>
                                     <i className="fab fa-facebook-f facebook"></i>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

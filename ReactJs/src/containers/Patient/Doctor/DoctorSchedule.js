@@ -169,7 +169,6 @@ class DoctorSchedule extends Component {
                                             let timestamp = parseInt(item.ngayKham); // Giá trị thời gian từ chuỗi
                                             let bookingDate = new Date(timestamp); // Tạo đối tượng Date từ giá trị thời gian
                                             let currentDate = new Date();
-                                            console.log(bookingDate);
                                             if (bookingDate.getFullYear() === currentDate.getFullYear() &&
                                                 bookingDate.getMonth() === currentDate.getMonth() &&
                                                 bookingDate.getDate() === currentDate.getDate()) {
